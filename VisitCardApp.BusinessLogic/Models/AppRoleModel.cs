@@ -3,14 +3,14 @@
     using Microsoft.AspNetCore.Identity;
     using VisitCardApp.BusinessLogic.Models;
 
-    public class RoleModel : IEntityModel<Role>
+    public class AppRoleModel : IEntityModel<AppRole>
     {
-        public Role ToEntity()
+        public AppRole ToEntity()
         {
             throw new System.NotImplementedException();
         }
 
-        public void ToModel(Role entity)
+        public void ToModel(AppRole entity)
         {
             throw new System.NotImplementedException();
         }

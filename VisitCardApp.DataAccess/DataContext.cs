@@ -4,13 +4,23 @@
     using Microsoft.EntityFrameworkCore;
     using VisitCardApp.DataAccess.Entities;
 
-    public class DataContext : IdentityDbContext<User, Role, string>
+    public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<ProjectCase> ProjectCases { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }
