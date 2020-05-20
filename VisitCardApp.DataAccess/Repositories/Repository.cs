@@ -247,7 +247,7 @@
             }
         }
 
-        public async Task<Article> GetArticleAsync(int articleId)
+        public async Task<Article> GetArticleByIdAsync(int articleId)
         {
             if (articleId == 0)
             {

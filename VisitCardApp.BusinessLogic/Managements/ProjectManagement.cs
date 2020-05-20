@@ -36,7 +36,7 @@
             }
         }
 
-        public async Task<ProjectCaseModel> GetProjectCaseAsync(int projectId)
+        public async Task<ProjectCaseModel> GetProjectCaseByIdAsync(int projectId)
         {
             try
             {

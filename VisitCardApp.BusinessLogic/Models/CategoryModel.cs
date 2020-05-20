@@ -1,6 +1,6 @@
-﻿namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.BusinessLogic.Models
 {
-    using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Entities;
     using VisitCardApp.DataAccess.Enums;
 
     public class CategoryModel : IEntityModel<Category>

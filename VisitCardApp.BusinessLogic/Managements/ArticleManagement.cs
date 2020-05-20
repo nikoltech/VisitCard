@@ -36,11 +36,11 @@
             }
         }
 
-        public async Task<ArticleModel> GetArticleAsync(int articleId)
+        public async Task<ArticleModel> GetArticleByIdAsync(int articleId)
         {
             try
             {
-                Article entity = await this.repo.GetArticleAsync(articleId).ConfigureAwait(false);
+                Article entity = await this.repo.GetArticleByIdAsync(articleId).ConfigureAwait(false);
 
                 ArticleModel model = new ArticleModel();
                 model.ToModel(entity);
@@ -88,7 +88,7 @@
             }
         }
 
-        public async Task<bool> RemoveProjectCaseAsync(int articleId)
+        public async Task<bool> RemoveArticleAsync(int articleId)
         {
             try
             {

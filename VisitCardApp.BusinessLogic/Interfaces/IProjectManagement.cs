@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using VisitCardApp.DataAccess.Entities;
+    using VisitCardApp.BusinessLogic.Models;
 
     public interface IProjectManagement
     {
         Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model);
 
-        Task<ProjectCaseModel> GetProjectCaseAsync(int projectId);
+        Task<ProjectCaseModel> GetProjectCaseByIdAsync(int projectId);
 
         Task<List<ProjectCaseModel>> GetProjectCaseListAsync(int page, int count);
 

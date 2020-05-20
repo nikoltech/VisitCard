@@ -1,9 +1,7 @@
-﻿namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.BusinessLogic.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Entities;
 
     public class OrderModel : IEntityModel<Order>
     {

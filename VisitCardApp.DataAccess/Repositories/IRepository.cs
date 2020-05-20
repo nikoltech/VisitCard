@@ -18,7 +18,7 @@
 
         Task<Article> CreateArticleAsync(Article article);
 
-        Task<Article> GetArticleAsync(int articleId);
+        Task<Article> GetArticleByIdAsync(int articleId);
 
         Task<List<Article>> GetArticleListAsync(int page, int count);
 

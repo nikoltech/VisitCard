@@ -1,8 +1,8 @@
-﻿namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.BusinessLogic.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Entities;
     using VisitCardApp.DataAccess.Helpers;
 
     public class ArticleModel : IEntityModel<Article>

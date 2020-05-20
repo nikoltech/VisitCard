@@ -3,10 +3,10 @@ Tickets & estimation
 
 ** CRUD logic for Project & Article(same logic) // generic?
    - backend
-    @ Prepare entities & models
-    @ Save data to db & image/text files to folder in repo
-    @ CRUD methods to repo
-    @ Add management CRUD methods
+    +@ Prepare entities & models
+    +@ Save data to db & image/text files to folder in repo
+    +@ CRUD methods to repo
+    +@ Add management CRUD methods
     @ Create controller CRUD methods
     // Article can add authorized & unauthorized user. Unauthorized users article must be approved by admin
     @ Add aproving logic

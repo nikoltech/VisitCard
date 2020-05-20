@@ -1,7 +1,7 @@
-﻿namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.BusinessLogic.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Entities;
 
     public class ProjectCaseModel : IEntityModel<ProjectCase>
     {

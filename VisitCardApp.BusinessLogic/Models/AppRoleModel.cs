@@ -1,7 +1,6 @@
-﻿namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.BusinessLogic.Models
 {
-    using Microsoft.AspNetCore.Identity;
-    using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Entities;
 
     public class AppRoleModel : IEntityModel<AppRole>
     {
