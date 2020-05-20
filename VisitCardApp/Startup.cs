@@ -21,7 +21,7 @@ namespace VisitCardApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
             Configuration = configuration;
 

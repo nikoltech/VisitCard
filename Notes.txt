@@ -1,0 +1,52 @@
+Tickets & estimation
+** Estimation
+
+** CRUD logic for Project & Article(same logic) // generic?
+   - backend
+    @ Prepare entities & models
+    @ Save data to db & image/text files to folder in repo
+    @ CRUD methods to repo
+    @ Add management CRUD methods
+    @ Create controller CRUD methods
+    // Article can add authorized & unauthorized user. Unauthorized users article must be approved by admin
+    @ Add aproving logic
+    @ Add notice about having unaproved articles. Notice unauthorized user about approving/declining article on email
+   Total: 0.0h
+
+   - frontend
+    @ Create pages
+    @ Convert images from byte to base64String
+   Total: 0.0h
+
+** Admin panel
+
+** Authorization
+    @ Roles
+    ..
+
+** Pagination Projects, Articles
+    ..
+
+** Routing.
+
+** Implement payment system
+    @ Create Card
+    @ Add to order to Card
+    // Order/Card/both ?
+    @ Add payment system(square?)
+    ..
+
+** XSS, CSRF securiry
+    ..
+
+** Comment articles
+    @ Update article entity & model
+    @ Create comment entity
+    @ Add remove method only by admin
+
+** CRUD categories (Articles, Project) // Admin
+    @ Add filter by category(es)
+    @ Update entities & models (Articles, Project)
+    @ Create CRUD methods
+
+** Routing.

@@ -1,20 +1,43 @@
 ﻿namespace VisitCardApp.DataAccess.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.ComponentModel.DataAnnotations;
     using VisitCardApp.BusinessLogic.Models;
 
     public class ProjectCaseModel : IEntityModel<ProjectCase>
     {
+        public int Id { get; set; }
+
+        [MaxLength(100)]
+        public string ProjectName { get; set; }
+
+        public string Description { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string ImageFileName { get; set; }
+
         public ProjectCase ToEntity()
         {
-            throw new NotImplementedException();
+            return new ProjectCase
+            {
+                Id = this.Id,
+                ProjectName = this.ProjectName,
+                Description = this.Description,
+                Image = this.Image,
+                ImageFileName = this.ImageFileName
+            };
         }
 
         public void ToModel(ProjectCase entity)
         {
-            throw new NotImplementedException();
+            if (entity != null)
+            {
+                this.Id = entity.Id;
+                this.ProjectName = entity.ProjectName;
+                this.Description = entity.Description;
+                this.Image = entity.Image;
+                this.ImageFileName = entity.ImageFileName;
+            }
         }
     }
 }

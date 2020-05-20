@@ -3,19 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitCardApp", "VisitCardApp\VisitCardApp.csproj", "{0F9E4ED8-78A1-40D0-9DA2-EBC2BAF41C7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitCardApp", "VisitCardApp\VisitCardApp.csproj", "{0F9E4ED8-78A1-40D0-9DA2-EBC2BAF41C7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{A2673EC8-53CC-403D-94E8-7F27CAB25AE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{84403233-7686-4130-9467-1A6816FE91DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitCardApp.DataAccess", "VisitCardApp.DataAccess\VisitCardApp.DataAccess.csproj", "{F591AB5A-28B0-4B4E-84BF-71BC62F2E509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitCardApp.DataAccess", "VisitCardApp.DataAccess\VisitCardApp.DataAccess.csproj", "{F591AB5A-28B0-4B4E-84BF-71BC62F2E509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitCardApp.BusinessLogic", "VisitCardApp.BusinessLogic\VisitCardApp.BusinessLogic.csproj", "{31D5FC2C-54AB-450A-AD47-4FD24832EEA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitCardApp.BusinessLogic", "VisitCardApp.BusinessLogic\VisitCardApp.BusinessLogic.csproj", "{31D5FC2C-54AB-450A-AD47-4FD24832EEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitCardApp.DataAccess.Test", "VisitCardApp.DataAccess.Test\VisitCardApp.DataAccess.Test.csproj", "{8591E219-91B4-4C7E-BCBA-A43C13AE7FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitCardApp.DataAccess.Test", "VisitCardApp.DataAccess.Test\VisitCardApp.DataAccess.Test.csproj", "{8591E219-91B4-4C7E-BCBA-A43C13AE7FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitCardApp.BusinessLogic.Test", "VisitCardApp.BusinessLogic.Test\VisitCardApp.BusinessLogic.Test.csproj", "{CEE370D3-A68D-4428-84D6-D19E58FC4D44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitCardApp.BusinessLogic.Test", "VisitCardApp.BusinessLogic.Test\VisitCardApp.BusinessLogic.Test.csproj", "{CEE370D3-A68D-4428-84D6-D19E58FC4D44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{30F084EF-996F-41DA-84B9-307F79910088}"
+	ProjectSection(SolutionItems) = preProject
+		Notes.txt = Notes.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

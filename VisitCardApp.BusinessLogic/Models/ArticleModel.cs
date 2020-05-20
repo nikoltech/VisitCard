@@ -1,18 +1,46 @@
 ﻿namespace VisitCardApp.DataAccess.Entities
 {
-    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.DataAccess.Helpers;
 
     public class ArticleModel : IEntityModel<Article>
     {
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(200, ErrorMessage = "Не более 200 символов")]
+        public string Topic { get; set; }
+
+        [Required]
+        public string Text { get; set; }
+
+        /// <summary>
+        /// filename, image file byte array
+        /// </summary>
+        public List<FileHelper> ArticleImages { get; set; }
+
         public Article ToEntity()
         {
-            throw new NotImplementedException();
+            return new Article
+            {
+                Id = this.Id,
+                Topic = this.Topic,
+                Text = this.Text,
+                ArticleImages = this.ArticleImages
+            };
         }
 
         public void ToModel(Article entity)
         {
-            throw new NotImplementedException();
+            if (entity != null)
+            {
+                this.Id = entity.Id;
+                this.Topic = entity.Topic;
+                this.Text = entity.Text;
+                this.ArticleImages = entity.ArticleImages;
+            }
         }
     }
 }
