@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using VisitCardApp.DataAccess.Entities;
-
-namespace VisitCardApp.BusinessLogic.Interfaces
+﻿namespace VisitCardApp.BusinessLogic.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using VisitCardApp.DataAccess.Entities;
+
     public interface IProjectManagement
     {
         Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model);

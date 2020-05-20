@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VisitCardApp.BusinessLogic.Communications;
+using VisitCardApp.BusinessLogic.Interfaces;
+using VisitCardApp.BusinessLogic.Managements;
 using VisitCardApp.DataAccess;
 using VisitCardApp.DataAccess.Entities;
 using VisitCardApp.DataAccess.Repositories;
@@ -56,6 +58,8 @@ namespace VisitCardApp
 
             // Resolve dependencies
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IArticleManagement, ArticleManagement>();
+            services.AddScoped<IProjectManagement, ProjectManagement>();
             services.AddTransient<UserService>();
 
             // Add caching

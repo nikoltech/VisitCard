@@ -8,24 +8,24 @@
     using VisitCardApp.DataAccess.Entities;
     using VisitCardApp.DataAccess.Repositories;
 
-    public class ProjectManagement : IProjectManagement
+    public class ArticleManagement : IArticleManagement
     {
         private readonly IRepository repo;
 
-        public ProjectManagement(IRepository repo)
+        public ArticleManagement(IRepository repo)
         {
             this.repo = repo;
         }
 
-        public async Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model)
+        public async Task<ArticleModel> CreateArticleAsync(ArticleModel model)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
 
             try
             {
-                ProjectCase entity = await this.repo.CreateProjectCaseAsync(model.ToEntity()).ConfigureAwait(false);
+                Article entity = await this.repo.CreateArticleAsync(model.ToEntity()).ConfigureAwait(false);
 
-                ProjectCaseModel addedModel = new ProjectCaseModel();
+                ArticleModel addedModel = new ArticleModel();
                 addedModel.ToModel(entity);
 
                 return addedModel;
@@ -36,13 +36,13 @@
             }
         }
 
-        public async Task<ProjectCaseModel> GetProjectCaseAsync(int projectId)
+        public async Task<ArticleModel> GetArticleAsync(int articleId)
         {
             try
             {
-                ProjectCase entity = await this.repo.GetProjectCaseAsync(projectId).ConfigureAwait(false);
+                Article entity = await this.repo.GetArticleAsync(articleId).ConfigureAwait(false);
 
-                ProjectCaseModel model = new ProjectCaseModel();
+                ArticleModel model = new ArticleModel();
                 model.ToModel(entity);
 
                 return model;
@@ -53,13 +53,13 @@
             }
         }
 
-        public async Task<List<ProjectCaseModel>> GetProjectCaseListAsync(int page, int count)
+        public async Task<List<ArticleModel>> GetArticleListAsync(int page, int count)
         {
             try
             {
-                List<ProjectCase> entities = await this.repo.GetProjectCaseListAsync(page, count).ConfigureAwait(false);
+                List<Article> entities = await this.repo.GetArticleListAsync(page, count).ConfigureAwait(false);
 
-                List<ProjectCaseModel> models = this.ToModelList<ProjectCase, ProjectCaseModel>(entities);
+                List<ArticleModel> models = this.ToModelList<Article, ArticleModel>(entities);
 
                 return models;
             }
@@ -69,15 +69,15 @@
             }
         }
 
-        public async Task<ProjectCaseModel> UpdateProjectCaseAsync(ProjectCaseModel model)
+        public async Task<ArticleModel> UpdateArticleAsync(ArticleModel model)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
 
             try
             {
-                ProjectCase entity = await this.repo.UpdateProjectCaseAsync(model.ToEntity()).ConfigureAwait(false);
+                Article entity = await this.repo.UpdateArticleAsync(model.ToEntity()).ConfigureAwait(false);
 
-                ProjectCaseModel updatedModel = new ProjectCaseModel();
+                ArticleModel updatedModel = new ArticleModel();
                 updatedModel.ToModel(entity);
 
                 return updatedModel;
@@ -88,11 +88,11 @@
             }
         }
 
-        public async Task<bool> RemoveProjectCaseAsync(int projectId)
+        public async Task<bool> RemoveProjectCaseAsync(int articleId)
         {
             try
             {
-                return await this.repo.RemoveProjectCaseAsync(projectId).ConfigureAwait(false);
+                return await this.repo.RemoveArticleAsync(articleId).ConfigureAwait(false);
             }
             catch
             {
