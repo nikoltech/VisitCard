@@ -25,6 +25,8 @@
             {
                 ProjectCase entity = await this.repo.CreateProjectCaseAsync(model.ToEntity()).ConfigureAwait(false);
 
+                if (entity == null) { return null; }
+
                 ProjectCaseModel addedModel = new ProjectCaseModel();
                 addedModel.ToModel(entity);
 

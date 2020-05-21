@@ -29,32 +29,8 @@
         {
             projectCase = projectCase ?? throw new ArgumentNullException(nameof(projectCase));
 
-            string filePath = $"~/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
-
             try
             {
-                // Save image file
-                if (projectCase.Image.Length > 0)
-                {
-                    projectCase.ImageFileName = projectCase.ImageFileName ?? throw new ArgumentNullException("Image filename cannot be null.");
-
-                    string imagePath = filePath + projectCase.ImageFileName;
-                    using (FileStream stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await stream.WriteAsync(projectCase.Image, 0, projectCase.Image.Length).ConfigureAwait(false);
-                        projectCase.ImagePath = imagePath;
-                    }
-
-                }
-
-                // Save project description in file
-                string descriptionPath = filePath + "Description.txt";
-                using (var stream = new StreamWriter(descriptionPath, false, Encoding.UTF8))
-                {
-                    await stream.WriteAsync(projectCase.Description ?? string.Empty);
-                    projectCase.DescriptionPath = descriptionPath;
-                }
-
                 this.context.ProjectCases.Add(projectCase);
 
                 if (await this.context.SaveChangesAsync() > 0)
@@ -86,8 +62,6 @@
                     throw new Exception($"Project with id {projectId} not found.");
                 }
 
-                await this.AttachProjectCaseFilesAsync(projectCase).ConfigureAwait(false);
-
                 return projectCase;
             }
             catch
@@ -103,11 +77,6 @@
                 int skip = this.SkipSize(page, count);
 
                 List<ProjectCase> projectCases = await this.context.ProjectCases.Skip(skip).Take(count).ToListAsync();
-
-                foreach (ProjectCase projectCase in projectCases)
-                {
-                    await this.AttachProjectCaseFilesAsync(projectCase).ConfigureAwait(false);
-                }
 
                 return projectCases;
             }
@@ -128,14 +97,6 @@
                 if (projectCase == null)
                 {
                     throw new Exception($"Project with id {updatedProject.Id} not found.");
-                }
-
-                if (!string.IsNullOrEmpty(projectCase.DescriptionPath))
-                {
-                    using (var stream = new StreamWriter(projectCase.DescriptionPath, false, Encoding.UTF8))
-                    {
-                        await stream.WriteAsync(projectCase.Description).ConfigureAwait(false);
-                    }
                 }
 
                 projectCase.ProjectName = updatedProject.ProjectName;
@@ -392,21 +353,7 @@
             return (int)toSkip;
         }
 
-        private async Task AttachProjectCaseFilesAsync(ProjectCase projectCase)
-        {
-            if (!string.IsNullOrEmpty(projectCase.ImagePath))
-            {
-                projectCase.Image = await File.ReadAllBytesAsync(projectCase.ImagePath).ConfigureAwait(false);
-            }
-
-            if (!string.IsNullOrEmpty(projectCase.DescriptionPath))
-            {
-                using (var stream = new StreamReader(projectCase.DescriptionPath, Encoding.UTF8))
-                {
-                    projectCase.Description = await stream.ReadToEndAsync().ConfigureAwait(false);
-                }
-            }
-        }
+        
 
         private async Task AttachArticleFilesAsync(Article article)
         {
@@ -416,7 +363,7 @@
                 if (!string.IsNullOrEmpty(im.ImagePath))
                 {
                     byte[] img = await File.ReadAllBytesAsync(im.ImagePath);
-                    article.ArticleImages.Add(new FileHelper(null, img));
+                    article.ArticleImages.Add(new FileHelper(null, img, im.ImageMimeType));
                 }
 
             }

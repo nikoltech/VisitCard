@@ -111,6 +111,10 @@ namespace VisitCardApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
+                    pattern: "{controller}/{action}/{page}/{count}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 

@@ -7,14 +7,22 @@
     {
         public int Id { get; set; }
 
-        [MaxLength(100)]
+        [Required]
+        [MaxLength(200, ErrorMessage = "Не более 200 символов")]
         public string ProjectName { get; set; }
 
+        [Required]
         public string Description { get; set; }
+
+        public string DescriptionPath { get; set; }
+
+        public string ImagePath { get; set; }
 
         public byte[] Image { get; set; }
 
         public string ImageFileName { get; set; }
+
+        public string ImageMimeType { get; set; }
 
         public ProjectCase ToEntity()
         {
@@ -22,9 +30,9 @@
             {
                 Id = this.Id,
                 ProjectName = this.ProjectName,
-                Description = this.Description,
-                Image = this.Image,
-                ImageFileName = this.ImageFileName
+                DescriptionPath = this.DescriptionPath,
+                ImagePath = this.ImagePath,
+                ImageMimeType = this.ImageMimeType
             };
         }
 
@@ -34,9 +42,9 @@
             {
                 this.Id = entity.Id;
                 this.ProjectName = entity.ProjectName;
-                this.Description = entity.Description;
-                this.Image = entity.Image;
-                this.ImageFileName = entity.ImageFileName;
+                this.DescriptionPath = entity.DescriptionPath;
+                this.ImagePath = entity.ImagePath;
+                this.ImageMimeType = entity.ImageMimeType;
             }
         }
     }

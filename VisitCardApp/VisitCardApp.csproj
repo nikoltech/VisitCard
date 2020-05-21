@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Content Remove="secrets.json" />
+    <Content Remove="wwwroot\Files\defimg.PNG" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,15 @@
   <ItemGroup>
     <ProjectReference Include="..\VisitCardApp.BusinessLogic\VisitCardApp.BusinessLogic.csproj" />
     <ProjectReference Include="..\VisitCardApp.DataAccess\VisitCardApp.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Article\" />
+    <Folder Include="wwwroot\Files\ArticleFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Files\defimg.PNG" />
   </ItemGroup>
 
 </Project>

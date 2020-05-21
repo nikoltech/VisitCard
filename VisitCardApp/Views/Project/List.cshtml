@@ -1,0 +1,95 @@
+﻿@model List<ProjectCaseModel>
+@{
+    ViewData["Title"] = "Портфолио";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool? ProjectCreated = (bool?)TempData["Created"];
+    bool? ProjectDeleted = (bool?)TempData["Deleted"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (ProjectCreated != null)
+{
+    @if (ProjectCreated.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Добавлено.</strong> Проект успешно добавлен.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Проект не добавлен. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+@if (ProjectDeleted != null)
+{
+    @if (ProjectDeleted.Value)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Удалено.</strong> Проект успешно удален.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Проект не был удален. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+
+
+@*Project list*@
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            @foreach (ProjectCaseModel caseModel in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        @if (caseModel.Image == null)
+                        {
+                            <img class="card-img-top" alt="@caseModel.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content("~/Files/defimg.png")" data-holder-rendered="true">
+
+                        }
+                        else
+                        {
+                            <img class="card-img-top" alt="@caseModel.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:@caseModel.ImageMimeType;base64,@(Convert.ToBase64String(caseModel.Image))" data-holder-rendered="true">
+                        }
+                        <div class="card-body">
+                            <p class="card-text">@caseModel.ProjectName</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    @Html.ActionLink("View", "", new { id = caseModel.Id, @class = "btn btn-sm btn-outline-secondary" })
+                                    @Html.ActionLink("Edit", "Update", new { id = caseModel.Id, @class = "btn btn-sm btn-outline-secondary" })
+                                    <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+                                </div>
+                                <small class="text-muted"><span class="fi-collapse-left"></span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

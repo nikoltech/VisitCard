@@ -1,10 +1,13 @@
 ﻿namespace VisitCardApp.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.Models;
 
+    // TODO: Article model, entity add ImageMimeType. Rewrite as project entity
     public class ArticleController : Controller
     {
         private readonly IArticleManagement articleManagement;
@@ -19,7 +22,16 @@
         public async Task<IActionResult> GetArticleListAsync(int page = 1, int count = 5)
         {
 
-            return View();
+            try
+            {
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
         }
 
         // TODO
@@ -27,7 +39,16 @@
         public async Task<IActionResult> GetArticleByIdAsync(int articleId)
         {
 
-            return View();
+            try
+            {
+                
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
         }
 
         // TODO
@@ -35,7 +56,16 @@
         public async Task<IActionResult> CreateArticleAsync(ArticleModel model)
         {
 
-            return View();
+            try
+            {
+                
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
         }
 
         // TODO
@@ -43,7 +73,16 @@
         public async Task<IActionResult> UpdateArticleAsync(ArticleModel model)
         {
 
-            return View();
+            try
+            {
+                
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
         }
 
         // TODO
@@ -51,7 +90,16 @@
         public async Task<IActionResult> RemoveArticleAsync(int articleId)
         {
 
-            return View();
+            try
+            {
+                
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
         }
     }
 }

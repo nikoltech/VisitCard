@@ -1,6 +1,5 @@
 ﻿namespace VisitCardApp.DataAccess.Entities
 {
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class ProjectCase
@@ -13,12 +12,6 @@
 
         public string ImagePath { get; set; }
 
-        public string ImageFileName { get; set; }
-
-        [NotMapped]
-        public string Description { get; set; }
-
-        [NotMapped]
-        public byte[] Image { get; set; }
+        public string ImageMimeType { get; set; }
     }
 }
