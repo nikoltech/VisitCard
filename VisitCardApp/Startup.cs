@@ -101,17 +101,15 @@ namespace VisitCardApp
             // Include compression before static files
             app.UseResponseCompression();
 
-            app.UseStaticFiles(this.GetStaticFileOptions());
-
-            // добавляем поддержку каталога node_modules
-            app.UseFileServer(new FileServerOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "node_modules")
-                ),
-                RequestPath = "/node_modules",
-                EnableDirectoryBrowsing = false
-            });
+            app.UseStaticFiles(this.GetStaticFileOptions())
+                .UseFileServer(new FileServerOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(env.ContentRootPath, "node_modules")
+                    ),
+                    RequestPath = "/node_modules",
+                    EnableDirectoryBrowsing = false
+                });
 
             app.UseRouting();
 
@@ -123,7 +121,7 @@ namespace VisitCardApp
             {
                 endpoints.MapControllerRoute(
                     name: "project",
-                    pattern: "{controller=Project}/{id:int}");
+                    pattern: "{controller}/{id:int}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

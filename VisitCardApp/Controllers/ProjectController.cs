@@ -5,7 +5,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Text;
     using System.Threading.Tasks;
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
@@ -56,10 +55,11 @@
         [HttpGet("Create")]
         public IActionResult CreateAsync()
         {
-            return View("Create", new ProjectViewModel());
+            return View();
         }
 
         [HttpPost("Create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(ProjectViewModel reqModel)
         {
             if (!ModelState.IsValid)
@@ -98,8 +98,8 @@
             try
             {
                 ProjectCaseModel model = await this.projectManagement.GetProjectCaseByIdAsync(id);
-
-                return View("Update", model);
+                ProjectViewModel vModel = new ProjectViewModel(model);
+                return View("Update", vModel);
             }
             catch (Exception ex)
             {
@@ -107,19 +107,22 @@
             }
         }
 
-        [HttpPatch("Update")]
-        public async Task<IActionResult> UpdateAsync(ProjectCaseModel model)
+        [HttpPost("Update")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAsync(ProjectViewModel reqModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", model);
+                return View("Update", reqModel);
             }
 
             try
             {
+                ProjectCaseModel model = reqModel.ToAppModel();
+
                 ProjectCaseModel updatedModel = await this.projectManagement.UpdateProjectCaseAsync(model);
 
-                return View("Update", updatedModel);
+                return RedirectToAction("", new { id = updatedModel.Id });
             }
             catch (Exception ex)
             {
@@ -128,7 +131,7 @@
         }
 
         // TODO: return url
-        [HttpDelete("Remove/{id}")]
+        [HttpPost("Remove/{id}")]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             try
