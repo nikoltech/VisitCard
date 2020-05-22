@@ -10,7 +10,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(200, ErrorMessage = "Не более 200 символов")]
+        [MaxLength(200)]
         public string Topic { get; set; }
 
         [Required]

@@ -6,7 +6,7 @@
 
     public interface IProjectManagement
     {
-        Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model);
+        Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model, string fileFolderPath);
 
         Task<ProjectCaseModel> GetProjectCaseByIdAsync(int projectId);
 

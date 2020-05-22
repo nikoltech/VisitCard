@@ -17,13 +17,20 @@
             this.repo = repo;
         }
 
-        public async Task<ArticleModel> CreateArticleAsync(ArticleModel model)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="fileFolderPath">Need folders {fileFolderPath}/Files/ArticleFiles</param>
+        /// <returns></returns>
+        public async Task<ArticleModel> CreateArticleAsync(ArticleModel model, string fileFolderPath)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
+            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
 
             try
             {
-                Article entity = await this.repo.CreateArticleAsync(model.ToEntity()).ConfigureAwait(false);
+                Article entity = await this.repo.CreateArticleAsync(model.ToEntity(), fileFolderPath).ConfigureAwait(false);
 
                 ArticleModel addedModel = new ArticleModel();
                 addedModel.ToModel(entity);

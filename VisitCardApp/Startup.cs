@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using VisitCardApp.BusinessLogic.Communications;
 using VisitCardApp.BusinessLogic.Interfaces;
@@ -101,6 +103,16 @@ namespace VisitCardApp
 
             app.UseStaticFiles(this.GetStaticFileOptions());
 
+            // добавляем поддержку каталога node_modules
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, "node_modules")
+                ),
+                RequestPath = "/node_modules",
+                EnableDirectoryBrowsing = false
+            });
+
             app.UseRouting();
 
             // Use with default auth and with tokens
@@ -110,8 +122,8 @@ namespace VisitCardApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action}/{page}/{count}");
+                    name: "project",
+                    pattern: "{controller=Project}/{id:int}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
@@ -133,7 +145,7 @@ namespace VisitCardApp
             {
                 OnPrepareResponse = ctx =>
                 {
-                    ctx.Context.Response.Headers.Add("Cache-Control", "public,max-age=600");
+                    ctx.Context.Response.Headers.Add("Cache-Control", "public,max-age=604800 "); // 7 days
                 }
             };
         }

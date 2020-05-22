@@ -25,12 +25,21 @@
 
         // TODO: CRUD image
         #region ProjectCase
-        public async Task<ProjectCase> CreateProjectCaseAsync(ProjectCase projectCase)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectCase"></param>
+        /// <param name="fileFolderPath"></param>
+        /// <returns>null if fail</returns>
+        public async Task<ProjectCase> CreateProjectCaseAsync(ProjectCase projectCase, string fileFolderPath)
         {
             projectCase = projectCase ?? throw new ArgumentNullException(nameof(projectCase));
+            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
 
             try
             {
+                await this.SaveProjectFilesAsync(projectCase, fileFolderPath).ConfigureAwait(false);
+
                 this.context.ProjectCases.Add(projectCase);
 
                 if (await this.context.SaveChangesAsync() > 0)
@@ -46,6 +55,13 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Project with id not found</exception>
+        /// <exception cref="ArgumentNullException">projectId</exception>
         public async Task<ProjectCase> GetProjectCaseAsync(int projectId)
         {
             if (projectId == 0)
@@ -61,6 +77,8 @@
                 {
                     throw new Exception($"Project with id {projectId} not found.");
                 }
+
+                await this.AttachProjectCaseFilesAsync(projectCase).ConfigureAwait(false);
 
                 return projectCase;
             }
@@ -78,6 +96,8 @@
 
                 List<ProjectCase> projectCases = await this.context.ProjectCases.Skip(skip).Take(count).ToListAsync();
 
+                await this.AttachProjectCaseListFilesAsync(projectCases).ConfigureAwait(false);
+
                 return projectCases;
             }
             catch
@@ -86,6 +106,13 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="updatedProject"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Project with id not found</exception>
+        /// <exception cref="ArgumentNullException">updatedProject</exception>
         public async Task<ProjectCase> UpdateProjectCaseAsync(ProjectCase updatedProject)
         {
             updatedProject = updatedProject ?? throw new ArgumentNullException(nameof(updatedProject));
@@ -100,6 +127,8 @@
                 }
 
                 projectCase.ProjectName = updatedProject.ProjectName;
+
+                await this.UpdateProjectDescriptionAsync(projectCase).ConfigureAwait(false);
 
                 if (await this.context.SaveChangesAsync() > 0)
                 {
@@ -161,37 +190,25 @@
 
         // TODO: CRUD images
         #region Articles
-        public async Task<Article> CreateArticleAsync(Article article)
+        public async Task<Article> CreateArticleAsync(Article article, string fileFolderPath)
         {
             article = article ?? throw new ArgumentNullException(nameof(article));
+            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
 
-            string filePath = $"~/Files/ArticleFiles/{article.Topic.Take(10)}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
+            string filePath = $"{fileFolderPath}/Files/ArticleFiles/{article.Topic.Take(10)}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
             try
             {
                 // Save image file
                 foreach (FileHelper f in article.ArticleImages)
                 {
-                    if (f.File.Length > 0)
-                    {
-                        string imagePath = filePath + f.FileName;
-                        using (FileStream stream = new FileStream(imagePath, FileMode.Create))
-                        {
-                            await stream.WriteAsync(f.File, 0, f.File.Length).ConfigureAwait(false);
-                            article.ArticleImagesPath.Add(new ArticleImage { ImagePath = imagePath, Article = article });
-                        }
-
-                    }
+                    string imagePath = await this.SaveImageFileAsync(f.File, f.FileName, filePath, f.ImageMimeType).ConfigureAwait(false);
+                    article.ArticleImagesPath.Add(new ArticleImage { ImagePath = imagePath, Article = article });
                 }
-                
 
-                // Save project description in file
+                // Save article text in file
                 string textPath = filePath + "Text.txt";
-                using (var stream = new StreamWriter(textPath, false, Encoding.UTF8))
-                {
-                    await stream.WriteAsync(article.Text ?? string.Empty);
-                    article.TextPath = textPath;
-                }
+                article.TextPath = await this.SaveTextFileAsync(textPath, article.Text).ConfigureAwait(false);
 
                 this.context.Articles.Add(article);
 
@@ -353,8 +370,55 @@
             return (int)toSkip;
         }
 
-        
+        #region Project
+        private async Task SaveProjectFilesAsync(ProjectCase projectCase, string webRootFilePath)
+        {
+            // string filePath = $"{this.appEnvironment.WebRootPath}/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
+            string filePath = $"{webRootFilePath}/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
+            // Save image file
+            projectCase.ImagePath = await this.SaveImageFileAsync(projectCase.Image, projectCase.ImageFileName, filePath, projectCase.ImageMimeType).ConfigureAwait(false);
+
+            // Save project description in file
+            string descriptionPath = filePath + "Description.txt";
+            projectCase.DescriptionPath = await this.SaveTextFileAsync(descriptionPath, projectCase.Description).ConfigureAwait(false);
+        }
+
+        private async Task AttachProjectCaseListFilesAsync(IEnumerable<ProjectCase> projectCases)
+        {
+            foreach (ProjectCase projectCase in projectCases)
+            {
+                await this.AttachProjectCaseFilesAsync(projectCase).ConfigureAwait(false);
+            }
+        }
+
+        private async Task AttachProjectCaseFilesAsync(ProjectCase projectCase)
+        {
+            if (!string.IsNullOrEmpty(projectCase.ImagePath))
+            {
+                projectCase.Image = await System.IO.File.ReadAllBytesAsync(projectCase.ImagePath);
+            }
+
+            if (!string.IsNullOrEmpty(projectCase.DescriptionPath))
+            {
+                using (var stream = new StreamReader(projectCase.DescriptionPath, Encoding.UTF8))
+                {
+                    projectCase.Description = await stream.ReadToEndAsync();
+                }
+            }
+        }
+
+        private async Task UpdateProjectDescriptionAsync(ProjectCase projectCase)
+        {
+            if (!string.IsNullOrEmpty(projectCase.DescriptionPath))
+            {
+                await this.SaveTextFileAsync(projectCase.DescriptionPath, projectCase.Description).ConfigureAwait(false);
+            }
+        }
+        #endregion
+
+        #region Article
+        // TODO: Check
         private async Task AttachArticleFilesAsync(Article article)
         {
             article.ArticleImages = new List<FileHelper>();
@@ -365,7 +429,6 @@
                     byte[] img = await File.ReadAllBytesAsync(im.ImagePath);
                     article.ArticleImages.Add(new FileHelper(null, img, im.ImageMimeType));
                 }
-
             }
 
             if (!string.IsNullOrEmpty(article.TextPath))
@@ -377,6 +440,52 @@
             }
         }
 
+        private async Task SaveArticleFilesAsync(ProjectCase article, string webRootFilePath)
+        {
+
+        }
+
+        private async Task AttachArticleListFilesAsync(IEnumerable<Article> articles)
+        {
+
+        }
+
+        private async Task UpdateArticleTextAsync(Article article)
+        {
+
+        }
+        #endregion
+
+        #region helper save file
+        private async Task<string> SaveImageFileAsync(byte[] image, string imageFileName, string filePath, string imageMimeType)
+        {
+            if (image?.Length > 0)
+            {
+                imageFileName = imageFileName ?? throw new ArgumentNullException("Image filename cannot be null.");
+                imageMimeType = imageMimeType ?? throw new ArgumentNullException("ImageMimeType cannot be null.");
+
+                string imagePath = filePath + imageFileName;
+                using (FileStream stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await stream.WriteAsync(image, 0, image.Length);
+                }
+                return imagePath;
+            }
+
+            return null;
+        }
+
+        private async Task<string> SaveTextFileAsync(string textPath, string text)
+        {
+            using (var stream = new StreamWriter(textPath, false, Encoding.UTF8))
+            {
+                await stream.WriteAsync(text ?? string.Empty);
+            }
+
+            return textPath;
+        }
+
+        #endregion
 
         #endregion
     }

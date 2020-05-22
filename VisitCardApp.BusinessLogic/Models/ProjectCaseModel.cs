@@ -30,9 +30,12 @@
             {
                 Id = this.Id,
                 ProjectName = this.ProjectName,
+                Description = this.Description,
                 DescriptionPath = this.DescriptionPath,
+                Image = this.Image,
                 ImagePath = this.ImagePath,
-                ImageMimeType = this.ImageMimeType
+                ImageMimeType = this.ImageMimeType,
+                ImageFileName = this.ImageFileName
             };
         }
 
@@ -42,9 +45,12 @@
             {
                 this.Id = entity.Id;
                 this.ProjectName = entity.ProjectName;
+                this.Description = entity.Description;
                 this.DescriptionPath = entity.DescriptionPath;
+                this.Image = entity.Image;
                 this.ImagePath = entity.ImagePath;
                 this.ImageMimeType = entity.ImageMimeType;
+                this.ImageFileName = entity.ImageFileName;
             }
         }
     }

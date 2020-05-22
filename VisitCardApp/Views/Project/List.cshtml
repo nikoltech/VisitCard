@@ -9,7 +9,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@if (ProjectCreated != null)
+@if (ProjectCreated.HasValue)
 {
     @if (ProjectCreated.Value)
     {
@@ -31,7 +31,7 @@
     }
 }
 
-@if (ProjectDeleted != null)
+@if (ProjectDeleted.HasValue)
 {
     @if (ProjectDeleted.Value)
     {
@@ -79,8 +79,8 @@
                             <p class="card-text">@caseModel.ProjectName</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    @Html.ActionLink("View", "", new { id = caseModel.Id, @class = "btn btn-sm btn-outline-secondary" })
-                                    @Html.ActionLink("Edit", "Update", new { id = caseModel.Id, @class = "btn btn-sm btn-outline-secondary" })
+                                    @Html.ActionLink("View", "", new { id = caseModel.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+                                    @Html.ActionLink("Edit", "Update", new { id = caseModel.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
                                     <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
                                 </div>

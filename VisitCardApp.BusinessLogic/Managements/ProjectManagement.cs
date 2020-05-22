@@ -17,13 +17,20 @@
             this.repo = repo;
         }
 
-        public async Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="fileFolderPath">Need folders {fileFolderPath}/Files/ProjectFiles</param>
+        /// <returns></returns>
+        public async Task<ProjectCaseModel> CreateProjectCaseAsync(ProjectCaseModel model, string fileFolderPath)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
+            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
 
             try
             {
-                ProjectCase entity = await this.repo.CreateProjectCaseAsync(model.ToEntity()).ConfigureAwait(false);
+                ProjectCase entity = await this.repo.CreateProjectCaseAsync(model.ToEntity(), fileFolderPath).ConfigureAwait(false);
 
                 if (entity == null) { return null; }
 
@@ -43,6 +50,8 @@
             try
             {
                 ProjectCase entity = await this.repo.GetProjectCaseAsync(projectId).ConfigureAwait(false);
+
+                if (entity == null) { return null; }
 
                 ProjectCaseModel model = new ProjectCaseModel();
                 model.ToModel(entity);

@@ -6,7 +6,7 @@
 
     public interface IArticleManagement
     {
-        Task<ArticleModel> CreateArticleAsync(ArticleModel model);
+        Task<ArticleModel> CreateArticleAsync(ArticleModel model, string fileFolderPath);
 
         Task<ArticleModel> GetArticleByIdAsync(int articleId);
 
