@@ -13,7 +13,6 @@
         [MaxLength(200)]
         public string Topic { get; set; }
 
-        [Required]
         public string Text { get; set; }
 
         /// <summary>

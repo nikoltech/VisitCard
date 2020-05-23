@@ -105,16 +105,16 @@
 
         [HttpPost("UpdateArticle")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateAsync(ArticleModel model)
+        public async Task<IActionResult> UpdateAsync(ArticleViewModel reqModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", model);
+                return View("Update", reqModel);
             }
 
             try
             {
-                ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(model);
+                ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(reqModel.ToAppModel());
 
                 return RedirectToAction("", new { id = updatedModel.Id });
             }

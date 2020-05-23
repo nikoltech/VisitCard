@@ -38,7 +38,7 @@
 
             try
             {
-                await this.SaveProjectFilesAsync(projectCase, webRootFilePath).ConfigureAwait(false);
+                projectCase = await this.SaveProjectFilesAsync(projectCase, webRootFilePath).ConfigureAwait(false);
 
                 this.context.ProjectCases.Add(projectCase);
 
@@ -144,6 +144,7 @@
                     }
 
                     string folderPath = this.GetProjectFolderPath(projectCase);
+                    projectCase.Image = updatedProject.Image;
                     projectCase = await this.SaveProjectImageAsync(projectCase, webRootFilePath, folderPath).ConfigureAwait(false);
                 }
 
@@ -211,7 +212,7 @@
 
             try
             {
-                await this.SaveArticleFilesAsync(article, webRootFilePath).ConfigureAwait(false);
+                article = await this.SaveArticleFilesAsync(article, webRootFilePath).ConfigureAwait(false);
 
                 this.context.Articles.Add(article);
 
@@ -293,7 +294,10 @@
                     throw new Exception($"Project with id {updatedArticle.Id} not found.");
                 }
 
-                await this.SaveTextFileAsync(article.TextPath, updatedArticle.Text).ConfigureAwait(false);
+                if (!string.IsNullOrEmpty(article.TextPath))
+                {
+                    await this.SaveTextFileAsync(article.TextPath, updatedArticle.Text).ConfigureAwait(false);
+                }
 
                 article.Topic = article.Topic;
 
@@ -338,6 +342,7 @@
 
                 this.RemoveFile(article.TextPath);
 
+                this.context.ArticleImages.RemoveRange(article.ArticleImagesPath);
                 this.context.Articles.Remove(article);
 
                 return await this.context.SaveChangesAsync() > 0;
@@ -368,7 +373,7 @@
         #region Project
         private string GetProjectFolderPath(ProjectCase projectCase) => $"/Files/ProjectFiles/{new string(projectCase.ProjectName.Take(10).ToArray())}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
-        private async Task SaveProjectFilesAsync(ProjectCase projectCase, string webRootFilePath)
+        private async Task<ProjectCase> SaveProjectFilesAsync(ProjectCase projectCase, string webRootFilePath)
         {
             // string filePath = $"{this.appEnvironment.WebRootPath}/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
             string folderPath = this.GetProjectFolderPath(projectCase);
@@ -379,6 +384,8 @@
             // Save project description in file
             string descriptionPath = webRootFilePath + folderPath + "Description.txt";
             projectCase.DescriptionPath = await this.SaveTextFileAsync(descriptionPath, projectCase.Description).ConfigureAwait(false);
+
+            return projectCase;
         }
 
         private async Task<ProjectCase> SaveProjectImageAsync(ProjectCase projectCase, string webRootFilePath, string folderPath)
@@ -441,7 +448,7 @@
             article.Text = await this.GetTextFileAsync(article.TextPath).ConfigureAwait(false);
         }
 
-        private async Task SaveArticleFilesAsync(Article article, string webRootFilePath)
+        private async Task<Article> SaveArticleFilesAsync(Article article, string webRootFilePath)
         {
             string folderPath = this.GetArticleFolderFilePath(article);
 
@@ -460,7 +467,9 @@
 
             // Save project description in file
             string textPath = webRootFilePath + folderPath + "Text.txt";
-            article.Text = await this.SaveTextFileAsync(textPath, article.Text).ConfigureAwait(false);
+            article.TextPath = await this.SaveTextFileAsync(textPath, article.Text).ConfigureAwait(false);
+
+            return article;
         }
 
         #endregion

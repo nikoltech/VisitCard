@@ -22,7 +22,6 @@
         [MaxLength(200, ErrorMessage = "Не более 200 символов")]
         public string Topic { get; set; }
 
-        [Required]
         public string Text { get; set; }
 
         /// <summary>
