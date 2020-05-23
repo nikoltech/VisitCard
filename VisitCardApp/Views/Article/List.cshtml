@@ -1,0 +1,96 @@
+﻿@model List<ArticleModel>
+@{
+    ViewData["Title"] = "Лента статей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool? ArticleCreated = (bool?)TempData["Created"];
+    bool? ArticleDeleted = (bool?)TempData["Deleted"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (ArticleCreated.HasValue)
+{
+    @if (ArticleCreated.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Добавлено!</strong> Статья успешно сохранена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Не удалось сохранить статью. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+@if (ArticleDeleted.HasValue)
+{
+    @if (ArticleDeleted.Value)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Удалено!</strong> Статья успешно удалена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Статья не была удалена. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+
+
+@*Article list*@
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            @foreach (ArticleModel article in Model)
+            {
+                VisitCardApp.DataAccess.Helpers.FileHelper img = article.ArticleImages.FirstOrDefault();
+                string articleTopic = new string(article.Topic.Take(10).ToArray());
+
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        @if (article.ArticleImages.Count > 0)
+                        {
+                            @*src="data:@img.ImageMimeType;base64,@(Convert.ToBase64String(img.File))"*@
+                            <img class="card-img-top" alt="@articleTopic [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content(img.UrlPath)" data-holder-rendered="true">
+                        }
+                        else
+                        {
+                            <img class="card-img-top" alt="@articleTopic [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content("~/Files/defimg.png")" data-holder-rendered="true">
+                        }
+                        <div class="card-body">
+                            <p class="card-text">@articleTopic</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    @Html.ActionLink("View", "", new { id = article.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+                                    @Html.ActionLink("Edit", "Update", new { id = article.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+                                </div>
+                                <small class="text-muted"><span class="fi-collapse-left"></span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

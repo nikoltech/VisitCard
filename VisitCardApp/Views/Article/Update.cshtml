@@ -1,0 +1,42 @@
+﻿@model ArticleViewModel
+@{
+    ViewData["Title"] = "Редактирование статьи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">@ViewData["Title"]</div>
+    <div class="panel-body">
+        @Html.ValidationSummary()
+        <form asp-action="UpdateArticle" method="post" enctype ="multipart/form-data" asp-antiforgery="true">
+            @Html.Hidden("Id", new { id = Model.Id})
+            <div>
+                <div>
+                    @Html.ValidationMessageFor(e => e.Topic)
+                    <br />
+                    @Html.LabelFor(e => e.Topic)
+                    <br />
+                    @Html.TextAreaFor(e => e.Topic)
+                    <br />
+                </div>
+
+                <div>
+                    @Html.ValidationMessageFor(e => e.Text)
+                    <br />
+                    @Html.LabelFor(e => e.Text)
+                    <br />
+                    @Html.TextAreaFor(e => e.Text)
+                    <br />
+                </div>
+
+                <div>
+                    <span class="btn btn-block">Редактирование изображений</span>
+                </div>
+
+                <div>
+                    <input class="btn btn-success" type="submit" value="Сохранить" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

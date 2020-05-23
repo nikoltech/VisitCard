@@ -1,6 +1,4 @@
-﻿
-
-namespace VisitCardApp.Models
+﻿namespace VisitCardApp.Models
 {
     using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;

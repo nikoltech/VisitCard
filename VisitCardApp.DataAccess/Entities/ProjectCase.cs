@@ -10,6 +10,8 @@
 
         public string DescriptionPath { get; set; }
 
+        public string UrlPath { get; set; }
+
         public string ImagePath { get; set; }
 
         public string ImageMimeType { get; set; }

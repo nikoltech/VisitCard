@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Article\" />
     <Folder Include="wwwroot\Files\ArticleFiles\" />
+    <Folder Include="wwwroot\Files\ProjectFiles\" />
   </ItemGroup>
 
   <ItemGroup>

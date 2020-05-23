@@ -8,7 +8,7 @@
     <div class="panel-heading">@ViewData["Title"]</div>
     <div class="panel-body">
         @Html.ValidationSummary()
-        <form asp-action="Update" method="post" enctype ="multipart/form-data" asp-antiforgery="true">
+        <form asp-action="UpdateProject" method="post" enctype ="multipart/form-data" asp-antiforgery="true">
             @Html.Hidden("Id", new { id = Model.Id})
             <div>
                 <div>

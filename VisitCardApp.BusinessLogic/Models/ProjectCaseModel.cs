@@ -16,6 +16,8 @@
 
         public string DescriptionPath { get; set; }
 
+        public string UrlPath { get; set; }
+
         public string ImagePath { get; set; }
 
         public byte[] Image { get; set; }
@@ -34,6 +36,7 @@
                 DescriptionPath = this.DescriptionPath,
                 Image = this.Image,
                 ImagePath = this.ImagePath,
+                UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
                 ImageFileName = this.ImageFileName
             };
@@ -49,6 +52,7 @@
                 this.DescriptionPath = entity.DescriptionPath;
                 this.Image = entity.Image;
                 this.ImagePath = entity.ImagePath;
+                this.UrlPath = entity.UrlPath;
                 this.ImageMimeType = entity.ImageMimeType;
                 this.ImageFileName = entity.ImageFileName;
             }

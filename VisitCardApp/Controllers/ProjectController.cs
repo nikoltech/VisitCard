@@ -107,7 +107,7 @@
             }
         }
 
-        [HttpPost("Update")]
+        [HttpPost("UpdateProject")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(ProjectViewModel reqModel)
         {
@@ -131,7 +131,7 @@
 
                 ProjectCaseModel updatedModel = await this.projectManagement.UpdateProjectCaseAsync(model, this.appEnvironment.WebRootPath);
 
-                return RedirectToAction("", new { id = updatedModel.Id });
+                return RedirectToAction("", new { id = reqModel.Id });
             }
             catch (Exception ex)
             {

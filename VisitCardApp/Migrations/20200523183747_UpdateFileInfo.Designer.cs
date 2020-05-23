@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VisitCardApp.DataAccess;
 
 namespace VisitCardApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200523183747_UpdateFileInfo")]
+    partial class UpdateFileInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,10 +245,10 @@ namespace VisitCardApp.Migrations
                     b.Property<int?>("ArticleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FilePath")
+                    b.Property<string>("ImageMimeType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageMimeType")
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlPath")

@@ -24,20 +24,21 @@
         }
 
         #region ProjectCase
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="projectCase"></param>
         /// <param name="fileFolderPath"></param>
         /// <returns>null if fail</returns>
-        public async Task<ProjectCase> CreateProjectCaseAsync(ProjectCase projectCase, string fileFolderPath)
+        public async Task<ProjectCase> CreateProjectCaseAsync(ProjectCase projectCase, string webRootFilePath)
         {
             projectCase = projectCase ?? throw new ArgumentNullException(nameof(projectCase));
-            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
+            webRootFilePath = webRootFilePath ?? throw new ArgumentNullException(nameof(webRootFilePath));
 
             try
             {
-                await this.SaveProjectFilesAsync(projectCase, fileFolderPath).ConfigureAwait(false);
+                await this.SaveProjectFilesAsync(projectCase, webRootFilePath).ConfigureAwait(false);
 
                 this.context.ProjectCases.Add(projectCase);
 
@@ -142,12 +143,11 @@
                         File.Delete(projectCase.ImagePath);
                     }
 
-                    string newImagePath = this.GetProjectFilePath(projectCase, webRootFilePath);
-                    projectCase.ImagePath = await this.SaveImageFileAsync(updatedProject.Image, updatedProject.ImageFileName, newImagePath).ConfigureAwait(false);
-                    projectCase.ImageMimeType = updatedProject.ImageMimeType;
+                    string folderPath = this.GetProjectFolderPath(projectCase);
+                    projectCase = await this.SaveProjectImageAsync(projectCase, webRootFilePath, folderPath).ConfigureAwait(false);
                 }
 
-                if (await this.context.SaveChangesAsync() > 0)
+                if (await this.context.SaveChangesAsync() > 0 || this.context.Entry(projectCase).State == EntityState.Unchanged)
                 {
                     return projectCase;
                 }
@@ -159,9 +159,6 @@
                 throw;
             }
         }
-
-        // TODO
-        //public async Task<ProjectCase> UpdateProjectCaseImageAsync(int projectId, ....)
 
         public async Task<bool> RemoveProjectCaseAsync(int projectId)
         {
@@ -207,16 +204,14 @@
 
         // TODO: Update images
         #region Articles
-        public async Task<Article> CreateArticleAsync(Article article, string fileFolderPath)
+        public async Task<Article> CreateArticleAsync(Article article, string webRootFilePath)
         {
             article = article ?? throw new ArgumentNullException(nameof(article));
-            fileFolderPath = fileFolderPath ?? throw new ArgumentNullException(nameof(fileFolderPath));
-
-            string filePath = this.GetArticleFilePath(article, fileFolderPath);
+            webRootFilePath = webRootFilePath ?? throw new ArgumentNullException(nameof(webRootFilePath));
 
             try
             {
-                await this.SaveArticleFilesAsync(article, fileFolderPath).ConfigureAwait(false);
+                await this.SaveArticleFilesAsync(article, webRootFilePath).ConfigureAwait(false);
 
                 this.context.Articles.Add(article);
 
@@ -302,7 +297,7 @@
 
                 article.Topic = article.Topic;
 
-                if (await this.context.SaveChangesAsync() > 0)
+                if (await this.context.SaveChangesAsync() > 0 || this.context.Entry(article).State == EntityState.Unchanged)
                 {
                     return article;
                 }
@@ -335,9 +330,9 @@
 
                 foreach (ArticleImage im in article.ArticleImagesPath)
                 {
-                    if (!string.IsNullOrEmpty(im.ImagePath))
+                    if (!string.IsNullOrEmpty(im.FilePath))
                     {
-                        File.Delete(im.ImagePath);
+                        File.Delete(im.FilePath);
                     }
                 }
 
@@ -371,24 +366,35 @@
         }
 
         #region Project
-        private string GetProjectFilePath(ProjectCase projectCase, string webRootFilePath) => $"{webRootFilePath}/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
+        private string GetProjectFolderPath(ProjectCase projectCase) => $"/Files/ProjectFiles/{new string(projectCase.ProjectName.Take(10).ToArray())}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
         private async Task SaveProjectFilesAsync(ProjectCase projectCase, string webRootFilePath)
         {
             // string filePath = $"{this.appEnvironment.WebRootPath}/Files/ProjectFiles/{projectCase.ProjectName}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
-            string filePath = this.GetProjectFilePath(projectCase, webRootFilePath);
+            string folderPath = this.GetProjectFolderPath(projectCase);
 
             // Save image file
+            await this.SaveProjectImageAsync(projectCase, webRootFilePath, folderPath).ConfigureAwait(false);
+
+            // Save project description in file
+            string descriptionPath = webRootFilePath + folderPath + "Description.txt";
+            projectCase.DescriptionPath = await this.SaveTextFileAsync(descriptionPath, projectCase.Description).ConfigureAwait(false);
+        }
+
+        private async Task<ProjectCase> SaveProjectImageAsync(ProjectCase projectCase, string webRootFilePath, string folderPath)
+        {
             if (projectCase.Image?.Length > 0)
             {
                 projectCase.ImageMimeType = projectCase.ImageMimeType ?? throw new ArgumentNullException("ImageMimeType cannot be null.");
 
-                projectCase.ImagePath = await this.SaveImageFileAsync(projectCase.Image, projectCase.ImageFileName, filePath).ConfigureAwait(false);
+                string urlPath = folderPath + projectCase.ImageFileName;
+                string filePath = webRootFilePath + urlPath;
+
+                projectCase.ImagePath = await this.SaveImageFileAsync(projectCase.Image, filePath).ConfigureAwait(false);
+                projectCase.UrlPath = urlPath;
             }
 
-            // Save project description in file
-            string descriptionPath = filePath + "Description.txt";
-            projectCase.DescriptionPath = await this.SaveTextFileAsync(descriptionPath, projectCase.Description).ConfigureAwait(false);
+            return projectCase;
         }
 
         private async Task AttachProjectCaseListFilesAsync(IEnumerable<ProjectCase> projectCases)
@@ -408,7 +414,7 @@
         #endregion
 
         #region Article
-        private string GetArticleFilePath(Article article, string webRootFilePath) => $"{webRootFilePath}/Files/ArticleFiles/{article.Topic.Take(10)}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
+        private string GetArticleFolderFilePath(Article article) => $"/Files/ArticleFiles/{new string(article.Topic.Take(10).ToArray())}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
         private async Task AttachArticleListFilesAsync(IEnumerable<Article> articles)
         {
@@ -423,10 +429,10 @@
             article.ArticleImages = new List<FileHelper>();
             foreach (ArticleImage im in article.ArticleImagesPath)
             {
-                byte[] img = await this.GetImageFileAsync(im.ImagePath).ConfigureAwait(false);
+                byte[] img = await this.GetImageFileAsync(im.FilePath).ConfigureAwait(false);
                 if (img != null)
                 {
-                    article.ArticleImages.Add(new FileHelper(null, img, im.ImageMimeType));
+                    article.ArticleImages.Add(new FileHelper(null, img, im.ImageMimeType, im.UrlPath));
                 }
 
                 if (isOnlyOneImage) break;
@@ -437,22 +443,23 @@
 
         private async Task SaveArticleFilesAsync(Article article, string webRootFilePath)
         {
-            string filePath = this.GetArticleFilePath(article, webRootFilePath);
+            string folderPath = this.GetArticleFolderFilePath(article);
 
             // Save images
             article.ArticleImagesPath = new List<ArticleImage>();
             foreach (FileHelper helper in article.ArticleImages)
             {
                 helper.ImageMimeType = helper.ImageMimeType ?? throw new ArgumentNullException("ImageMimeType cannot be null.");
-                string imagePath = await this.SaveImageFileAsync(helper.File, helper.FileName, filePath).ConfigureAwait(false);
-                if (!string.IsNullOrEmpty(imagePath))
-                {
-                    article.ArticleImagesPath.Add(new ArticleImage { ImagePath = imagePath, ImageMimeType = helper.ImageMimeType });
-                }
+
+                string urlPath = folderPath + helper.FileName;
+                string filePath = webRootFilePath + urlPath;
+
+                await this.SaveImageFileAsync(helper.File, filePath).ConfigureAwait(false);
+                article.ArticleImagesPath.Add(new ArticleImage { FilePath = filePath, UrlPath = urlPath, ImageMimeType = helper.ImageMimeType });
             }
 
             // Save project description in file
-            string textPath = filePath + "Text.txt";
+            string textPath = webRootFilePath + folderPath + "Text.txt";
             article.Text = await this.SaveTextFileAsync(textPath, article.Text).ConfigureAwait(false);
         }
 
@@ -464,20 +471,16 @@
         /// SaveImageFileAsync. If image exists, it will be reopened and truncate
         /// </summary>
         /// <returns>image path or null if fail</returns>
-        private async Task<string> SaveImageFileAsync(byte[] image, string imageFileName, string filePath)
+        private async Task<string> SaveImageFileAsync(byte[] image, string filePath)
         {
             if (image?.Length > 0)
             {
-                imageFileName = imageFileName ?? throw new ArgumentNullException("Image filename cannot be null.");
-
-                string imagePath = filePath + imageFileName;
-
-                using (FileStream stream = new FileStream(imagePath, FileMode.Create))
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
                 {
                     await stream.WriteAsync(image, 0, image.Length);
                 }
 
-                return imagePath;
+                return filePath;
             }
 
             return null;

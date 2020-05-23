@@ -8,7 +8,9 @@ namespace VisitCardApp.DataAccess.Entities
     {
         public int Id { get; set; }
 
-        public string ImagePath { get; set; }
+        public string UrlPath { get; set; }
+
+        public string FilePath { get; set; }
 
         public string ImageMimeType { get; set; }
 
