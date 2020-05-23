@@ -80,13 +80,14 @@
             }
         }
 
-        public async Task<ProjectCaseModel> UpdateProjectCaseAsync(ProjectCaseModel model)
+        public async Task<ProjectCaseModel> UpdateProjectCaseAsync(ProjectCaseModel model, string webRootFilePath)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
+            webRootFilePath = webRootFilePath ?? throw new ArgumentNullException(nameof(webRootFilePath));
 
             try
             {
-                ProjectCase entity = await this.repo.UpdateProjectCaseAsync(model.ToEntity()).ConfigureAwait(false);
+                ProjectCase entity = await this.repo.UpdateProjectCaseAsync(model.ToEntity(), webRootFilePath).ConfigureAwait(false);
 
                 ProjectCaseModel updatedModel = new ProjectCaseModel();
                 updatedModel.ToModel(entity);

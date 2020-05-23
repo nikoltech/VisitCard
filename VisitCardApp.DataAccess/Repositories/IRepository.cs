@@ -12,7 +12,7 @@
 
         Task<List<ProjectCase>> GetProjectCaseListAsync(int page, int count);
 
-        Task<ProjectCase> UpdateProjectCaseAsync(ProjectCase updatedProject);
+        Task<ProjectCase> UpdateProjectCaseAsync(ProjectCase updatedProject, string webRootFilePath);
 
         Task<bool> RemoveProjectCaseAsync(int projectId);
 

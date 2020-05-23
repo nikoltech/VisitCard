@@ -119,8 +119,17 @@
             try
             {
                 ProjectCaseModel model = reqModel.ToAppModel();
+                if (reqModel.ImageFile != null)
+                {
+                    using (BinaryReader reader = new BinaryReader(reqModel.ImageFile.OpenReadStream()))
+                    {
+                        model.ImageFileName = reqModel.ImageFile.FileName;
+                        model.ImageMimeType = reqModel.ImageFile.ContentType;
+                        model.Image = reader.ReadBytes((int)reqModel.ImageFile.Length);
+                    }
+                }
 
-                ProjectCaseModel updatedModel = await this.projectManagement.UpdateProjectCaseAsync(model);
+                ProjectCaseModel updatedModel = await this.projectManagement.UpdateProjectCaseAsync(model, this.appEnvironment.WebRootPath);
 
                 return RedirectToAction("", new { id = updatedModel.Id });
             }
