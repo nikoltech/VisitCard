@@ -143,9 +143,9 @@
         }
 
         #region private methods
-        private List<FileHelper> ReadFilesBytes(FormFileCollection files)
+        private List<ArticleImageModel> ReadFilesBytes(FormFileCollection files)
         {
-            List<FileHelper> images = new List<FileHelper>();
+            List<ArticleImageModel> images = new List<ArticleImageModel>();
             foreach (IFormFile file in files)
             {
                 if (file != null)
@@ -153,7 +153,7 @@
                     using (BinaryReader reader = new BinaryReader(file.OpenReadStream()))
                     {
                         byte[] img = reader.ReadBytes((int)file.Length);
-                        images.Add(new FileHelper { FileName = file.FileName, ImageMimeType = file.ContentType, File = img });
+                        images.Add(new ArticleImageModel { FileName = file.FileName, ImageMimeType = file.ContentType, File = img });
                     }
                 }
             }

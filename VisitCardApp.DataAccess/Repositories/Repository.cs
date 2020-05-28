@@ -239,7 +239,7 @@
             try
             {
                 Article article = await this.context.Articles
-                    .Include(a => a.ArticleImagesPath)
+                    .Include(a => a.ArticleImages)
                     .Where(p => p.Id == articleId).FirstOrDefaultAsync();
 
                 if (article == null)
@@ -247,7 +247,7 @@
                     throw new Exception($"Project with id {articleId} not found.");
                 }
 
-                await this.AttachArticleFilesAsync(article).ConfigureAwait(false);
+                article.Text = await this.GetTextFileAsync(article.TextPath).ConfigureAwait(false);
 
                 return article;
             }
@@ -264,12 +264,12 @@
                 int skip = this.SkipSize(page, count);
 
                 List<Article> articles = await this.context.Articles
-                    .Include(a => a.ArticleImagesPath)
+                    .Include(a => a.ArticleImages)
                     .Skip(skip).Take(count).ToListAsync();
 
                 foreach (Article article in articles)
                 {
-                    await this.AttachArticleFilesAsync(article).ConfigureAwait(false);
+                    article.Text = await this.GetTextFileAsync(article.TextPath).ConfigureAwait(false);
                 }
 
                 return articles;
@@ -299,7 +299,7 @@
                     await this.SaveTextFileAsync(article.TextPath, updatedArticle.Text).ConfigureAwait(false);
                 }
 
-                article.Topic = article.Topic;
+                article.Topic = updatedArticle.Topic;
 
                 if (await this.context.SaveChangesAsync() > 0 || this.context.Entry(article).State == EntityState.Unchanged)
                 {
@@ -324,7 +324,7 @@
             try
             {
                 Article article = await this.context.Articles
-                    .Include(a => a.ArticleImagesPath)
+                    .Include(a => a.ArticleImages)
                     .Where(p => p.Id == articleId).FirstOrDefaultAsync();
 
                 if (article == null)
@@ -332,7 +332,7 @@
                     return true;
                 }
 
-                foreach (ArticleImage im in article.ArticleImagesPath)
+                foreach (ArticleImage im in article.ArticleImages)
                 {
                     if (!string.IsNullOrEmpty(im.FilePath))
                     {
@@ -342,7 +342,7 @@
 
                 this.RemoveFile(article.TextPath);
 
-                this.context.ArticleImages.RemoveRange(article.ArticleImagesPath);
+                this.context.ArticleImages.RemoveRange(article.ArticleImages);
                 this.context.Articles.Remove(article);
 
                 return await this.context.SaveChangesAsync() > 0;
@@ -423,6 +423,7 @@
         #region Article
         private string GetArticleFolderFilePath(Article article) => $"/Files/ArticleFiles/{new string(article.Topic.Take(10).ToArray())}_{DateTime.Now:dd_MM_yyyy__h_mm_ss}_";
 
+        /* AttachArticleFilesAsync
         private async Task AttachArticleListFilesAsync(IEnumerable<Article> articles)
         {
             foreach (Article article in articles)
@@ -430,39 +431,47 @@
                 await this.AttachArticleFilesAsync(article, true);
             }
         }
-
+        
         private async Task AttachArticleFilesAsync(Article article, bool isOnlyOneImage = false)
         {
-            article.ArticleImages = new List<FileHelper>();
-            foreach (ArticleImage im in article.ArticleImagesPath)
+            article.ArticleImages = new List<ArticleImage>();
+            foreach (ArticleImage im in article.ArticleImages)
             {
                 byte[] img = await this.GetImageFileAsync(im.FilePath).ConfigureAwait(false);
                 if (img != null)
                 {
-                    article.ArticleImages.Add(new FileHelper(null, img, im.ImageMimeType, im.UrlPath));
+                    article.ArticleImages.Add(new ArticleImage 
+                    {
+                        Article = im.Article,
+                        Id = im.Id,
+                        ImageMimeType = im.ImageMimeType,
+                        UrlPath = im.UrlPath
+                    });
                 }
 
                 if (isOnlyOneImage) break;
             }
 
             article.Text = await this.GetTextFileAsync(article.TextPath).ConfigureAwait(false);
-        }
+        }*/
 
         private async Task<Article> SaveArticleFilesAsync(Article article, string webRootFilePath)
         {
             string folderPath = this.GetArticleFolderFilePath(article);
 
             // Save images
-            article.ArticleImagesPath = new List<ArticleImage>();
-            foreach (FileHelper helper in article.ArticleImages)
+            foreach (ArticleImage image in article.ArticleImages)
             {
-                helper.ImageMimeType = helper.ImageMimeType ?? throw new ArgumentNullException("ImageMimeType cannot be null.");
+                image.ImageMimeType = image.ImageMimeType ?? throw new ArgumentNullException("ImageMimeType cannot be null.");
 
-                string urlPath = folderPath + helper.FileName;
+                string urlPath = folderPath + image.FileName;
                 string filePath = webRootFilePath + urlPath;
 
-                await this.SaveImageFileAsync(helper.File, filePath).ConfigureAwait(false);
-                article.ArticleImagesPath.Add(new ArticleImage { FilePath = filePath, UrlPath = urlPath, ImageMimeType = helper.ImageMimeType });
+                await this.SaveImageFileAsync(image.File, filePath).ConfigureAwait(false);
+
+                image.FilePath = filePath;
+                image.UrlPath = urlPath;
+                image.Article = article;
             }
 
             // Save project description in file

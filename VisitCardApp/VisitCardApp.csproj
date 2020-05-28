@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200528110032_RefactorSaveFileEntities.cs" />
+    <Compile Remove="Migrations\20200528110032_RefactorSaveFileEntities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="secrets.json" />
     <Content Remove="wwwroot\Files\defimg.PNG" />
   </ItemGroup>

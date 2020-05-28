@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VisitCardApp.DataAccess.Entities
+﻿namespace VisitCardApp.DataAccess.Entities
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    
     public class ArticleImage
     {
         public int Id { get; set; }
@@ -15,5 +13,11 @@ namespace VisitCardApp.DataAccess.Entities
         public string ImageMimeType { get; set; }
 
         public Article Article { get; set; }
+
+        [NotMapped]
+        public byte[] File { get; set; }
+
+        [NotMapped]
+        public string FileName { get; set; }
     }
 }

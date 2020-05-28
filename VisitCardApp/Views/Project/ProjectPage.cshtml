@@ -21,7 +21,7 @@ else
     @if (Model.Image != null)
     {
         <div>
-            <img class="card-img-top" alt="@Model.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:@Model.ImageMimeType;base64,@(Convert.ToBase64String(Model.Image))" data-holder-rendered="true">
+            <img class="card-img-top" alt="@Model.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content(Model.UrlPath)" data-holder-rendered="true">
         </div>
     }
 

@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    using VisitCardApp.DataAccess.Helpers;
 
     public class Article
     {
@@ -12,12 +11,9 @@
 
         public string TextPath { get; set; }
 
-        public List<ArticleImage> ArticleImagesPath { get; set; }
+        public List<ArticleImage> ArticleImages { get; set; }
 
         [NotMapped]
         public string Text { get; set; }
-
-        [NotMapped]
-        public List<FileHelper> ArticleImages { get; set; }
     }
 }

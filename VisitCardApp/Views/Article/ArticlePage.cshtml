@@ -21,7 +21,7 @@ else
     <div>@Model.Text</div>
     <br />
 
-    @foreach (VisitCardApp.DataAccess.Helpers.FileHelper img in Model.ArticleImages)
+    @foreach (ArticleImageModel img in Model.ArticleImages)
     {
         string articleTopic = new string(Model.Topic.Take(10).ToArray());
 

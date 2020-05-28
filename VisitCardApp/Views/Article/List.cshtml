@@ -64,12 +64,12 @@
         <div class="row">
             @foreach (ArticleModel article in Model)
             {
-                VisitCardApp.DataAccess.Helpers.FileHelper img = article.ArticleImages.FirstOrDefault();
+                ArticleImageModel img = article.ArticleImages.FirstOrDefault();
                 string articleTopic = new string(article.Topic.Take(10).ToArray());
 
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        @if (article.ArticleImages.Count > 0)
+                        @if (img != null && !string.IsNullOrEmpty(img.UrlPath))
                         {
                             @*src="data:@img.ImageMimeType;base64,@(Convert.ToBase64String(img.File))"*@
                             <img class="card-img-top" alt="@articleTopic [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content(img.UrlPath)" data-holder-rendered="true">
