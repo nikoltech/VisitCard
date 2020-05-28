@@ -31,6 +31,23 @@
             }
         }
 
+        public async Task<CategoryModel> GetCategoryByIdAsync(int id)
+        {
+            try
+            {
+                Category category = await this.repo.GetCategoryByIdAsync(id).ConfigureAwait(false);
+
+                CategoryModel model = new CategoryModel();
+                model.ToModel(category);
+
+                return model;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public async Task<CategoryModel> CreateCategoryAsync(CategoryModel model)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));
@@ -68,13 +85,11 @@
             }
         }
 
-        public async Task<bool> RemoveCategoryAsync(CategoryModel model)
+        public async Task<bool> RemoveCategoryAsync(int categoryId)
         {
-            model = model ?? throw new ArgumentNullException(nameof(model));
-
             try
             {
-                return await this.repo.RemoveCategoryAsync(model.ToEntity()).ConfigureAwait(false);
+                return await this.repo.RemoveCategoryAsync(categoryId).ConfigureAwait(false);
             }
             catch
             {

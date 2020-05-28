@@ -418,6 +418,18 @@
             }
         }
 
+        public async Task<Category> GetCategoryByIdAsync(int categoryId)
+        {
+            try
+            {
+                return await this.context.Categories.Where(c => c.Id == categoryId).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public async Task<Category> CreateCategoryAsync(Category category)
         {
             category = category ?? throw new ArgumentNullException(nameof(category));
@@ -453,20 +465,23 @@
             }
         }
 
-        public async Task<bool> RemoveCategoryAsync(Category category)
+        public async Task<bool> RemoveCategoryAsync(int categoryId)
         {
-            category = category ?? throw new ArgumentNullException(nameof(category));
-
             try
             {
-                this.context.Categories.Remove(category);
-
-                if (await this.context.SaveChangesAsync() > 0)
+                Category category = await this.GetCategoryByIdAsync(categoryId).ConfigureAwait(false);
+                if (category == null)
                 {
-                    return true;
+                    this.context.Categories.Remove(category);
+                    if (await this.context.SaveChangesAsync() > 0)
+                    {
+                        return true;
+                    }
+
+                    return false;
                 }
 
-                return false;
+                return true;
             }
             catch
             {

@@ -9,10 +9,12 @@
     {
         Task<List<CategoryModel>> GetCategoryListAsync(CategoryType type = CategoryType.All);
 
+        Task<CategoryModel> GetCategoryByIdAsync(int id);
+
         Task<CategoryModel> CreateCategoryAsync(CategoryModel category);
 
         Task<CategoryModel> UpdateCategoryAsync(CategoryModel category);
 
-        Task<bool> RemoveCategoryAsync(CategoryModel category);
+        Task<bool> RemoveCategoryAsync(int categoryId);
     }
 }

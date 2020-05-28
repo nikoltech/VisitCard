@@ -29,10 +29,12 @@
 
         Task<List<Category>> GetCategoryListAsync(CategoryType type = CategoryType.All);
 
+        Task<Category> GetCategoryByIdAsync(int categoryId);
+
         Task<Category> CreateCategoryAsync(Category category);
 
         Task<Category> UpdateCategoryAsync(Category category);
 
-        Task<bool> RemoveCategoryAsync(Category category);
+        Task<bool> RemoveCategoryAsync(int categoryId);
     }
 }

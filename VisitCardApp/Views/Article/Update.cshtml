@@ -12,6 +12,9 @@
             @Html.Hidden("Id", new { id = Model.Id})
             <div>
                 <div>
+                    @Html.DropDownListFor(e => e.CategoryId, ViewData["Categories"] as SelectList, new { @class = "form-control" })
+                </div>
+                <div>
                     @Html.ValidationMessageFor(e => e.Topic)
                     <br />
                     @Html.LabelFor(e => e.Topic)
