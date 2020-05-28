@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -15,19 +16,27 @@
     {
         private readonly IProjectManagement projectManagement;
         private readonly IWebHostEnvironment appEnvironment;
+        private readonly ICategoryManagement categoryManagement;
 
-        public ProjectController(IProjectManagement projectManagement, IWebHostEnvironment appEnvironment)
+        public ProjectController(
+            IProjectManagement projectManagement,
+            IWebHostEnvironment appEnvironment,
+            ICategoryManagement categoryManagement)
         {
             this.projectManagement = projectManagement;
             this.appEnvironment = appEnvironment;
+            this.categoryManagement = categoryManagement;
         }
 
-        [HttpGet("List/{page?}/{count?}")]
-        public async Task<IActionResult> ListAsync(int? page = 1, int? count = 6)
+        [HttpGet("List/{page?}/{count?}/{categoryId?}")]
+        public async Task<IActionResult> ListAsync(int? page = 1, int? count = 6, int? categoryId = null)
         {
             try
             {
-                List<ProjectCaseModel> models = await this.projectManagement.GetProjectCaseListAsync(page.Value, count.Value);
+                List<ProjectCaseModel> models = await this.projectManagement.GetProjectCaseListAsync(page.Value, count.Value, categoryId.GetValueOrDefault());
+
+                List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
+                ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
 
                 return View("List", models);
             }
@@ -53,8 +62,11 @@
         }
 
         [HttpGet("Create")]
-        public IActionResult CreateAsync()
+        public async Task<IActionResult> CreateAsync()
         {
+            List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
+            ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
+            
             return View();
         }
 
@@ -64,6 +76,9 @@
         {
             if (!ModelState.IsValid)
             {
+                List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
+                ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
+
                 return View("Create", reqModel);
             }
 
@@ -99,6 +114,10 @@
             {
                 ProjectCaseModel model = await this.projectManagement.GetProjectCaseByIdAsync(id);
                 ProjectViewModel vModel = new ProjectViewModel(model);
+
+                List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
+                ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
+
                 return View("Update", vModel);
             }
             catch (Exception ex)
@@ -113,6 +132,9 @@
         {
             if (!ModelState.IsValid)
             {
+                List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
+                ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
+
                 return View("Update", reqModel);
             }
 

@@ -26,6 +26,10 @@
 
         public string ImageMimeType { get; set; }
 
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
         public ProjectCase ToEntity()
         {
             return new ProjectCase
@@ -38,7 +42,9 @@
                 ImagePath = this.ImagePath,
                 UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
-                ImageFileName = this.ImageFileName
+                ImageFileName = this.ImageFileName,
+                CategoryId = this.CategoryId,
+                Category = this.Category
             };
         }
 
@@ -55,6 +61,8 @@
                 this.UrlPath = entity.UrlPath;
                 this.ImageMimeType = entity.ImageMimeType;
                 this.ImageFileName = entity.ImageFileName;
+                this.CategoryId = entity.CategoryId;
+                this.Category = entity.Category;
             }
         }
     }

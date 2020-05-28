@@ -64,11 +64,11 @@
             }
         }
 
-        public async Task<List<ProjectCaseModel>> GetProjectCaseListAsync(int page, int count)
+        public async Task<List<ProjectCaseModel>> GetProjectCaseListAsync(int page, int count, int categoryId)
         {
             try
             {
-                List<ProjectCase> entities = await this.repo.GetProjectCaseListAsync(page, count).ConfigureAwait(false);
+                List<ProjectCase> entities = await this.repo.GetProjectCaseListAsync(page, count, categoryId).ConfigureAwait(false);
 
                 List<ProjectCaseModel> models = this.ToModelList<ProjectCase, ProjectCaseModel>(entities);
 

@@ -29,13 +29,16 @@
         /// </summary>
         public FormFileCollection Files { get; set; }
 
+        public int CategoryId { get; set; }
+
         public ArticleModel ToAppModel()
         {
             return new ArticleModel
             {
                 Id = this.Id,
                 Topic = this.Topic,
-                Text = this.Text
+                Text = this.Text,
+                CategoryId = this.CategoryId
             };
         }
     }

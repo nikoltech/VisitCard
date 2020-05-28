@@ -13,12 +13,22 @@
 
         public Category ToEntity()
         {
-            throw new System.NotImplementedException();
+            return new Category
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Type = this.Type
+            };
         }
 
         public void ToModel(Category entity)
         {
-            throw new System.NotImplementedException();
+            if (entity != null)
+            {
+                this.Id = entity.Id;
+                this.Name = entity.Name;
+                this.Type = entity.Type;
+            }
         }
     }
 }

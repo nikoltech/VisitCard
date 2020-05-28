@@ -13,6 +13,10 @@
 
         public List<ArticleImage> ArticleImages { get; set; }
 
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
         [NotMapped]
         public string Text { get; set; }
     }

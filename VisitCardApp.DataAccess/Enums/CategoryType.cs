@@ -1,17 +1,13 @@
-﻿
-
-namespace VisitCardApp.DataAccess.Enums
+﻿namespace VisitCardApp.DataAccess.Enums
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     public enum CategoryType
     {
         None = 0,
 
-        Project = 1,
+        All = 1,
 
-        Article = 2
+        Project = 2,
+
+        Article = 3
     }
 }

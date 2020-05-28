@@ -18,7 +18,7 @@ else
     <h3>@ViewData["Title"]</h3>
     <br />
 
-    @if (Model.Image != null)
+    @if (!string.IsNullOrEmpty(Model.UrlPath))
     {
         <div>
             <img class="card-img-top" alt="@Model.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content(Model.UrlPath)" data-holder-rendered="true">

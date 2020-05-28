@@ -62,6 +62,7 @@ namespace VisitCardApp
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IArticleManagement, ArticleManagement>();
             services.AddScoped<IProjectManagement, ProjectManagement>();
+            services.AddScoped<ICategoryManagement, CategoryManagement>();
             services.AddTransient<UserService>();
 
             // Add caching

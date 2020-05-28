@@ -62,6 +62,18 @@
     <div class="container">
 
         <div class="row">
+            @using (Html.BeginForm("List", "Project", new { }, FormMethod.Get, false, new { @class = "" }))
+            {
+                <div>
+                    @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                </div>
+
+                <input type="submit" />
+            }
+
+        </div>
+
+        <div class="row">
             @foreach (ProjectCaseModel caseModel in Model)
             {
                 <div class="col-md-4">
@@ -82,7 +94,7 @@
                                     @Html.ActionLink("View", "", new { id = caseModel.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
                                     @Html.ActionLink("Edit", "Update", new { id = caseModel.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
                                     <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
                                 </div>
                                 <small class="text-muted"><span class="fi-collapse-left"></span></small>
                             </div>

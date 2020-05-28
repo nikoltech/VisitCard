@@ -1,6 +1,7 @@
 ﻿namespace VisitCardApp.Models
 {
     using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using VisitCardApp.BusinessLogic.Models;
 
@@ -29,13 +30,16 @@
         [Display(Name = "Изображение")]
         public IFormFile ImageFile { get; set; }
 
+        public int CategoryId { get; set; }
+
         public ProjectCaseModel ToAppModel()
         {
             return new ProjectCaseModel
             {
                 Id = this.Id,
                 ProjectName = this.ProjectName,
-                Description = this.Description
+                Description = this.Description,
+                CategoryId = this.CategoryId
             };
         }
     }

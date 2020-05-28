@@ -21,6 +21,10 @@
 
         public List<ArticleImageModel> ArticleImages { get; set; }
 
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
         public Article ToEntity()
         {
             List<ArticleImage> articleImages = new List<ArticleImage>();
@@ -34,7 +38,9 @@
                 Id = this.Id,
                 Topic = this.Topic,
                 Text = this.Text,
-                ArticleImages = articleImages
+                ArticleImages = articleImages,
+                CategoryId = this.CategoryId,
+                Category = this.Category
             };
         }
 
@@ -45,6 +51,8 @@
                 this.Id = entity.Id;
                 this.Topic = entity.Topic;
                 this.Text = entity.Text;
+                this.CategoryId = entity.CategoryId;
+                this.Category = entity.Category;
 
                 List<ArticleImageModel> articleImages = new List<ArticleImageModel>();
                 if (entity.ArticleImages != null)

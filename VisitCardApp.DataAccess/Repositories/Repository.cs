@@ -9,6 +9,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using VisitCardApp.DataAccess.Entities;
+    using VisitCardApp.DataAccess.Enums;
     using VisitCardApp.DataAccess.Helpers;
 
     public class Repository : IRepository
@@ -88,13 +89,37 @@
             }
         }
 
-        public async Task<List<ProjectCase>> GetProjectCaseListAsync(int page, int count)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="count"></param>
+        /// <param name="categoryId"></param>
+        /// <returns>CategoryType.All`s data if categoryId is zero</returns>
+        public async Task<List<ProjectCase>> GetProjectCaseListAsync(int page, int count, int categoryId)
         {
             try
             {
                 int skip = this.SkipSize(page, count);
 
-                List<ProjectCase> projectCases = await this.context.ProjectCases.Skip(skip).Take(count).ToListAsync();
+                IQueryable<ProjectCase> projectCasesQuery = this.context.ProjectCases;
+
+                Category category = null;
+                if (categoryId != 0)
+                {
+                    category = await this.context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+                }
+                else
+                {
+                    category = await this.context.Categories.FirstOrDefaultAsync(c => c.Type == CategoryType.All);
+                }
+
+                if (category.Type != CategoryType.All)
+                {
+                    projectCasesQuery = projectCasesQuery.Where(p => p.CategoryId == categoryId);
+                }
+
+                List<ProjectCase> projectCases = await projectCasesQuery.Skip(skip).Take(count).ToListAsync();
 
                 await this.AttachProjectCaseListFilesAsync(projectCases).ConfigureAwait(false);
 
@@ -148,7 +173,7 @@
                     projectCase = await this.SaveProjectImageAsync(projectCase, webRootFilePath, folderPath).ConfigureAwait(false);
                 }
 
-                if (await this.context.SaveChangesAsync() > 0 || this.context.Entry(projectCase).State == EntityState.Unchanged)
+                if (this.context.Entry(projectCase).State == EntityState.Unchanged || await this.context.SaveChangesAsync() > 0)
                 {
                     return projectCase;
                 }
@@ -257,13 +282,30 @@
             }
         }
 
-        public async Task<List<Article>> GetArticleListAsync(int page, int count)
+        public async Task<List<Article>> GetArticleListAsync(int page, int count, int categoryId)
         {
             try
             {
                 int skip = this.SkipSize(page, count);
 
-                List<Article> articles = await this.context.Articles
+                IQueryable<Article> articlesQuery = this.context.Articles;
+
+                Category category = null;
+                if (categoryId != 0)
+                {
+                    category = await this.context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+                }
+                else
+                {
+                    category = await this.context.Categories.FirstOrDefaultAsync(c => c.Type == CategoryType.All);
+                }
+
+                if (category.Type != CategoryType.All)
+                {
+                    articlesQuery = articlesQuery.Where(p => p.CategoryId == categoryId);
+                }
+
+                List<Article> articles = await articlesQuery
                     .Include(a => a.ArticleImages)
                     .Skip(skip).Take(count).ToListAsync();
 
@@ -301,7 +343,7 @@
 
                 article.Topic = updatedArticle.Topic;
 
-                if (await this.context.SaveChangesAsync() > 0 || this.context.Entry(article).State == EntityState.Unchanged)
+                if (this.context.Entry(article).State == EntityState.Unchanged || await this.context.SaveChangesAsync() > 0)
                 {
                     return article;
                 }
@@ -359,6 +401,79 @@
 
         #endregion
 
+        #region Category
+        public async Task<List<Category>> GetCategoryListAsync(CategoryType type)
+        {
+            try
+            {
+                return type switch
+                {
+                    CategoryType.All => await this.context.Categories.ToListAsync(),
+                    _ => await this.context.Categories.Where(c => c.Type == type).ToListAsync(),
+                };
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Category> CreateCategoryAsync(Category category)
+        {
+            category = category ?? throw new ArgumentNullException(nameof(category));
+
+            try
+            {
+                return (await this.context.Categories.AddAsync(category)).Entity;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Category> UpdateCategoryAsync(Category category)
+        {
+            category = category ?? throw new ArgumentNullException(nameof(category));
+
+            try
+            {
+                Category updatedEntity = this.context.Categories.Update(category).Entity;
+
+                if (this.context.Entry(category).State == EntityState.Unchanged || await this.context.SaveChangesAsync() > 0)
+                {
+                    return updatedEntity;
+                }
+
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> RemoveCategoryAsync(Category category)
+        {
+            category = category ?? throw new ArgumentNullException(nameof(category));
+
+            try
+            {
+                this.context.Categories.Remove(category);
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        #endregion
 
         #region private methods
         private int SkipSize(int page, int elementsAmount)
@@ -414,7 +529,7 @@
 
         private async Task AttachProjectCaseFilesAsync(ProjectCase projectCase)
         {
-            projectCase.Image = await this.GetImageFileAsync(projectCase.ImagePath).ConfigureAwait(false);
+            //projectCase.Image = await this.GetImageFileAsync(projectCase.ImagePath).ConfigureAwait(false);
             projectCase.Description = await this.GetTextFileAsync(projectCase.DescriptionPath).ConfigureAwait(false);
         }
 

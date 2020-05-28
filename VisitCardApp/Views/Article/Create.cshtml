@@ -12,6 +12,9 @@
         {
             <div>
                 <div>
+                    @Html.DropDownListFor(e => e.CategoryId, ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                </div>
+                <div>
                     @Html.ValidationMessageFor(e => e.Topic)
                     <br />
                     @Html.LabelFor(e => e.Topic)
