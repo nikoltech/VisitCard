@@ -27,8 +27,6 @@ namespace VisitCardApp
     {
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
-            Configuration = configuration;
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -36,6 +34,8 @@ namespace VisitCardApp
                 .AddJsonFile("secrets.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .AddConfiguration(configuration);
+
+            this.Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -69,6 +69,7 @@ namespace VisitCardApp
             services.AddMemoryCache();
 
             // Add Compression
+            // TODO: Check images on responce
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]

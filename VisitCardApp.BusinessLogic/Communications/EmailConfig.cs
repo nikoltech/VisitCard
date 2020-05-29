@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VisitCardApp.BusinessLogic.Communications
+﻿namespace VisitCardApp.BusinessLogic.Communications
 {
     public class EmailConfig
     {

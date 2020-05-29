@@ -13,4 +13,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.6.0" />
+  </ItemGroup>
+
 </Project>
