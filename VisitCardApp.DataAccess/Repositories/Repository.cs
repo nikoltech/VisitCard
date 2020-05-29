@@ -114,7 +114,7 @@
                     category = await this.context.Categories.FirstOrDefaultAsync(c => c.Type == CategoryType.All);
                 }
 
-                if (category.Type != CategoryType.All)
+                if (category != null && category.Type != CategoryType.All)
                 {
                     projectCasesQuery = projectCasesQuery.Where(p => p.CategoryId == categoryId);
                 }
@@ -300,7 +300,7 @@
                     category = await this.context.Categories.FirstOrDefaultAsync(c => c.Type == CategoryType.All);
                 }
 
-                if (category.Type != CategoryType.All)
+                if (category != null && category.Type != CategoryType.All)
                 {
                     articlesQuery = articlesQuery.Where(p => p.CategoryId == categoryId);
                 }

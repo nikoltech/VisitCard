@@ -13,12 +13,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using VisitCardApp.BusinessLogic.Communications;
 using VisitCardApp.BusinessLogic.Interfaces;
 using VisitCardApp.BusinessLogic.Managements;
 using VisitCardApp.DataAccess;
 using VisitCardApp.DataAccess.Entities;
 using VisitCardApp.DataAccess.Repositories;
+using VisitCardApp.DataAccess.Services;
 using VisitCardApp.DataAccess.Services.User;
 
 namespace VisitCardApp
@@ -27,6 +29,7 @@ namespace VisitCardApp
     {
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -56,6 +59,7 @@ namespace VisitCardApp
                 .AddDefaultTokenProviders();
 
             services.Configure<EmailConfig>(this.Configuration.GetSection("EmailConfiguration"));
+            services.Configure<AdminSecurity>(this.Configuration.GetSection("AdminSecurity"));
 
 
             // Resolve dependencies
@@ -63,7 +67,8 @@ namespace VisitCardApp
             services.AddScoped<IArticleManagement, ArticleManagement>();
             services.AddScoped<IProjectManagement, ProjectManagement>();
             services.AddScoped<ICategoryManagement, CategoryManagement>();
-            services.AddTransient<UserService>();
+            services.AddScoped<UserService>();
+            services.AddScoped<RoleInitService>();
 
             // Add caching
             services.AddMemoryCache();
@@ -129,12 +134,16 @@ namespace VisitCardApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<DataContext>())
                 {
                     context.Database.Migrate();
+                    int result = context.Initialize().Result;
+
+                    RoleInitService roleInitService = serviceScope.ServiceProvider.GetRequiredService<RoleInitService>();
+                    roleInitService.InitializeAsync().GetAwaiter().GetResult();
                 }
             }
         }

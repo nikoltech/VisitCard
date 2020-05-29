@@ -57,6 +57,25 @@
             return user;
         }
 
+        public async Task<AppUser> UpdateUserCacheByEmailAsync(string email)
+        {
+            email = email ?? throw new ArgumentNullException(nameof(email));
+
+            AppUser user = await this.UserManager.Users.FirstOrDefaultAsync(p => p.Email.Equals(email));
+            this.SetUserToCache(user);
+
+            return user;
+        }
+
+        public async Task<AppUser> UpdateUserCacheByIdAsync(string id)
+        {
+            AppUser user = await this.UserManager.Users.FirstOrDefaultAsync(p => p.Id.Equals(id));
+            this.SetUserToCache(user);
+
+            return user;
+        }
+
+
         #region private methods
         private void SetUserToCache(AppUser user)
         {

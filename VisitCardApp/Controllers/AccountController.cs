@@ -62,7 +62,7 @@
                         // проверяем, подтвержден ли email
                         if (!await this.UserManager.IsEmailConfirmedAsync(signedUser))
                         {
-                            ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email. Подтвердите или пройдите регистрацию снова. Письмо повторно отправлено на указанную почту.");
+                            ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email.\nПодтвердите или пройдите регистрацию снова.\nПисьмо повторно отправлено на указанную почту.");
                             await this.SendConfirmationEmailAsync(signedUser).ConfigureAwait(false);
                             return View(model);
                         }
@@ -114,8 +114,12 @@
 
                     if (user != null && !user.EmailConfirmed)
                     {
-                        await this.UserManager.DeleteAsync(user);
-                        user = null;
+                        IList<string> roles = await this.UserManager.GetRolesAsync(user);
+                        if (!roles.Any(r => r.Equals("admin")))
+                        {
+                            await this.UserManager.DeleteAsync(user);
+                            user = null;
+                        }
                     }
 
                     if (user == null)
@@ -125,6 +129,8 @@
 
                         if (result.Succeeded)
                         {
+                            await this.UserManager.AddToRoleAsync(user, "user");
+
                             // for dev
                             //await this.SignInManager.SignInAsync(user, false);
                             // for production 
@@ -154,7 +160,7 @@
                 {
                     await this.UserManager.DeleteAsync(user);
                 }
-                ModelState.AddModelError("", "Something get wrong!");
+                ModelState.AddModelError("", "Something got wrong!");
             }
 
             return View(model);
@@ -162,41 +168,38 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail(string email, string code)
         {
-            ErrorViewModel errorViewModel = new ErrorViewModel
-            {
-                Message = "Confirmation email"
-            };
-
             try
             {
-                if (userId == null || code == null)
+                if (email == null || code == null)
                 {
-                    return View("Error", errorViewModel);
+                    return View("Error", new ErrorViewModel { Message = "Некорректные данные." });
                 }
 
                 //var user = await this.UserManager.FindByIdAsync(userId);
-                var user = await this.UserService.GetUserAsync(userId);
+                var user = await this.UserManager.FindByEmailAsync(email);
                 if (user == null)
                 {
-                    return View("Error", errorViewModel);
+                    return View("Error", new ErrorViewModel { Message = "Пользователь не найден." });
                 }
 
                 var result = await this.UserManager.ConfirmEmailAsync(user, code);
                 if (result.Succeeded)
                 {
                     await this.SignInManager.SignInAsync(user, false);
+                    await this.UserService.UpdateUserCacheByEmailAsync(email).ConfigureAwait(false);
+
                     return View(user);
                 }
                 else
                 {
-                    return View("Error", errorViewModel);
+                    return View("Error", new ErrorViewModel { Message = "Ошибка подтверждения." });
                 }
             }
             catch
             {
-                return View("Error", errorViewModel);
+                return View("Error", new ErrorViewModel { Message = "Неизвестная ошибка. Обратитесь к администратору." });
             }
         }
 
@@ -250,13 +253,9 @@
         /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null, string somes = "Еще один способ передачи данных в представление")
+        public IActionResult ResetPassword(string code = null)
         {
-            somes ??= "Why standby NULL?";
-            Microsoft.Extensions.Primitives.StringValues vs;
-            vs.Append(somes);
-            this.HttpContext.Request.Query.Append(KeyValuePair.Create("somes", vs));
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error", new ErrorViewModel { Message = "Некоректные данные." }) : View();
         }
 
         /// <summary>
@@ -282,6 +281,8 @@
                 var result = await this.UserManager.ResetPasswordAsync(user, model.Code, model.Password);
                 if (result.Succeeded)
                 {
+                    await this.UserService.UpdateUserCacheByIdAsync(user.Id).ConfigureAwait(false);
+
                     return View("ResetPasswordConfirmation");
                 }
                 foreach (var error in result.Errors)
@@ -358,10 +359,10 @@
             var callbackUrl = Url.Action(
                 "ConfirmEmail",
                 "Account",
-                new { userId = user.Id, code = code },
+                new { email = user.Email, code = code },
                 protocol: HttpContext.Request.Scheme);
 
-            Message message = new Message(user.Email, "WebAppSome: Email confirmation",
+            Message message = new Message(user.Email, "VisitCard: Email confirmation",
                 $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>подтвердить</a>!");
 
             await this.EmailService.SendEmailAsync(message);

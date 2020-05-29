@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VisitCardApp.DataAccess;
 
 namespace VisitCardApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200529163323_AddInitialCode")]
+    partial class AddInitialCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,10 +298,8 @@ namespace VisitCardApp.Migrations
 
             modelBuilder.Entity("VisitCardApp.DataAccess.Entities.InitializeCode", b =>
                 {
-                    b.Property<string>("InitializeCodeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("InitializeCodeId");
+                    b.Property<string>("GuidCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("InitializeCodes");
                 });

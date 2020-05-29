@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200528110032_RefactorSaveFileEntities.cs" />
     <Compile Remove="Migrations\20200528110032_RefactorSaveFileEntities.Designer.cs" />
+    <Compile Remove="Migrations\20200529173750_InitializeCodeId.cs" />
+    <Compile Remove="Migrations\20200529173750_InitializeCodeId.Designer.cs" />
+    <Compile Remove="Migrations\20200529174123_RemoveInitializeCode.cs" />
+    <Compile Remove="Migrations\20200529174123_RemoveInitializeCode.Designer.cs" />
+    <Compile Remove="Migrations\20200529174245_AddInitializeCode.cs" />
+    <Compile Remove="Migrations\20200529174245_AddInitializeCode.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
