@@ -1,30 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using VisitCardApp.BusinessLogic.Communications;
-using VisitCardApp.BusinessLogic.Interfaces;
-using VisitCardApp.BusinessLogic.Managements;
-using VisitCardApp.DataAccess;
-using VisitCardApp.DataAccess.Entities;
-using VisitCardApp.DataAccess.Repositories;
-using VisitCardApp.DataAccess.Services;
-using VisitCardApp.DataAccess.Services.User;
-
 namespace VisitCardApp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.ResponseCompression;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.FileProviders;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
+    using VisitCardApp.BusinessLogic.Communications;
+    using VisitCardApp.BusinessLogic.Interfaces;
+    using VisitCardApp.BusinessLogic.Managements;
+    using VisitCardApp.DataAccess;
+    using VisitCardApp.DataAccess.Entities;
+    using VisitCardApp.DataAccess.Repositories;
+    using VisitCardApp.DataAccess.Services;
+    using VisitCardApp.DataAccess.Services.User;
+
     public class Startup
     {
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)

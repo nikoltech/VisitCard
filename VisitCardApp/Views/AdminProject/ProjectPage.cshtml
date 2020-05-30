@@ -1,0 +1,40 @@
+﻿@model ProjectCaseModel
+@{
+    ViewData["Title"] = Model?.ProjectName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Ошибка!</strong> Проект не доступен. Попробуйте позже или <a href="#">свяжитесь</a> с администрацией.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+else
+{
+    <h3>@ViewData["Title"]</h3>
+    <br />
+
+    @if (!string.IsNullOrEmpty(Model.UrlPath))
+    {
+        <div>
+            <img class="card-img-top" alt="@Model.ProjectName [100%x225]" style="height: 225px; width: 100%; display: block;" src="@Url.Content(Model.UrlPath)" data-holder-rendered="true">
+        </div>
+    }
+
+    <br />
+    <div>@Model.Description</div>
+
+    <div>
+        @Html.ActionLink("Редактировать", "Update", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    </div>
+    <div>
+        @using (Html.BeginForm("Remove", "Project", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+        {
+            <input class="btn btn-danger" type="submit" value="Удалить" />
+        }
+    </div>
+}

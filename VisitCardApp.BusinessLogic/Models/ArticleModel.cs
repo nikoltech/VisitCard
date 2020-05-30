@@ -9,6 +9,7 @@
         public ArticleModel()
         {
             this.ArticleImages = new List<ArticleImageModel>();
+            this.Comments = new List<CommentModel>();
         }
 
         public int Id { get; set; }
@@ -25,12 +26,22 @@
 
         public Category Category { get; set; }
 
+        public List<CommentModel> Comments { get; set; }
+
+        public string UserId { get; set; }
+
         public Article ToEntity()
         {
             List<ArticleImage> articleImages = new List<ArticleImage>();
-            foreach (ArticleImageModel imModel in ArticleImages)
+            foreach (ArticleImageModel imModel in this.ArticleImages)
             {
                 articleImages.Add(imModel.ToEntity());
+            }
+
+            List<Comment> comments = new List<Comment>();
+            foreach (CommentModel comModel in this.Comments)
+            {
+                comments.Add(comModel.ToEntity());
             }
 
             return new Article
@@ -40,7 +51,9 @@
                 Text = this.Text,
                 ArticleImages = articleImages,
                 CategoryId = this.CategoryId,
-                Category = this.Category
+                Category = this.Category,
+                UserId = this.UserId,
+                Comments = comments
             };
         }
 
@@ -64,6 +77,19 @@
                 }
 
                 this.ArticleImages = articleImages;
+
+                List<CommentModel> comments = new List<CommentModel>();
+                if (entity.Comments != null)
+                {
+                    foreach (Comment c in entity.Comments)
+                    {
+                        CommentModel commentModel = new CommentModel { Article = this };
+                        commentModel.ToModel(c);
+                        comments.Add(commentModel);
+                    }
+                }
+
+                this.Comments = comments;
             }
         }
     }

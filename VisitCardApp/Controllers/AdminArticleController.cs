@@ -18,16 +18,16 @@
     using VisitCardApp.DataAccess.Helpers;
     using VisitCardApp.Models;
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [Route("{controller}")]
-    public class ArticleController : Controller
+    public class AdminArticleController : Controller
     {
         private readonly IArticleManagement articleManagement;
         private readonly IWebHostEnvironment appEnvironment;
         private readonly ICategoryManagement categoryManagement;
         private readonly UserManager<AppUser> UserManager;
 
-        public ArticleController(
+        public AdminArticleController(
             IArticleManagement articleManagement,
             IWebHostEnvironment appEnvironment,
             ICategoryManagement categoryManagement,
@@ -39,7 +39,6 @@
             this.UserManager = userManager;
         }
 
-        [AllowAnonymous]
         [HttpGet("List/{page?}/{count?}/{categoryId?}")]
         public async Task<IActionResult> ListAsync(int? page = 1, int? count = 6, int? categoryId = null)
         {
@@ -58,7 +57,6 @@
             }
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
@@ -155,7 +153,6 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet("Update/{id}")]
         public async Task<IActionResult> UpdateAsync(int id)
         {
@@ -174,7 +171,6 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost("UpdateArticle")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(ArticleViewModel reqModel)
@@ -199,7 +195,6 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost("Remove/{id}")]
         public async Task<IActionResult> RemoveAsync(int id)
         {

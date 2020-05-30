@@ -110,6 +110,40 @@
             }
         }
 
+        public async Task<CommentModel> AddCommentAsync(CommentModel model)
+        {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
+            try
+            {
+                Comment entity = await this.repo.AddArticleCommentAsync(model.ToEntity()).ConfigureAwait(false);
+
+                entity = entity ?? throw new Exception("Error saving comment.");
+
+                CommentModel updatedModel = new CommentModel();
+                updatedModel.ToModel(entity);
+
+                return updatedModel;
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<bool> RemoveCommentAsync(int commentId)
+        {
+            try
+            {
+                return await this.repo.RemoveArticleCommentAsync(commentId).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         #region private methods
         private List<TModel> ToModelList<TEntity, TModel>(IEnumerable<TEntity> entities)
             where TModel : IEntityModel<TEntity>, new()

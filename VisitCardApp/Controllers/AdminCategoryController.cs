@@ -1,5 +1,6 @@
 ﻿namespace VisitCardApp.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
@@ -12,12 +13,13 @@
     using VisitCardApp.DataAccess.Enums;
     using VisitCardApp.Models;
 
+    [Authorize(Roles = "admin")]
     [Route("{controller}")]
-    public class CategoryController : Controller
+    public class AdminCategoryController : Controller
     {
         private readonly ICategoryManagement categoryManagement;
 
-        public CategoryController(ICategoryManagement categoryManagement)
+        public AdminCategoryController(ICategoryManagement categoryManagement)
         {
             this.categoryManagement = categoryManagement;
         }

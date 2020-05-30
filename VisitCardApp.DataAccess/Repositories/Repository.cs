@@ -10,7 +10,6 @@
     using System.Threading.Tasks;
     using VisitCardApp.DataAccess.Entities;
     using VisitCardApp.DataAccess.Enums;
-    using VisitCardApp.DataAccess.Helpers;
 
     public class Repository : IRepository
     {
@@ -237,6 +236,13 @@
 
             try
             {
+                AppUser user = await this.context.Users.Where(u => u.Id.Equals(article.UserId)).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
                 article = await this.SaveArticleFilesAsync(article, webRootFilePath).ConfigureAwait(false);
 
                 this.context.Articles.Add(article);
@@ -265,6 +271,7 @@
             {
                 Article article = await this.context.Articles
                     .Include(a => a.ArticleImages)
+                    .Include(a => a.Comments)
                     .Where(p => p.Id == articleId).FirstOrDefaultAsync();
 
                 if (article == null)
@@ -307,6 +314,7 @@
 
                 List<Article> articles = await articlesQuery
                     .Include(a => a.ArticleImages)
+                    .Include(a => a.Comments)
                     .Skip(skip).Take(count).ToListAsync();
 
                 foreach (Article article in articles)
@@ -394,6 +402,71 @@
                 throw;
             }
         }
+
+        public async Task<Comment> AddArticleCommentAsync(Comment comment)
+        {
+            comment = comment ?? throw new ArgumentNullException(nameof(comment));
+
+            try
+            {
+                AppUser user = await this.context.Users.Where(u => u.Id.Equals(comment.UserId)).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                Article article = await this.GetArticleByIdAsync(comment.ArticleId).ConfigureAwait(false);
+
+                if (article == null)
+                {
+                    throw new Exception($"Article not found.");
+                }
+
+                comment.UserName = user.UserName;
+
+                article.Comments.Add(comment);
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return comment;
+                }
+
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> RemoveArticleCommentAsync(int commentId)
+        {
+            try
+            {
+                Comment comment = await this.context.Comments.Where(c => c.Id == commentId).FirstOrDefaultAsync();
+
+                if (comment == null)
+                {
+                    throw new Exception("Comment does not exist.");
+                }
+
+                this.context.Comments.Remove(comment);
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+
 
         #region Article Images
 

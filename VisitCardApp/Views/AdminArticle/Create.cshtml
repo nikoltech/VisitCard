@@ -1,0 +1,55 @@
+﻿@model ArticleViewModel
+@{
+    ViewData["Title"] = "Добавление статьи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">@ViewData["Title"]</div>
+    <div class="panel-body">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm("Create", "Article", new { }, FormMethod.Post, true, new { enctype = "multipart/form-data", @class = "" }))
+        {
+            <div>
+                <div>
+                    @Html.DropDownListFor(e => e.CategoryId, ViewData["Categories"] as SelectList, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(e => e.Topic)
+                    <br />
+                    @Html.LabelFor(e => e.Topic)
+                    <br />
+                    @Html.TextAreaFor(e => e.Topic)
+                    <br />
+                </div>
+
+                <div>
+                    @Html.ValidationMessageFor(e => e.Text)
+                    <br />
+                    @Html.LabelFor(e => e.Text)
+                    <br />
+                    @Html.TextAreaFor(e => e.Text)
+                    <br />
+                </div>
+
+                <div>
+                    @Html.ValidationMessageFor(e => e.Files)
+                    <br />
+                    @Html.LabelFor(e => e.Files)
+                    <br />
+                    <div class="custom-file">
+                        @Html.EditorFor(e => e.Files, new { @class = "custom-file-input" })
+                        @Html.LabelFor(e => e.Files, "Выберите файлы..", new { @class = "custom-file-label" })
+                    </div>
+                    <br />
+                </div>
+
+                <div>
+                    <input class="btn btn-success" type="submit" value="Сохранить" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

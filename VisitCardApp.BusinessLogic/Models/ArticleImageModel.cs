@@ -8,9 +8,12 @@
 
         public ArticleImageModel(ArticleImage entity) 
         {
-            this.Id = entity.Id;
-            this.UrlPath = entity.UrlPath;
-            this.ImageMimeType = entity.ImageMimeType;
+            if (entity != null)
+            {
+                this.Id = entity.Id;
+                this.UrlPath = entity.UrlPath;
+                this.ImageMimeType = entity.ImageMimeType;
+            }
         }
 
         //public ArticleImageModel(string filename, byte[] file, string imageMimeType, string urlPath)
@@ -45,9 +48,12 @@
 
         public void ToModel(ArticleImage entity)
         {
-            this.Id = entity.Id;
-            this.UrlPath = entity.UrlPath;
-            this.ImageMimeType = entity.ImageMimeType;
+            if (entity != null)
+            {
+                this.Id = entity.Id;
+                this.UrlPath = entity.UrlPath;
+                this.ImageMimeType = entity.ImageMimeType;
+            }
         }
     }
 }

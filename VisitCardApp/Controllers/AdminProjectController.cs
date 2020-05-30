@@ -14,13 +14,13 @@
 
     [Authorize(Roles = "admin")]
     [Route("{controller}")]
-    public class ProjectController : Controller
+    public class AdminProjectController : Controller
     {
         private readonly IProjectManagement projectManagement;
         private readonly IWebHostEnvironment appEnvironment;
         private readonly ICategoryManagement categoryManagement;
 
-        public ProjectController(
+        public AdminProjectController(
             IProjectManagement projectManagement,
             IWebHostEnvironment appEnvironment,
             ICategoryManagement categoryManagement)
@@ -30,7 +30,6 @@
             this.categoryManagement = categoryManagement;
         }
 
-        [AllowAnonymous]
         [HttpGet("List/{page?}/{count?}/{categoryId?}")]
         public async Task<IActionResult> ListAsync(int? page = 1, int? count = 6, int? categoryId = null)
         {
@@ -49,7 +48,6 @@
             }
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {

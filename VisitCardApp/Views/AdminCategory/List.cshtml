@@ -1,0 +1,39 @@
+﻿@model List<CategoryModel>
+@{
+    ViewData["Title"] = "Список категорий";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <a asp-action="Create" class="btn btn-success">Добавить</a>
+</div>
+<br />
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Тип</th>
+            <th scope="col">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int number = 0;}
+        @foreach (CategoryModel cat in Model)
+        {
+        <tr>
+            <th scope="row">@{++number;}</th>
+            <td>@cat.Name</td>
+            <td>@cat.Type.ToString()</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <a asp-action="Update" asp-route-id="@cat.Id" class="btn btn-warning btn-sm">Изменить</a>
+                    <a asp-action="Remove" asp-route-id="@cat.Id" class="btn btn-danger btn-sm">Удалить</a>
+                </div>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>

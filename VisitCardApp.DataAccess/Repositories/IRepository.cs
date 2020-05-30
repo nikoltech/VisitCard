@@ -27,6 +27,10 @@
 
         Task<bool> RemoveArticleAsync(int articleId);
 
+        Task<Comment> AddArticleCommentAsync(Comment comment);
+
+        Task<bool> RemoveArticleCommentAsync(int commentId);
+
         Task<List<Category>> GetCategoryListAsync(CategoryType type = CategoryType.All);
 
         Task<Category> GetCategoryByIdAsync(int categoryId);

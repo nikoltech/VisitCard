@@ -15,5 +15,9 @@
         Task<ArticleModel> UpdateArticleAsync(ArticleModel model);
 
         Task<bool> RemoveArticleAsync(int articleId);
+
+        Task<CommentModel> AddCommentAsync(CommentModel model);
+
+        Task<bool> RemoveCommentAsync(int commentId);
     }
 }
