@@ -4,7 +4,7 @@
     ViewData["Title"] = Model?.Topic;
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool? CommentCreated = (bool?)TempData["CommentCreated"];
-
+    bool? IsUsersArticle = (bool?)TempData["IsUsersArticle"];
 }
 
 @if (Model == null)
@@ -20,9 +20,22 @@ else
 {
     <h3>@ViewData["Title"]</h3>
     <br />
-
+    @if (IsUsersArticle.HasValue && IsUsersArticle.Value)
+    {
+        <div>
+            @Html.ActionLink("Редактировать", "Update", new { id = Model.Id }, new { @class = "btn btn-warning" })
+        </div>
+        <div>
+            @using (Html.BeginForm("Remove", "Article", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+            {
+                <input class="btn btn-danger" type="submit" value="Удалить" />
+            }
+        </div>
+    }
+    <br />
     <div>@Model.Text</div>
     <br />
+
 
     @foreach (ArticleImageModel img in Model.ArticleImages)
     {
@@ -36,15 +49,8 @@ else
         }
     }
 
-    <div>
-        @Html.ActionLink("Редактировать", "Update", new { id = Model.Id }, new { @class = "btn btn-warning" })
-    </div>
-    <div>
-        @using (Html.BeginForm("Remove", "Article", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
-        {
-            <input class="btn btn-danger" type="submit" value="Удалить" />
-        }
-    </div>
+
+
 
     <!--<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />-->
@@ -62,9 +68,9 @@ else
             padding: 6px;
         }
 
-        .comments .comment:hover {
-            background: #eee;
-        }
+            .comments .comment:hover {
+                background: #eee;
+            }
     </style>
 
     <div class="container">
@@ -138,5 +144,5 @@ else
             </div>
         </div>
     </div>
-    
+
 }

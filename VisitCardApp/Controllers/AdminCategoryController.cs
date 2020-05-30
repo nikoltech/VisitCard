@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
     using System;
     using System.Collections.Generic;
     using System.Linq;

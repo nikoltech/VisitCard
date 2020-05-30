@@ -6,9 +6,20 @@
     bool? ArticleCreated = (bool?)TempData["Created"];
     bool? ArticleDeleted = (bool?)TempData["Deleted"];
     bool? CommentCreated = (bool?)TempData["CommentCreated"];
+    bool? IsUsersArticle = (bool?)TempData["IsUsersArticle"];
 }
 
 <h1>@ViewData["Title"]</h1>
+
+@if (IsUsersArticle.HasValue && IsUsersArticle.Value)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong> Вы не можете редактировать чужую статью.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 
 @if (CommentCreated.HasValue && CommentCreated.Value)
 {

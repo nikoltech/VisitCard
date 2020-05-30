@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
@@ -15,7 +13,6 @@
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
     using VisitCardApp.DataAccess.Entities;
-    using VisitCardApp.DataAccess.Helpers;
     using VisitCardApp.Models;
 
     [Authorize(Roles = "admin")]

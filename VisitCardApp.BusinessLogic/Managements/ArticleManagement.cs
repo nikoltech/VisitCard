@@ -95,6 +95,26 @@
             }
         }
 
+        public async Task<ArticleModel> UpdateArticleAsync(ArticleModel model, string userId)
+        {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+
+            try
+            {
+                Article entity = await this.repo.UpdateArticleAsync(model.ToEntity(), userId).ConfigureAwait(false);
+
+                ArticleModel updatedModel = new ArticleModel();
+                updatedModel.ToModel(entity);
+
+                return updatedModel;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         // TODO
         // public async Task<ArticleModel> UpdateArticleImageAsync(imageId..., webRootFilePath...) ...
 
@@ -103,6 +123,18 @@
             try
             {
                 return await this.repo.RemoveArticleAsync(articleId).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> RemoveArticleAsync(int articleId, string userId)
+        {
+            try
+            {
+                return await this.repo.RemoveArticleAsync(articleId, userId).ConfigureAwait(false);
             }
             catch
             {

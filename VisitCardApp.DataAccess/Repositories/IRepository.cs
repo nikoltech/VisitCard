@@ -25,7 +25,11 @@
 
         Task<Article> UpdateArticleAsync(Article updatedArticle);
 
+        Task<Article> UpdateArticleAsync(Article updatedArticle, string userId);
+
         Task<bool> RemoveArticleAsync(int articleId);
+
+        Task<bool> RemoveArticleAsync(int articleId, string userId);
 
         Task<Comment> AddArticleCommentAsync(Comment comment);
 

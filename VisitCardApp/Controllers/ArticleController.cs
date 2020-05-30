@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
@@ -15,7 +13,6 @@
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
     using VisitCardApp.DataAccess.Entities;
-    using VisitCardApp.DataAccess.Helpers;
     using VisitCardApp.Models;
 
     [Authorize]
@@ -26,6 +23,7 @@
         private readonly IWebHostEnvironment appEnvironment;
         private readonly ICategoryManagement categoryManagement;
         private readonly UserManager<AppUser> UserManager;
+        private readonly string UserId;
 
         public ArticleController(
             IArticleManagement articleManagement,
@@ -37,6 +35,11 @@
             this.appEnvironment = appEnvironment;
             this.categoryManagement = categoryManagement;
             this.UserManager = userManager;
+
+            if (this.User != null)
+            {
+                this.UserId = this.UserManager.GetUserId(this.User);
+            }
         }
 
         [AllowAnonymous]
@@ -65,6 +68,7 @@
             try
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
+                ViewData["IsUsersArticle"] = this.UserId.Equals(model?.UserId);
 
                 return View("ArticlePage", model);
             }
@@ -155,13 +159,18 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet("Update/{id}")]
         public async Task<IActionResult> UpdateAsync(int id)
         {
             try
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
+                
+                if (!this.UserId.Equals(model?.UserId))
+                {
+                    ViewData["IsUsersArticle"] = false;
+                    return View("List");
+                }
 
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Article).ConfigureAwait(false);
                 ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
@@ -174,7 +183,6 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost("UpdateArticle")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(ArticleViewModel reqModel)
@@ -189,7 +197,7 @@
 
             try
             {
-                ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(reqModel.ToAppModel());
+                ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(reqModel.ToAppModel(), this.UserId);
 
                 return RedirectToAction("", new { id = updatedModel.Id });
             }
@@ -199,13 +207,12 @@
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost("Remove/{id}")]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             try
             {
-                bool result = await this.articleManagement.RemoveArticleAsync(id);
+                bool result = await this.articleManagement.RemoveArticleAsync(id, this.UserId).ConfigureAwait(false);
 
                 TempData["Deleted"] = result;
 

@@ -56,20 +56,26 @@
                 try
                 {
                     //User signedUser = await this.UserManager.FindByEmailAsync(model.Email);
-                    AppUser signedUser = await this.UserService.GetUserByEmailAsync(model.Email);
-                    if (signedUser != null)
+                    AppUser user = await this.UserService.GetUserByEmailAsync(model.Email);
+                    if (user != null)
                     {
                         // проверяем, подтвержден ли email
-                        if (!await this.UserManager.IsEmailConfirmedAsync(signedUser))
+                        if (!await this.UserManager.IsEmailConfirmedAsync(user))
                         {
                             ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email.\nПодтвердите или пройдите регистрацию снова.\nПисьмо повторно отправлено на указанную почту.");
-                            await this.SendConfirmationEmailAsync(signedUser).ConfigureAwait(false);
+                            await this.SendConfirmationEmailAsync(user).ConfigureAwait(false);
                             return View(model);
                         }
 
-                        var result = await this.SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, false);
+                        var result = await this.SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
                         if (result.Succeeded)
                         {
+                            IList<string> roles = await this.UserManager.GetRolesAsync(user);
+                            if (roles.Any(r => r.Equals("admin")))
+                            {
+                                return RedirectToAction("Index", "Admin");
+                            }
+
                             if (string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                             {
                                 return Redirect(model.ReturnUrl);
@@ -302,6 +308,11 @@
         {
             await this.SignInManager.SignOutAsync();
             return RedirectToAction("Login");
+        }
+
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            return View();
         }
         #endregion
 

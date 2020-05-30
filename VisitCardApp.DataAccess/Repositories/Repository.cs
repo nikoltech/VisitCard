@@ -331,6 +331,27 @@
         }
 
         // updates without images
+        public async Task<Article> UpdateArticleAsync(Article updatedArticle, string userId)
+        {
+            updatedArticle = updatedArticle ?? throw new ArgumentNullException(nameof(updatedArticle));
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+
+            try
+            {
+                Article article = await this.context.Articles.Where(p => p.Id == updatedArticle.Id && p.UserId.Equals(userId)).FirstOrDefaultAsync();
+
+                if (article == null)
+                {
+                    throw new Exception($"Project with id {updatedArticle.Id} not found.");
+                }
+
+                return await this.UpdateArticleAsync(updatedArticle, article).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public async Task<Article> UpdateArticleAsync(Article updatedArticle)
         {
             updatedArticle = updatedArticle ?? throw new ArgumentNullException(nameof(updatedArticle));
@@ -344,6 +365,20 @@
                     throw new Exception($"Project with id {updatedArticle.Id} not found.");
                 }
 
+                return await this.UpdateArticleAsync(updatedArticle, article).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private async Task<Article> UpdateArticleAsync(Article updatedArticle, Article article)
+        {
+            updatedArticle = updatedArticle ?? throw new ArgumentNullException(nameof(updatedArticle));
+
+            try
+            {
                 if (!string.IsNullOrEmpty(article.TextPath))
                 {
                     await this.SaveTextFileAsync(article.TextPath, updatedArticle.Text).ConfigureAwait(false);
@@ -364,6 +399,26 @@
             }
         }
 
+        public async Task<bool> RemoveArticleAsync(int articleId, string userId)
+        {
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+            if (articleId == 0)
+            {
+                throw new ArgumentNullException(nameof(articleId));
+            }
+
+            Article article = await this.context.Articles
+                    .Include(a => a.ArticleImages)
+                    .Where(a => a.Id == articleId && a.UserId.Equals(userId)).FirstOrDefaultAsync();
+
+            if (article == null)
+            {
+                throw new Exception("Article does not exists.");
+            }
+
+            return await this.RemoveArticleAsync(article).ConfigureAwait(false);
+        }
+
         public async Task<bool> RemoveArticleAsync(int articleId)
         {
             if (articleId == 0)
@@ -379,9 +434,23 @@
 
                 if (article == null)
                 {
-                    return true;
+                    throw new Exception("Article does not exists.");
                 }
 
+                return await this.RemoveArticleAsync(article).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private async Task<bool> RemoveArticleAsync(Article article)
+        {
+            article = article ??  throw new ArgumentNullException(nameof(article));
+
+            try
+            {
                 foreach (ArticleImage im in article.ArticleImages)
                 {
                     if (!string.IsNullOrEmpty(im.FilePath))
