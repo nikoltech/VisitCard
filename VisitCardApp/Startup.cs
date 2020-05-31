@@ -58,9 +58,10 @@ namespace VisitCardApp
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddSession();
+
             services.Configure<EmailConfig>(this.Configuration.GetSection("EmailConfiguration"));
             services.Configure<AdminSecurity>(this.Configuration.GetSection("AdminSecurity"));
-
 
             // Resolve dependencies
             services.AddScoped<IRepository, Repository>();

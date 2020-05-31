@@ -637,6 +637,112 @@
         }
         #endregion
 
+        #region Cart
+        public async Task<Cart> AddToCart(CartLine cartLine, string userId)
+        {
+            cartLine = cartLine ?? throw new ArgumentNullException(nameof(cartLine));
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+
+            try
+            {
+                AppUser user = await this.context.Users.Where(u => u.Id.Equals(userId)).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                Cart cart = await this.context.Carts.Where(c => c.UserId.Equals(userId) && !c.IsPaid).FirstOrDefaultAsync();
+                if (cart == null)
+                {
+                    cart = new Cart { UserId = user.Id, Items = new List<CartLine>() };
+                }
+
+                cart.Items.Add(cartLine);
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return cart;
+                }
+
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Cart> RemoveFromCart(int cartLineId, string userId)
+        {
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+
+            try
+            {
+                AppUser user = await this.context.Users.Where(u => u.Id.Equals(userId)).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                Cart cart = await this.context.Carts.Where(c => c.UserId.Equals(userId) && !c.IsPaid).FirstOrDefaultAsync();
+                if (cart == null)
+                {
+                    throw new Exception("Cart not found.");
+                }
+
+                CartLine cartLine = cart.Items.Where(l => l.Id == cartLineId).FirstOrDefault();
+                if (cartLine != null)
+                {
+                    cart.Items.Remove(cartLine);
+                }
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return cart;
+                }
+
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> SetPaidCart(int cartId, string userId)
+        {
+            userId = userId ?? throw new ArgumentNullException(nameof(userId));
+
+            try
+            {
+                AppUser user = await this.context.Users.Where(u => u.Id.Equals(userId)).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                Cart cart = await this.context.Carts.Where(c => c.UserId.Equals(userId) && c.Id == cartId).FirstOrDefaultAsync();
+                if (cart == null)
+                {
+                    throw new Exception("Cart not found.");
+                }
+
+                // TODO
+                cart.IsPaid = true;
+
+                return await this.context.SaveChangesAsync() > 0;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #endregion
+
         #region private methods
         private int SkipSize(int page, int elementsAmount)
         {

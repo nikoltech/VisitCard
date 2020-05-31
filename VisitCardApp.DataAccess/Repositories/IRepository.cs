@@ -44,5 +44,11 @@
         Task<Category> UpdateCategoryAsync(Category category);
 
         Task<bool> RemoveCategoryAsync(int categoryId);
+
+        Task<Cart> AddToCart(CartLine cartLine, string userId);
+
+        Task<Cart> RemoveFromCart(int cartLineId, string userId);
+
+        Task<bool> SetPaidCart(int cartId, string userId);
     }
 }
