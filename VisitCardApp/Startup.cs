@@ -1,11 +1,8 @@
 namespace VisitCardApp
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -15,10 +12,10 @@ namespace VisitCardApp
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Options;
     using VisitCardApp.BusinessLogic.Communications;
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Managements;
+    using VisitCardApp.BusinessLogic.Models;
     using VisitCardApp.DataAccess;
     using VisitCardApp.DataAccess.Entities;
     using VisitCardApp.DataAccess.Repositories;
@@ -70,6 +67,7 @@ namespace VisitCardApp
             services.AddScoped<ICategoryManagement, CategoryManagement>();
             services.AddScoped<UserService>();
             services.AddScoped<RoleInitService>();
+            services.AddTransient<CartModel>();
 
             // Add caching
             services.AddMemoryCache();

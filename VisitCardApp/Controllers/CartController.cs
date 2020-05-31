@@ -14,10 +14,12 @@
     public class CartController : Controller
     {
         private readonly IProjectManagement projectManagement;
+        private readonly CartModel cartModel;
 
-        public CartController(IProjectManagement projectManagement)
+        public CartController(IProjectManagement projectManagement, CartModel cartModel)
         {
             this.projectManagement = projectManagement;
+            this.cartModel = cartModel;
         }
 
         public IActionResult Index()
@@ -34,12 +36,20 @@
 
                 if (model != null)
                 {
-                    this.GetCart().Items.Add(new CartLineModel { ProjectCase = model, Quantity = quantity.Value });
+                    CartLineModel existsItem = this.cartModel.Items.Where(i => i.ProjectCase.Id == projectId).FirstOrDefault();
+                    if (existsItem != null)
+                    {
+                        existsItem.Quantity += quantity.Value;
+                    }
+                    else
+                    {
+                        this.cartModel.Items.Add(new CartLineModel { ProjectCase = model, Quantity = quantity.Value });
+                    }
                 }
 
-                TempData["CartAdded"] = true;
+                TempData["ItemAdded"] = model != null;
 
-                return RedirectToAction("Index");
+                return View("Cart", this.cartModel);
             }
             catch (Exception ex)
             {
@@ -50,15 +60,15 @@
         [HttpPost("Remove")]
         public IActionResult RemoveFromCart(int projectId)
         {
-            CartLineModel model = this.GetCart().Items.Where(i => i.ProjectCase.Id == projectId).FirstOrDefault();
+            CartLineModel model = this.cartModel.Items.Where(i => i.ProjectCase.Id == projectId).FirstOrDefault();
 
             if (model != null)
             {
-                GetCart().Items.Remove(model);
-                TempData["CartRemoved"] = true;
+                this.cartModel.Items.Remove(model);
+                TempData["ItemRemoved"] = true;
             }
 
-            return View("Cart", this.GetCart());
+            return View("Cart", this.cartModel);
         }
 
         #region private methods
