@@ -1,0 +1,114 @@
+﻿@model CartModel
+@{
+    ViewData["Title"] = "Корзина покупок";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool? ItemAdded = (bool?)TempData["ItemAdded"];
+    bool? ItemRemoved = (bool?)TempData["ItemRemoved"];
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <a asp-action="List" asp-controller="Project" class="btn btn-info">Добавить еще</a>
+</div>
+
+@if (ItemAdded.HasValue && ItemAdded.Value)
+{
+    <br />
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Добавлено!</strong> Товар добавлен в корзину.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ItemRemoved.HasValue)
+{
+    @if (ItemRemoved.Value)
+    {
+        <br />
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Удалено!</strong> Товар удален из списка покупок.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <br />
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<br />
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Стоимость</th>
+            <th scope="col"><button type="button" class="btn btn-sm btn-dark">_______________________</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int number = 0;
+            long costs = 0;
+        }
+        @if (Model != null)
+        {
+            foreach (CartLineModel line in Model.Items)
+            {
+                ++number;
+                costs += 1;
+                <tr>
+                    <th scope="row">@number</th>
+                    <td>@line.ProjectCase.ProjectName</td>
+                    <td>Price</td>
+                    <td>@line.Quantity</td>
+                    <td>Quantity * price</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                @using (Html.BeginForm("Remove", "Cart", new { }, FormMethod.Post, true, new { @class = "" }))
+                                {
+                                    <input id="id" name="id" type="hidden" value="@line.ProjectCase.Id">
+
+                                    <input type="submit" name="name" class="btn btn-warning btn-sm" value="Убрать" />
+                                }
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                @using (Html.BeginForm("Add", "Cart", new { }, FormMethod.Post, true, new { @class = "" }))
+                                {
+                                    <input id="id" name="id" type="hidden" value="@line.ProjectCase.Id">
+
+                                    <input type="submit" name="name" class="btn btn-info btn-sm" value="Добавить" />
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="alert alert-success" role="alert">
+        Общая сумма: <strong>@string.Format("{0:0.00;(0.00);0}", costs)</strong>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <a href="#" class="btn btn-success btn-lg">Оформить заказ</a>
+</div>

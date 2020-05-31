@@ -8,7 +8,7 @@
     <div class="panel-heading">@ViewData["Title"]</div>
     <div class="panel-body">
         @Html.ValidationSummary()
-        @using (Html.BeginForm("Update", "Category", new { Id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+        @using (Html.BeginForm("Update", "AdminCategory", new { Id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
         {
             <div>
                 <div>

@@ -4,6 +4,11 @@
 
     public class CartModel
     {
+        public CartModel()
+        {
+            Items = new List<CartLineModel>();
+        }
+
         public List<CartLineModel> Items { get; set; }
     }
 }

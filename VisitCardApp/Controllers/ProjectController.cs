@@ -50,7 +50,7 @@
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
                 ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
 
-                return View("List", projectModels);
+                return View("List", model);
             }
             catch (Exception ex)
             {

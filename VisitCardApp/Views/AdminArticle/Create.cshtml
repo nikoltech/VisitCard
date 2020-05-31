@@ -8,7 +8,7 @@
     <div class="panel-heading">@ViewData["Title"]</div>
     <div class="panel-body">
         @Html.ValidationSummary()
-        @using (Html.BeginForm("Create", "Article", new { }, FormMethod.Post, true, new { enctype = "multipart/form-data", @class = "" }))
+        @using (Html.BeginForm("Create", "AdminArticle", new { }, FormMethod.Post, true, new { enctype = "multipart/form-data", @class = "" }))
         {
             <div>
                 <div>

@@ -74,7 +74,7 @@
         <br />
         <div class="row">
 
-            @using (Html.BeginForm("List", "Article", new { }, FormMethod.Get, false, new { @class = "" }))
+            @using (Html.BeginForm("List", "AdminArticle", new { }, FormMethod.Get, false, new { @class = "" }))
             {
                 <div>
                     @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })

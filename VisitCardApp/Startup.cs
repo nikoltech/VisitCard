@@ -1,5 +1,6 @@
 namespace VisitCardApp
 {
+    using System;
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
@@ -55,7 +56,13 @@ namespace VisitCardApp
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddSession();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".VisitCardApp.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(3600);
+                options.Cookie.IsEssential = true;
+            });
 
             services.Configure<EmailConfig>(this.Configuration.GetSection("EmailConfiguration"));
             services.Configure<AdminSecurity>(this.Configuration.GetSection("AdminSecurity"));
@@ -67,7 +74,6 @@ namespace VisitCardApp
             services.AddScoped<ICategoryManagement, CategoryManagement>();
             services.AddScoped<UserService>();
             services.AddScoped<RoleInitService>();
-            services.AddTransient<CartModel>();
 
             // Add caching
             services.AddMemoryCache();
@@ -118,6 +124,7 @@ namespace VisitCardApp
                 });
 
             app.UseRouting();
+            app.UseSession();
 
             // Use with default auth and with tokens
             app.UseAuthentication();

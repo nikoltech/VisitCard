@@ -63,7 +63,7 @@
         <div class="row"><a asp-action="Create" class="btn btn-success">Добавить</a></div>
 
         <div class="row">
-            @using (Html.BeginForm("List", "Project", new { }, FormMethod.Get, false, new { @class = "" }))
+            @using (Html.BeginForm("List", "AdminProject", new { }, FormMethod.Get, false, new { @class = "" }))
             {
                 <div>
                     @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })

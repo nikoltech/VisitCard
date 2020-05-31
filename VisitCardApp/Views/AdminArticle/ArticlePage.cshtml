@@ -40,7 +40,7 @@ else
         @Html.ActionLink("Редактировать", "Update", new { id = Model.Id }, new { @class = "btn btn-warning" })
     </div>
     <div>
-        @using (Html.BeginForm("Remove", "Article", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+        @using (Html.BeginForm("Remove", "AdminArticle", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
         {
             <input class="btn btn-danger" type="submit" value="Удалить" />
         }

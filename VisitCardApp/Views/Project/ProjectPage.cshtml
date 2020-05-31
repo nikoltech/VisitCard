@@ -27,4 +27,24 @@ else
 
     <br />
     <div>@Model.Description</div>
+
+    <br />
+    <br />
+    <div class="row">
+        @using (Html.BeginForm("Add", "Cart", new { }, FormMethod.Post, true, new { @class = "" }))
+        {
+            @Html.Hidden("Id", new { id = Model.Id })
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">0.00</span>
+                </div>
+                <input id="quantity" name="quantity" placeholder="Количество" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <div class="input-group-append">
+                    <input type="submit" class="btn btn-outline-success btn-sm" value="Добавить в корзину" />
+                </div>
+            </div>
+        }
+    </div>
 }

@@ -23,12 +23,13 @@
 
             try
             {
-                Cart entity = await this.repo.AddToCart(model.ToEntity(), userId).ConfigureAwait(false);
+                //Cart entity = await this.repo.AddToCart(model.ToEntity(), userId).ConfigureAwait(false);
 
-                CartModel addedModel = new CartModel();
-                addedModel.ToModel(entity);
+                //CartModel addedModel = new CartModel();
+                //addedModel.ToModel(entity);
 
-                return addedModel;
+                //return addedModel;
+                return null;
             }
             catch
             {
@@ -42,12 +43,14 @@
 
             try
             {
-                Cart entity = await this.repo.RemoveFromCart(cartLineId, userId).ConfigureAwait(false);
+                //Cart entity = await this.repo.RemoveFromCart(cartLineId, userId).ConfigureAwait(false);
 
-                CartModel updatedModel = new CartModel();
-                updatedModel.ToModel(entity);
+                //CartModel updatedModel = new CartModel();
+                //updatedModel.ToModel(entity);
 
-                return updatedModel;
+                //return updatedModel;
+
+                return null;
             }
             catch
             {
