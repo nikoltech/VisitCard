@@ -60,15 +60,15 @@
             }
         }
 
-        public async Task<List<ArticleModel>> GetArticleListAsync(int page, int count, int categoryId)
+        public async Task<(List<ArticleModel> models, long total)> GetArticleListAsync(int page, int count, int categoryId)
         {
             try
             {
-                List<Article> entities = await this.repo.GetArticleListAsync(page, count, categoryId).ConfigureAwait(false);
+                (List<Article> entities, long total) = await this.repo.GetArticleListAsync(page, count, categoryId).ConfigureAwait(false);
 
                 List<ArticleModel> models = this.ToModelList<Article, ArticleModel>(entities);
 
-                return models;
+                return (models, total);
             }
             catch
             {

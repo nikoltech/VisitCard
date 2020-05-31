@@ -11,7 +11,7 @@
 
         Task<ProjectCase> GetProjectCaseAsync(int projectId);
 
-        Task<List<ProjectCase>> GetProjectCaseListAsync(int page, int count, int categoryId);
+        Task<(List<ProjectCase> entities, long total)> GetProjectCaseListAsync(int page, int count, int categoryId);
 
         Task<ProjectCase> UpdateProjectCaseAsync(ProjectCase updatedProject, string webRootFilePath);
 
@@ -21,7 +21,7 @@
 
         Task<Article> GetArticleByIdAsync(int articleId);
 
-        Task<List<Article>> GetArticleListAsync(int page, int count, int categoryId);
+        Task<(List<Article> entities, long total)> GetArticleListAsync(int page, int count, int categoryId);
 
         Task<Article> UpdateArticleAsync(Article updatedArticle);
 

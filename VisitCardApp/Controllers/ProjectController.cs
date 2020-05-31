@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
+    using VisitCardApp.Helpers;
     using VisitCardApp.Models;
 
     [Route("{controller}")]
@@ -32,12 +33,24 @@
         {
             try
             {
-                List<ProjectCaseModel> models = await this.projectManagement.GetProjectCaseListAsync(page.Value, count.Value, categoryId.GetValueOrDefault());
+                (List<ProjectCaseModel> projectModels, long total) = await this.projectManagement.GetProjectCaseListAsync(page.Value, count.Value, categoryId.GetValueOrDefault());
+
+                ProjectListViewModel model = new ProjectListViewModel
+                {
+                    ProjectCases = projectModels,
+                    CategoryId = categoryId,
+                    Pagination = new PaginationModel
+                    {
+                        AmountPerPage = count.Value,
+                        Page = page.Value,
+                        TotalItems = total
+                    }
+                };
 
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
                 ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
 
-                return View("List", models);
+                return View("List", projectModels);
             }
             catch (Exception ex)
             {

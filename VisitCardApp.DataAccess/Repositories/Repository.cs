@@ -95,7 +95,7 @@
         /// <param name="count"></param>
         /// <param name="categoryId"></param>
         /// <returns>CategoryType.All`s data if categoryId is zero</returns>
-        public async Task<List<ProjectCase>> GetProjectCaseListAsync(int page, int count, int categoryId)
+        public async Task<(List<ProjectCase> entities, long total)> GetProjectCaseListAsync(int page, int count, int categoryId)
         {
             try
             {
@@ -118,11 +118,13 @@
                     projectCasesQuery = projectCasesQuery.Where(p => p.CategoryId == categoryId);
                 }
 
+                long total = await projectCasesQuery.CountAsync();
+
                 List<ProjectCase> projectCases = await projectCasesQuery.Skip(skip).Take(count).ToListAsync();
 
                 await this.AttachProjectCaseListFilesAsync(projectCases).ConfigureAwait(false);
 
-                return projectCases;
+                return (projectCases, total);
             }
             catch
             {
@@ -289,7 +291,7 @@
             }
         }
 
-        public async Task<List<Article>> GetArticleListAsync(int page, int count, int categoryId)
+        public async Task<(List<Article> entities, long total)> GetArticleListAsync(int page, int count, int categoryId)
         {
             try
             {
@@ -312,6 +314,8 @@
                     articlesQuery = articlesQuery.Where(p => p.CategoryId == categoryId);
                 }
 
+                long total = await articlesQuery.CountAsync();
+
                 List<Article> articles = await articlesQuery
                     .Include(a => a.ArticleImages)
                     .Include(a => a.Comments)
@@ -322,7 +326,7 @@
                     article.Text = await this.GetTextFileAsync(article.TextPath).ConfigureAwait(false);
                 }
 
-                return articles;
+                return (articles, total);
             }
             catch
             {
@@ -352,6 +356,7 @@
                 throw;
             }
         }
+        
         public async Task<Article> UpdateArticleAsync(Article updatedArticle)
         {
             updatedArticle = updatedArticle ?? throw new ArgumentNullException(nameof(updatedArticle));

@@ -1,4 +1,4 @@
-﻿@model List<ProjectCaseModel>
+﻿@model ProjectListViewModel
 @{
     ViewData["Title"] = "Портфолио";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -67,13 +67,13 @@
                     @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 </div>
 
-                <input type="submit" />
+                <input type="submit" value="Фильтр" />
             }
 
         </div>
 
         <div class="row">
-            @foreach (ProjectCaseModel caseModel in Model)
+            @foreach (ProjectCaseModel caseModel in Model.ProjectCases)
             {
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
@@ -101,6 +101,9 @@
                     </div>
                 </div>
             }
+        </div>
+        <div class="row">
+            @Html.Pagination(Model.Pagination, (x) => Url.Action("List", new { page = x, categoryId = Model.CategoryId }))
         </div>
     </div>
 </div>

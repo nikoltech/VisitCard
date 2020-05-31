@@ -1,4 +1,4 @@
-﻿@model List<ArticleModel>
+﻿@model ArticleListViewModel
 @{
     ViewData["Title"] = "Лента статей";
     Layout = "~/Views/Admin/_Layout.cshtml";
@@ -80,12 +80,12 @@
                     @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 </div>
 
-                <input type="submit" />
+                <input type="submit" value="Фильтр"/>
             }
         </div>
 
         <div class="row">
-            @foreach (ArticleModel article in Model)
+            @foreach (ArticleModel article in Model.Articles)
             {
                 ArticleImageModel img = article.ArticleImages.FirstOrDefault();
                 string articleTopic = new string(article.Topic.Take(10).ToArray());
@@ -114,6 +114,9 @@
                     </div>
                 </div>
             }
+        </div>
+        <div class="row">
+            @Html.Pagination(Model.Pagination, (x) => Url.Action("List", new { page = x, categoryId = Model.CategoryId }))
         </div>
     </div>
 </div>

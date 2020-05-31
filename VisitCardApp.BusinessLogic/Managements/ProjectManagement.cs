@@ -64,15 +64,15 @@
             }
         }
 
-        public async Task<List<ProjectCaseModel>> GetProjectCaseListAsync(int page, int count, int categoryId)
+        public async Task<(List<ProjectCaseModel> projectModels, long total)> GetProjectCaseListAsync(int page, int count, int categoryId)
         {
             try
             {
-                List<ProjectCase> entities = await this.repo.GetProjectCaseListAsync(page, count, categoryId).ConfigureAwait(false);
+                (List<ProjectCase> entities, long total) = await this.repo.GetProjectCaseListAsync(page, count, categoryId).ConfigureAwait(false);
 
                 List<ProjectCaseModel> models = this.ToModelList<ProjectCase, ProjectCaseModel>(entities);
 
-                return models;
+                return (models, total);
             }
             catch
             {

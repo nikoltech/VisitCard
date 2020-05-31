@@ -10,7 +10,7 @@
 
         Task<ArticleModel> GetArticleByIdAsync(int articleId);
 
-        Task<List<ArticleModel>> GetArticleListAsync(int page, int count, int categoryId);
+        Task<(List<ArticleModel> models, long total)> GetArticleListAsync(int page, int count, int categoryId);
 
         Task<ArticleModel> UpdateArticleAsync(ArticleModel model);
 

@@ -13,6 +13,7 @@
     using VisitCardApp.BusinessLogic.Interfaces;
     using VisitCardApp.BusinessLogic.Models;
     using VisitCardApp.DataAccess.Entities;
+    using VisitCardApp.Helpers;
     using VisitCardApp.Models;
 
     [Authorize]
@@ -48,12 +49,24 @@
         {
             try
             {
-                List<ArticleModel> models = await this.articleManagement.GetArticleListAsync(page.Value, count.Value, categoryId.GetValueOrDefault());
+                (List<ArticleModel> models, long total) = await this.articleManagement.GetArticleListAsync(page.Value, count.Value, categoryId.GetValueOrDefault());
+
+                ArticleListViewModel model = new ArticleListViewModel
+                {
+                    Articles = models,
+                    CategoryId = categoryId,
+                    Pagination = new PaginationModel
+                    {
+                        AmountPerPage = count.Value,
+                        Page = page.Value,
+                        TotalItems = total
+                    }
+                };
 
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Article).ConfigureAwait(false);
                 ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
 
-                return View("List", models);
+                return View("List", model);
             }
             catch (Exception ex)
             {
