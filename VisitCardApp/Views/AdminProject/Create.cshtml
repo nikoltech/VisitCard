@@ -10,44 +10,53 @@
         @Html.ValidationSummary()
         @using (Html.BeginForm("Create", "AdminProject", new { }, FormMethod.Post, true, new { enctype = "multipart/form-data", @class = "" }))
         {
+        <div>
             <div>
-                <div>
-                    @Html.DropDownListFor(e => e.CategoryId, ViewData["Categories"] as SelectList, new { @class = "form-control" })
-                </div>
-                <div>
-                    @Html.ValidationMessageFor(e => e.ProjectName)
-                    <br />
-                    @Html.LabelFor(e => e.ProjectName)
-                    <br />
-                    @Html.EditorFor(e => e.ProjectName)
-                    <br />
-                </div>
-
-                <div>
-                    @Html.ValidationMessageFor(e => e.Description)
-                    <br />
-                    @Html.LabelFor(e => e.Description)
-                    <br />
-                    @Html.EditorFor(e => e.Description)
-                    <br />
-                </div>
-
-                <div>
-                    @Html.ValidationMessageFor(e => e.ImageFile)
-                    <br />
-                    @Html.LabelFor(e => e.ImageFile)
-                    <br />
-                    <div class="custom-file">
-                        @Html.EditorFor(e => e.ImageFile, new { @class = "custom-file-input" })
-                        @Html.LabelFor(e => e.ImageFile, "Выберите файл", new { @class = "custom-file-label" })
-                    </div>
-                    <br />
-                </div>
-
-                <div>
-                    <input class="btn btn-success" type="submit" value="Добавить" />
-                </div>
+                @Html.DropDownListFor(e => e.CategoryId, ViewData["Categories"] as SelectList, new { @class = "form-control" })
             </div>
+            <div>
+                @Html.ValidationMessageFor(e => e.ProjectName)
+                <br />
+                @Html.LabelFor(e => e.ProjectName)
+                <br />
+                @Html.EditorFor(e => e.ProjectName)
+                <br />
+            </div>
+
+            <div>
+                @Html.ValidationMessageFor(e => e.Description)
+                <br />
+                @Html.LabelFor(e => e.Description)
+                <br />
+                @Html.EditorFor(e => e.Description)
+                <br />
+            </div>
+
+            <div>
+                @Html.ValidationMessageFor(e => e.Cost)
+                <br />
+                @Html.LabelFor(e => e.Cost)
+                <br />
+                @Html.EditorFor(e => e.Cost)
+                <br />
+            </div>
+
+            <div>
+                @Html.ValidationMessageFor(e => e.ImageFile)
+                <br />
+                @Html.LabelFor(e => e.ImageFile)
+                <br />
+                <div class="custom-file">
+                    @Html.EditorFor(e => e.ImageFile, new { @class = "custom-file-input" })
+                    @Html.LabelFor(e => e.ImageFile, "Выберите файл", new { @class = "custom-file-label" })
+                </div>
+                <br />
+            </div>
+
+            <div>
+                <input class="btn btn-success" type="submit" value="Добавить" />
+            </div>
+        </div>
         }
     </div>
 </div>

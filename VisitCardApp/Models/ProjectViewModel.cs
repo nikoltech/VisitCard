@@ -30,6 +30,9 @@
         [Display(Name = "Изображение")]
         public IFormFile ImageFile { get; set; }
 
+        [Display(Name = "Стоимость (0 - не продается)")]
+        public decimal Cost { get; set; }
+
         public int CategoryId { get; set; }
 
         public ProjectCaseModel ToAppModel()
@@ -39,6 +42,7 @@
                 Id = this.Id,
                 ProjectName = this.ProjectName,
                 Description = this.Description,
+                Cost = this.Cost,
                 CategoryId = this.CategoryId
             };
         }

@@ -34,7 +34,6 @@
 
     <script type="text/javascript">
         // Create and initialize a payment form object
-        const formData = new FormData();
         const paymentForm = new SqPaymentForm({
             // Initialize the payment form elements
 
@@ -84,18 +83,15 @@
 
                     //TODO: Replace alert with code in step 2.1
                     // alert(`The generated nonce is:\n${nonce}`);
+                    const formData = new FormData();
                     formData.append('nonce', nonce);
-                    var object = {};
-                    formData.forEach((value, key) => { object[key] = value });
-                    var jsonData = JSON.stringify(object);
 
                     fetch('process-payment', {
                         method: 'POST',
                         headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
+                            'Accept': 'application/json'
                         },
-                        body: jsonData
+                        body: formData
                     })
                         .catch(err => {
                             alert('Network error: ' + err);
@@ -108,7 +104,8 @@
                         })
                         .then(data => {
                             console.log(JSON.stringify(data));
-                            alert('Payment complete successfully!\nCheck browser developer console for more details');
+                            alert('Payment complete successfully!');
+                            setTimeout(redirectNext, 3000);
                         })
                         .catch(err => {
                             console.error(err);
@@ -126,6 +123,10 @@
             event.preventDefault();
             // Request a nonce from the SqPaymentForm object
             paymentForm.requestCardNonce();
+        }
+
+        function redirectNext() {
+            window.location.replace("@Url.Action("Index")");
         }
     </script>
 }

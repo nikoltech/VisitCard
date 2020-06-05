@@ -18,6 +18,8 @@
 
         public string ImageFileName { get; set; }
 
+        public decimal Cost { get; set; }
+
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }

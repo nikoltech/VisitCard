@@ -1,5 +1,6 @@
 ﻿namespace VisitCardApp.BusinessLogic.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using VisitCardApp.DataAccess.Entities;
 
@@ -26,6 +27,17 @@
 
         public string ImageMimeType { get; set; }
 
+        private decimal cost;
+        public decimal Cost
+        {
+            get { return Math.Round(this.cost, 2); }
+            set 
+            {
+                if (value < 0) { this.cost = 0; }
+                else { this.cost = Math.Round(value, 2); }
+            }
+        }
+
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
@@ -43,6 +55,7 @@
                 UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
                 ImageFileName = this.ImageFileName,
+                Cost = this.Cost,
                 CategoryId = this.CategoryId,
                 Category = this.Category
             };
@@ -61,6 +74,7 @@
                 this.UrlPath = entity.UrlPath;
                 this.ImageMimeType = entity.ImageMimeType;
                 this.ImageFileName = entity.ImageFileName;
+                this.Cost = entity.Cost;
                 this.CategoryId = entity.CategoryId;
                 this.Category = entity.Category;
             }

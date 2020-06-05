@@ -129,9 +129,8 @@
             }
         }
 
-        [AllowAnonymous]
         [HttpPost("process-payment")]
-        public async Task<IActionResult> ProcessPaymentAsync([FromBody]string nonce)
+        public async Task<IActionResult> ProcessPaymentAsync(string nonce)
         {
             try
             {
@@ -144,17 +143,20 @@
                     .AccessToken(this.appSettings.AccessToken)
                     .Build();
 
-                string testNonce = string.Empty;
-
-                //string nonce = Request.Form["nonce"];
-
                 IPaymentsApi PaymentsApi = client.PaymentsApi;
-                nonce = testNonce;
                 CreatePaymentRequest request_body = new CreatePaymentRequest(nonce, this.NewIdempotencyKey(), new Money(100, "USD"));
 
                 CreatePaymentResponse responce = await PaymentsApi.CreatePaymentAsync(request_body);
 
-                return View("PaymentResult", responce);
+                if (responce.Payment.Status == "COMPLETED")
+                {
+                    this.UpdateCart(new CartModel());
+                    return this.Ok();
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
             }
             catch (Exception ex)
             {
