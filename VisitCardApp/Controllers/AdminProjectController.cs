@@ -14,7 +14,7 @@
     using VisitCardApp.Models;
 
     [Authorize(Roles = "admin")]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class AdminProjectController : Controller
     {
         private readonly IProjectManagement projectManagement;

@@ -22,6 +22,7 @@ namespace VisitCardApp
     using VisitCardApp.DataAccess.Repositories;
     using VisitCardApp.DataAccess.Services;
     using VisitCardApp.DataAccess.Services.User;
+    using VisitCardApp.Models;
 
     public class Startup
     {
@@ -64,6 +65,7 @@ namespace VisitCardApp
                 options.Cookie.IsEssential = true;
             });
 
+            services.Configure<AppSettings>(this.Configuration.GetSection("AppSettings"));
             services.Configure<EmailConfig>(this.Configuration.GetSection("EmailConfiguration"));
             services.Configure<AdminSecurity>(this.Configuration.GetSection("AdminSecurity"));
 

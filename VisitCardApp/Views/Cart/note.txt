@@ -1,0 +1,178 @@
+﻿<script type="text/javascript">
+        // Create and initialize a payment form object
+        const paymentForm = new SqPaymentForm({
+            // Initialize the payment form elements
+
+            postalCode: false,
+
+            //TODO: Replace with your sandbox application ID
+            applicationId: applicationId,
+            locationId: locationId,
+            inputClass: 'sq-input',
+            autoBuild: false,
+            // Customize the CSS for SqPaymentForm iframe elements
+            inputStyles: [{
+                fontSize: '16px',
+                lineHeight: '24px',
+                padding: '16px',
+                placeholderColor: '#a0a0a0',
+                backgroundColor: 'transparent',
+            }],
+            // Initialize the credit card placeholders
+            cardNumber: {
+                elementId: 'sq-card-number',
+                placeholder: 'Card Number'
+            },
+            cvv: {
+                elementId: 'sq-cvv',
+                placeholder: 'CVV'
+            },
+            expirationDate: {
+                elementId: 'sq-expiration-date',
+                placeholder: 'MM/YY'
+            },
+            //postalCode: {
+            //    elementId: 'sq-postal-code',
+            //    placeholder: 'Postal'
+            //},
+
+            // SqPaymentForm callback functions
+            callbacks: {
+                /*
+                * callback function: cardNonceResponseReceived
+                * Triggered when: SqPaymentForm completes a card nonce request
+                */
+                cardNonceResponseReceived: function (errors, nonce, cardData) {
+                    if (errors) {
+                        // Log errors from nonce generation to the browser developer console.
+                        console.error('Encountered errors:');
+                        errors.forEach(function (error) {
+                            console.error('  ' + error.message);
+                        });
+                        alert('Encountered errors, check browser developer console for more details');
+                        return;
+                    }
+                    alert(`The generated nonce is:\n${nonce}`);
+                    //TODO: Replace alert with code in step 2.1
+                }
+            }
+        });
+
+        //TODO: paste code from step 1.1.4
+        // onGetCardNonce is triggered when the "Pay $1.00" button is clicked
+        function onGetCardNonce(event) {
+            // Don't submit the form until SqPaymentForm returns with a nonce
+            event.preventDefault();
+            // Request a nonce from the SqPaymentForm object
+            let res;
+            process(paymentForm.requestCardNonce(), res);
+        }
+
+        function (req, res) {
+            app.post('/process-payment', async (req, res) => {
+                const request_params = req.body;
+
+                // length of idempotency_key should be less than 45
+                const idempotency_key = crypto.randomBytes(22).toString('hex');
+
+                // Charge the customer's card
+                const payments_api = new squareConnect.PaymentsApi();
+                const request_body = {
+                    source_id: request_params.nonce,
+                    amount_money: {
+                        amount: 100, // $1.00 charge
+                        currency: 'USD'
+                    },
+                    idempotency_key: idempotency_key
+                };
+
+                try {
+                    const response = await payments_api.createPayment(request_body);
+                    res.status(200).json({
+                        'title': 'Payment Successful',
+                        'result': response
+                    });
+                } catch (error) {
+                    res.status(500).json({
+                        'title': 'Payment Failure',
+                        'result': error.response.text
+                    });
+                }
+            });
+        }
+
+        paymentForm.build();
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+<!-- Begin Payment Form -->
+<div class="sq-payment-form">
+    <!--
+      Square's JS will automatically hide these buttons if they are unsupported
+      by the current device.
+    -->
+    <div id="sq-walletbox">
+        <button id="sq-google-pay" class="button-google-pay"></button>
+        <button id="sq-apple-pay" class="sq-apple-pay"></button>
+        <button id="sq-masterpass" class="sq-masterpass"></button>
+        <div class="sq-wallet-divider">
+            <span class="sq-wallet-divider__text">Or</span>
+        </div>
+    </div>
+    <div id="sq-ccbox">
+        <!--
+          You should replace the action attribute of the form with the path of
+          the URL you want to POST the nonce to (for example, "/process-card").
+          You need to then make a "Charge" request to Square's transaction API with
+          this nonce to securely charge the customer.
+          Learn more about how to setup the server component of the payment form here:
+          https://docs.connect.squareup.com/payments/transactions/processing-payment-rest
+        -->
+        <form id="nonce-form" novalidate action="ProcessPayment" method="post">
+            <div class="sq-field">
+                <label class="sq-label">Card Number</label>
+                <div id="sq-card-number"></div>
+            </div>
+            <div class="sq-field-wrapper">
+                <div class="sq-field sq-field--in-wrapper">
+                    <label class="sq-label">CVV</label>
+                    <div id="sq-cvv"></div>
+                </div>
+                <div class="sq-field sq-field--in-wrapper">
+                    <label class="sq-label">Expiration</label>
+                    <div id="sq-expiration-date"></div>
+                </div>
+                <div class="sq-field sq-field--in-wrapper">
+                    <label class="sq-label">Postal</label>
+                    <div id="sq-postal-code"></div>
+                </div>
+            </div>
+            <div class="sq-field">
+                <button id="sq-creditcard" class="sq-button" onclick="onGetCardNonce(event)">
+                    Pay $1.00 Now
+                </button>
+            </div>
+            <!--
+              After a nonce is generated it will be assigned to this hidden input field.
+            -->
+            <div id="error"></div>
+            <input type="hidden" id="card-nonce" name="nonce">
+        </form>
+    </div>
+</div>
+<!-- End Payment Form -->

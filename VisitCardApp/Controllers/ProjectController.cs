@@ -11,7 +11,7 @@
     using VisitCardApp.Helpers;
     using VisitCardApp.Models;
 
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class ProjectController : Controller
     {
         private readonly IProjectManagement projectManagement;

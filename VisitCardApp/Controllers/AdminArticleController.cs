@@ -17,7 +17,7 @@
     using VisitCardApp.Models;
 
     [Authorize(Roles = "admin")]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class AdminArticleController : Controller
     {
         private readonly IArticleManagement articleManagement;

@@ -1,0 +1,35 @@
+﻿@using Square.Models
+@model CreatePaymentResponse
+@{
+    ViewData["Title"] = "PaymentSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>PaymentResult</h1>
+@Model.Payment.Status
+@Model.Payment.AmountMoney
+
+<div>
+    Errors
+    <br />
+    <ul>
+    </ul>
+    @if (Model?.Errors != null)
+    {
+        foreach (Error error in Model.Errors)
+        {
+            <li>
+                Category = @error.Category
+                Code = @error.Category
+                Detail - @error.Detail
+                Field = @error.Field
+                <br />
+            </li>
+            <br />
+        }
+    }
+
+</div>
+
+@Model.
+

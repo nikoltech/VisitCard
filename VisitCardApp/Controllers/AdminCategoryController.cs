@@ -13,7 +13,7 @@
     using VisitCardApp.Models;
 
     [Authorize(Roles = "admin")]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class AdminCategoryController : Controller
     {
         private readonly ICategoryManagement categoryManagement;

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("Headers", false)
+    @RenderSection("Styles", false)
 </head>
 <body>
     <header>
@@ -28,9 +29,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="List">Articles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="List">Categories</a>
                         </li>
                     </ul>
                 </div>
