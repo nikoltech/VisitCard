@@ -1,4 +1,5 @@
-﻿@model ProjectCaseModel
+﻿@using System.Globalization;
+@model ProjectCaseModel
 @{
     ViewData["Title"] = Model?.ProjectName;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,7 +43,7 @@ else
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">@Model.Cost.ToString("C2")</span>
+                        <span class="input-group-text">@Model.Cost.ToString("C2", CultureInfo.GetCultureInfo("en-US"))</span>
                     </div>
                     <input id="quantity" name="quantity" placeholder="Количество" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
                     <div class="input-group-append">
