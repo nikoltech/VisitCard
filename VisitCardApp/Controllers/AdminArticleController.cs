@@ -16,6 +16,7 @@
     using VisitCardApp.Helpers;
     using VisitCardApp.Models;
 
+    // TODO: Add Comment datetime. Sort by Descending. Pagination?
     [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class AdminArticleController : Controller

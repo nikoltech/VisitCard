@@ -22,51 +22,6 @@ else
     <h3>@ViewData["Title"]</h3>
     <br />
 
-
-    @if (CommentCreated.HasValue)
-    {
-        @if (CommentCreated.Value)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Добавлено!</strong> Комментарий добавлен.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Ошибка!</strong> Комментарий не был добавленю
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-    }
-
-    @if (CommentRemoved.HasValue)
-    {
-        @if (CommentRemoved.Value)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Удалено!</strong> Комментарий удален.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Ошибка!</strong> Комментарий не был удален
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-    }
-
     <div>@Model.Text</div>
     <br />
 
@@ -144,6 +99,28 @@ else
                             }
                         }
 
+                        @if (CommentRemoved.HasValue)
+                        {
+                            @if (CommentRemoved.Value)
+                            {
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Удалено!</strong> Комментарий удален.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Ошибка!</strong> Комментарий не был удален
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            }
+                        }
+
                         <br>
                         @using (Html.BeginForm("AddComment", "AdminArticle", null, FormMethod.Post, true, new { @class = "" }))
                         {
@@ -179,10 +156,11 @@ else
                                         <div class="clearfix"></div>
                                     </div>
                                     <div>
-                                        @using (Html.BeginForm("RemoveComment", "AdminArticle", null, FormMethod.Post, true, new { @class = "" }))
+                                        @using (Html.BeginForm("RemoveComment", "AdminArticle", null, FormMethod.Post, true, null))
                                         {
-                                            @Html.Hidden("Id", comment.Id)
-                                            @Html.Hidden("ArticleId", Model.Id)
+                                            <input type="hidden" id="Id" name="Id" value="@comment.Id" />
+                                            <input type="hidden" id="ArticleId" name="ArticleId" value="@Model.Id" />
+
                                             <input class="btn btn-danger btn-sm" type="submit" value="[X] Удалить" />
                                         }
                                     </div>

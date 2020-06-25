@@ -87,7 +87,7 @@
                     return View("Error", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
                 }
 
-                ViewData["IsUsersArticle"] = this.UserId.Equals(model?.UserId);
+                ViewData["IsUsersArticle"] = this.UserId?.Equals(model?.UserId) ?? false;
 
                 return View("ArticlePage", model);
             }
