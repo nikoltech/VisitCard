@@ -32,6 +32,8 @@
             {
                 Article entity = await this.repo.CreateArticleAsync(model.ToEntity(), fileFolderPath).ConfigureAwait(false);
 
+                if (entity == null) { return null; }
+
                 ArticleModel addedModel = new ArticleModel();
                 addedModel.ToModel(entity);
 
@@ -48,6 +50,8 @@
             try
             {
                 Article entity = await this.repo.GetArticleByIdAsync(articleId).ConfigureAwait(false);
+
+                if (entity == null) { return null; }
 
                 ArticleModel model = new ArticleModel();
                 model.ToModel(entity);
@@ -84,6 +88,8 @@
             {
                 Article entity = await this.repo.UpdateArticleAsync(model.ToEntity()).ConfigureAwait(false);
 
+                if (entity == null) { return null; }
+
                 ArticleModel updatedModel = new ArticleModel();
                 updatedModel.ToModel(entity);
 
@@ -103,6 +109,8 @@
             try
             {
                 Article entity = await this.repo.UpdateArticleAsync(model.ToEntity(), userId).ConfigureAwait(false);
+
+                if (entity == null) { return null; }
 
                 ArticleModel updatedModel = new ArticleModel();
                 updatedModel.ToModel(entity);
@@ -150,7 +158,7 @@
             {
                 Comment entity = await this.repo.AddArticleCommentAsync(model.ToEntity()).ConfigureAwait(false);
 
-                entity = entity ?? throw new Exception("Error saving comment.");
+                if (entity == null) { return null; }
 
                 CommentModel updatedModel = new CommentModel();
                 updatedModel.ToModel(entity);

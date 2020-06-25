@@ -2,9 +2,81 @@
 @{
     ViewData["Title"] = "Список категорий";
     Layout = "~/Views/Admin/_Layout.cshtml";
+
+    bool? CategoryDeleted = (bool?)TempData["Deleted"];
+    bool? CategoryCreated = (bool?)TempData["Created"];
+    bool? CategoryUpdated = (bool?)TempData["Updated"];
+
 }
 
 <h1>@ViewData["Title"]</h1>
+
+@if (CategoryDeleted.HasValue)
+{
+    @if (CategoryDeleted.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Удалено!</strong> Категория успешно удалена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Категория не была удалена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+@if (CategoryCreated.HasValue)
+{
+    @if (CategoryCreated.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Добавлено!</strong> Категория успешно добавлена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Категория не была добавлена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+@if (CategoryUpdated.HasValue)
+{
+    @if (CategoryUpdated.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Изменено!</strong> Категория успешно обновлена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Категория не была изменена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
 <div>
     <a asp-action="Create" class="btn btn-success">Добавить</a>
 </div>
@@ -22,17 +94,22 @@
         @{int number = 0;}
         @foreach (CategoryModel cat in Model)
         {
-        <tr>
-            <th scope="row">@{++number;}</th>
-            <td>@cat.Name</td>
-            <td>@cat.Type.ToString()</td>
-            <td>
-                <div class="btn-group" role="group" aria-label="Actions">
-                    <a asp-action="Update" asp-route-id="@cat.Id" class="btn btn-warning btn-sm">Изменить</a>
-                    <a asp-action="Remove" asp-route-id="@cat.Id" class="btn btn-danger btn-sm">Удалить</a>
-                </div>
-            </td>
-        </tr>
+            ++number;
+            <tr>
+                <th scope="row">@number</th>
+                <td>@cat.Name</td>
+                <td>@cat.Type.ToString()</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a asp-action="Update" asp-route-id="@cat.Id" class="btn btn-warning btn-sm">Изменить</a>
+                        @using (Html.BeginForm("Remove", "AdminCategory", null, FormMethod.Post, true, new { @class = "" }))
+                        {
+                            @Html.Hidden("Id", cat.Id)
+                            <input class="btn btn-danger btn-sm" type="submit" value="Удалить" />
+                        }
+                    </div>
+                </td>
+            </tr>
         }
 
     </tbody>

@@ -26,8 +26,9 @@ else
             @Html.ActionLink("Редактировать", "Update", new { id = Model.Id }, new { @class = "btn btn-warning" })
         </div>
         <div>
-            @using (Html.BeginForm("Remove", "Article", new { id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+            @using (Html.BeginForm("Remove", "Article", null, FormMethod.Post, true, new { @class = "" }))
             {
+                @Html.Hidden("Id", Model.Id)
                 <input class="btn btn-danger" type="submit" value="Удалить" />
             }
         </div>
@@ -104,8 +105,9 @@ else
                         }
 
                         <br>
-                        @using (Html.BeginForm("AddComment", "Article", new { ArticleId = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+                        @using (Html.BeginForm("AddComment", "Article", null, FormMethod.Post, true, new { @class = "" }))
                         {
+                            @Html.Hidden("ArticleId", Model.Id)
                             <textarea id="text" name="text" class="form-control" placeholder="Оставьте Ваш комментарий" rows="5"></textarea>
 
                             @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)

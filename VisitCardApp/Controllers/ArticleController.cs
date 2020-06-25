@@ -81,6 +81,12 @@
             try
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
+
+                if (model == null)
+                {
+                    return View("Error", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
+                }
+
                 ViewData["IsUsersArticle"] = this.UserId.Equals(model?.UserId);
 
                 return View("ArticlePage", model);
@@ -144,11 +150,14 @@
                 {
                     ArticleModel article = await this.articleManagement.GetArticleByIdAsync(model.ArticleId).ConfigureAwait(false);
 
-                    if (article != null)
+                    if (article == null)
                     {
-                        return View("ArticlePage", article);
+                        return View("Error", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
                     }
+                    
+                    return View("ArticlePage", article);
                 }
+
                 return View("List");
             }
 
@@ -178,7 +187,12 @@
             try
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
-                
+
+                if (model == null)
+                {
+                    return View("Error", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
+                }
+
                 if (!this.UserId.Equals(model?.UserId))
                 {
                     ViewData["IsUsersArticle"] = false;
@@ -211,6 +225,11 @@
             try
             {
                 ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(reqModel.ToAppModel(), this.UserId);
+
+                if (updatedModel == null)
+                {
+                    return View("Error", new ErrorViewModel { Message = "Cannot update article! Something got wrong." });
+                }
 
                 return RedirectToAction("", new { id = updatedModel.Id });
             }
@@ -257,6 +276,6 @@
         }
 
 
-        #endregion
+        #endregion private methods
     }
 }

@@ -63,7 +63,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -74,11 +74,16 @@
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
 
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
+                }
+
                 return View("ArticlePage", model);
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -120,7 +125,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -135,11 +140,14 @@
                 {
                     ArticleModel article = await this.articleManagement.GetArticleByIdAsync(model.ArticleId).ConfigureAwait(false);
 
-                    if (article != null)
+                    if (model == null)
                     {
-                        return View("ArticlePage", article);
+                        return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
                     }
+                    
+                    return View("ArticlePage", article);
                 }
+
                 return View("List");
             }
 
@@ -159,7 +167,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -170,6 +178,11 @@
             {
                 ArticleModel model = await this.articleManagement.GetArticleByIdAsync(id);
 
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get article! Something got wrong." });
+                }
+
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Article).ConfigureAwait(false);
                 ViewData["Categories"] = new SelectList(categoryList, nameof(CategoryModel.Id), nameof(CategoryModel.Name));
 
@@ -177,7 +190,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -197,15 +210,23 @@
             {
                 ArticleModel updatedModel = await this.articleManagement.UpdateArticleAsync(reqModel.ToAppModel());
 
+                if (updatedModel == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot updating article! Something got wrong." });
+                }
+
+                ViewData["Updated"] = updatedModel != null;
+
                 return RedirectToAction("", new { id = updatedModel.Id });
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
         [HttpPost("Remove/{id}")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             try
@@ -218,7 +239,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -242,6 +263,6 @@
         }
 
 
-        #endregion
+        #endregion private methods
     }
 }

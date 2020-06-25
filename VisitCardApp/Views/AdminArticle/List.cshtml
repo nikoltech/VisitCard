@@ -5,19 +5,32 @@
 
     bool? ArticleCreated = (bool?)TempData["Created"];
     bool? ArticleDeleted = (bool?)TempData["Deleted"];
+    bool? ArticleUpdated = (bool?)TempData["Updated"];
     bool? CommentCreated = (bool?)TempData["CommentCreated"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
-@if (CommentCreated.HasValue && CommentCreated.Value)
+@if (CommentCreated.HasValue)
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Ошибка!</strong> Коментарий не был добавлен.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    @if (CommentCreated.Value)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Добавлено!</strong> Коментарий добавлен.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Коментарий не был добавлен. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
 }
 
 @if (ArticleCreated.HasValue)
@@ -64,7 +77,27 @@
     }
 }
 
-
+@if (ArticleUpdated.HasValue)
+{
+    @if (ArticleUpdated.Value)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Изменено!</strong> Статья успешно изменена.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ошибка!</strong> Статья не была изменена. Что-то пошло не так.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
 
 @*Article list*@
 
@@ -80,7 +113,7 @@
                     @Html.DropDownList("CategoryId", ViewData["Categories"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 </div>
 
-                <input type="submit" value="Фильтр"/>
+                <input type="submit" value="Фильтр" />
             }
         </div>
 

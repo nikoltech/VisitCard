@@ -89,6 +89,8 @@
             {
                 ProjectCase entity = await this.repo.UpdateProjectCaseAsync(model.ToEntity(), webRootFilePath).ConfigureAwait(false);
 
+                if (entity == null) { return null; }
+
                 ProjectCaseModel updatedModel = new ProjectCaseModel();
                 updatedModel.ToModel(entity);
 

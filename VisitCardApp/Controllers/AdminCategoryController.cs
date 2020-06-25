@@ -34,7 +34,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -47,6 +47,7 @@
         }
 
         [HttpPost("Create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(CategoryModel model)
         {
             if (!this.ModelState.IsValid)
@@ -66,7 +67,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -77,17 +78,23 @@
             {
                 CategoryModel model = await this.categoryManagement.GetCategoryByIdAsync(id).ConfigureAwait(false);
 
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get category! Something got wrong." });
+                }
+
                 ViewData["CategoryTypes"] = this.GetCategoryTypeSelectList();
 
                 return View(model);
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
         [HttpPost("Update")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(CategoryModel model)
         {
             if (!this.ModelState.IsValid)
@@ -107,11 +114,12 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
-        [HttpPost("Remove/{id}")]
+        [HttpPost("Remove")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             try
@@ -124,7 +132,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 

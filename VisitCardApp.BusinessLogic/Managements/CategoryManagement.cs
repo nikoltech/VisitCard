@@ -37,6 +37,8 @@
             {
                 Category category = await this.repo.GetCategoryByIdAsync(id).ConfigureAwait(false);
 
+                if (category == null) { return null; }
+
                 CategoryModel model = new CategoryModel();
                 model.ToModel(category);
 
@@ -55,6 +57,9 @@
             try
             {
                 Category category = await this.repo.CreateCategoryAsync(model.ToEntity()).ConfigureAwait(false);
+
+                if (category == null) { return null; }
+
                 CategoryModel addedModel = new CategoryModel();
                 addedModel.ToModel(category);
 
@@ -73,6 +78,8 @@
             try
             {
                 Category category = await this.repo.UpdateCategoryAsync(model.ToEntity()).ConfigureAwait(false);
+
+                if (category == null) { return null; }
 
                 CategoryModel updatedModel = new CategoryModel();
                 updatedModel.ToModel(category);

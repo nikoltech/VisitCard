@@ -8,8 +8,9 @@
     <div class="panel-heading">@ViewData["Title"]</div>
     <div class="panel-body">
         @Html.ValidationSummary()
-        @using (Html.BeginForm("Update", "AdminCategory", new { Id = Model.Id }, FormMethod.Post, true, new { @class = "" }))
+        @using (Html.BeginForm("Update", "AdminCategory", null, FormMethod.Post, true, new { @class = "" }))
         {
+            @Html.Hidden("Id", Model.Id)
             <div>
                 <div>
                     <select id="Type" name="Type" class="form-control">

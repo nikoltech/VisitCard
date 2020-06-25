@@ -79,7 +79,7 @@
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
                             <div class="btn-group" role="group" aria-label="Actions">
-                                @using (Html.BeginForm("Remove", "Cart", new { }, FormMethod.Post, true, new { @class = "" }))
+                                @using (Html.BeginForm("Remove", "Cart", null, FormMethod.Post, true, new { @class = "" }))
                                 {
                                     <input id="id" name="id" type="hidden" value="@line.ProjectCase.Id">
 
@@ -87,7 +87,7 @@
                                 }
                             </div>
                             <div class="btn-group" role="group" aria-label="Actions">
-                                @using (Html.BeginForm("Add", "Cart", new { }, FormMethod.Post, true, new { @class = "" }))
+                                @using (Html.BeginForm("Add", "Cart", null, FormMethod.Post, true, new { @class = "" }))
                                 {
                                     <input id="id" name="id" type="hidden" value="@line.ProjectCase.Id">
 

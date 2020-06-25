@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -583,7 +584,21 @@
 
             try
             {
-                return (await this.context.Categories.AddAsync(category)).Entity;
+                Category existAllCategoryType = await this.context.Categories.Where(c => c.Type == CategoryType.All).FirstOrDefaultAsync();
+
+                if (existAllCategoryType != null && category.Type == CategoryType.All)
+                {
+                    throw new Exception("Cannot add more than one category type All.");
+                }
+
+                this.context.Categories.Add(category);
+
+                if (await this.context.SaveChangesAsync() > 0)
+                {
+                    return category;
+                }
+
+                return null;
             }
             catch
             {
@@ -617,7 +632,7 @@
             try
             {
                 Category category = await this.GetCategoryByIdAsync(categoryId).ConfigureAwait(false);
-                if (category == null)
+                if (category != null)
                 {
                     this.context.Categories.Remove(category);
                     if (await this.context.SaveChangesAsync() > 0)
@@ -957,6 +972,6 @@
 
         #endregion
 
-        #endregion
+        #endregion private methods
     }
 }

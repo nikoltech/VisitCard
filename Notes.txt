@@ -22,10 +22,10 @@ Tickets & estimation
 
 ** Authorization
     @ Roles
-    ..
+    ..Done
 
 ** Pagination Projects, Articles
-    ..
+    ..Done
 
 ** Routing.
 
@@ -37,7 +37,7 @@ Tickets & estimation
     ..
 
 ** XSS, CSRF securiry
-    ..
+    ..Done
 
 ** Comment articles
     @ Update article entity & model
@@ -48,5 +48,3 @@ Tickets & estimation
     @ Add filter by category(es)
     @ Update entities & models (Articles, Project)
     @ Create CRUD methods
-
-** Routing.

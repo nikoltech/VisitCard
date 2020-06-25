@@ -104,8 +104,7 @@
             }
         }
 
-        // TEST
-        // TODO
+        // FOR TEST
         [HttpGet("PaymentForm")]
         public IActionResult PaymentForm()
         {
@@ -129,6 +128,8 @@
             }
         }
 
+        // USES
+        // TODO: Catch CORS exceptions, other statuses
         [HttpPost("process-payment")]
         public async Task<IActionResult> ProcessPaymentAsync(string nonce)
         {
@@ -148,22 +149,23 @@
 
                 CreatePaymentResponse responce = await PaymentsApi.CreatePaymentAsync(request_body);
 
-                if (responce.Payment.Status == "COMPLETED")
+                if (responce?.Payment?.Status == "COMPLETED")
                 {
                     this.UpdateCart(new CartModel());
                     return this.Ok();
                 }
                 else
                 {
-                    return this.BadRequest();
+                    return this.BadRequest($"STATUS: {responce?.Payment?.Status}");
                 }
             }
             catch (Exception ex)
             {
-                return View("PaymentError", new PaymentResultModel { ResultMessage = ex.Message });
+                return this.BadRequest($"PaymentError: { ex.Message }");
             }
         }
 
+        // FOR TEST
         [HttpPost("Paid")]
         public IActionResult Paid()
         {
@@ -225,11 +227,13 @@
         private CartModel GetCart()
         {
             CartModel cart = this.HttpContext.Session.Get<CartModel>("Cart");
+
             if (cart == null)
             {
                 cart = new CartModel();
                 this.HttpContext.Session.Set("Cart", cart);
             }
+
             return cart;
         }
 
@@ -238,6 +242,7 @@
             this.HttpContext.Session.Set("Cart", cart);
             return this.HttpContext.Session.Get<CartModel>("Cart");
         }
+
         #endregion
     }
 }

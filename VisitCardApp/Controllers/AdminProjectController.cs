@@ -57,7 +57,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -68,11 +68,16 @@
             {
                 ProjectCaseModel model = await this.projectManagement.GetProjectCaseByIdAsync(id);
 
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get project! Something got wrong." });
+                }
+
                 return View("ProjectPage", model);
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -118,7 +123,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -128,6 +133,12 @@
             try
             {
                 ProjectCaseModel model = await this.projectManagement.GetProjectCaseByIdAsync(id);
+
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot get project! Something got wrong." });
+                }
+
                 ProjectViewModel vModel = new ProjectViewModel(model);
 
                 List<CategoryModel> categoryList = await this.categoryManagement.GetCategoryListAsync(DataAccess.Enums.CategoryType.Project).ConfigureAwait(false);
@@ -137,7 +148,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -168,16 +179,22 @@
 
                 ProjectCaseModel updatedModel = await this.projectManagement.UpdateProjectCaseAsync(model, this.appEnvironment.WebRootPath);
 
+                if (model == null)
+                {
+                    return View("ErrorAdmin", new ErrorViewModel { Message = "Cannot updating project! Something got wrong." });
+                }
+
                 return RedirectToAction("", new { id = reqModel.Id });
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
         // TODO: return url
         [HttpPost("Remove/{id}")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             try
@@ -190,7 +207,7 @@
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
             }
         }
 
