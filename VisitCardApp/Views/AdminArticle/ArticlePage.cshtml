@@ -4,6 +4,7 @@
     ViewData["Title"] = Model?.Topic;
     Layout = "~/Views/Admin/_Layout.cshtml";
     bool? CommentCreated = (bool?)TempData["CommentCreated"];
+    bool? CommentRemoved = (bool?)TempData["CommentRemoved"];
 
 }
 
@@ -20,6 +21,51 @@ else
 {
     <h3>@ViewData["Title"]</h3>
     <br />
+
+
+    @if (CommentCreated.HasValue)
+    {
+        @if (CommentCreated.Value)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Добавлено!</strong> Комментарий добавлен.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Ошибка!</strong> Комментарий не был добавленю
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
+
+    @if (CommentRemoved.HasValue)
+    {
+        @if (CommentRemoved.Value)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Удалено!</strong> Комментарий удален.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Ошибка!</strong> Комментарий не был удален
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
 
     <div>@Model.Text</div>
     <br />
@@ -63,9 +109,9 @@ else
             padding: 6px;
         }
 
-        .comments .comment:hover {
-            background: #eee;
-        }
+            .comments .comment:hover {
+                background: #eee;
+            }
     </style>
 
     <div class="container">
@@ -99,7 +145,7 @@ else
                         }
 
                         <br>
-                        @using (Html.BeginForm("AddComment", "Article", null, FormMethod.Post, true, new { @class = "" }))
+                        @using (Html.BeginForm("AddComment", "AdminArticle", null, FormMethod.Post, true, new { @class = "" }))
                         {
                             @Html.Hidden("ArticleId", Model.Id)
                             <textarea id="text" name="text" class="form-control" placeholder="Оставьте Ваш комментарий" rows="5"></textarea>
@@ -132,6 +178,14 @@ else
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
+                                    <div>
+                                        @using (Html.BeginForm("RemoveComment", "AdminArticle", null, FormMethod.Post, true, new { @class = "" }))
+                                        {
+                                            @Html.Hidden("Id", comment.Id)
+                                            @Html.Hidden("ArticleId", Model.Id)
+                                            <input class="btn btn-danger btn-sm" type="submit" value="[X] Удалить" />
+                                        }
+                                    </div>
                                 </li>
                             }
                         </ul>
@@ -140,5 +194,5 @@ else
             </div>
         </div>
     </div>
-    
+
 }

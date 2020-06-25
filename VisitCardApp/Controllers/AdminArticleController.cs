@@ -171,6 +171,26 @@
             }
         }
 
+        [HttpPost("RemoveComment")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveCommentAsync(int articleId, int id)
+        {
+            try
+            {
+                bool result = await this.articleManagement.RemoveCommentAsync(id).ConfigureAwait(false);
+
+                TempData["CommentRemoved"] = result;
+
+                ArticleModel article = await this.articleManagement.GetArticleByIdAsync(articleId).ConfigureAwait(false);
+
+                return View("ArticlePage", article);
+            }
+            catch (Exception ex)
+            {
+                return View("ErrorAdmin", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
         [HttpGet("Update/{id}")]
         public async Task<IActionResult> UpdateAsync(int id)
         {
