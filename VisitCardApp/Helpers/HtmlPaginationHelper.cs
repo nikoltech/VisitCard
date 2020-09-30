@@ -43,6 +43,7 @@
                 TagBuilder li2Tag = new TagBuilder("li");
                 li2Tag.AddCssClass("page-item disabled");
                 TagBuilder a2Tag = new TagBuilder("a");
+                a2Tag.MergeAttribute("href", "#");
                 a2Tag.AddCssClass("page-link");
                 a2Tag.InnerHtml.Append("...");
                 li2Tag.InnerHtml.AppendHtml(a2Tag);
@@ -79,6 +80,7 @@
                 TagBuilder li2Tag = new TagBuilder("li");
                 li2Tag.AddCssClass("page-item disabled");
                 TagBuilder a2Tag = new TagBuilder("a");
+                a2Tag.MergeAttribute("href", "#");
                 a2Tag.AddCssClass("page-link");
                 a2Tag.InnerHtml.Append("...");
                 li2Tag.InnerHtml.AppendHtml(a2Tag);

@@ -110,7 +110,10 @@ namespace VisitCardApp
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // app.UseHsts();
             }
+
+            // app.UseHttpsRedirection();
 
             // Include compression before static files
             app.UseResponseCompression();
@@ -128,9 +131,13 @@ namespace VisitCardApp
             app.UseRouting();
             app.UseSession();
 
+            // app.UseCors();
+
             // Use with default auth and with tokens
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // Custom middleware
 
             app.UseEndpoints(endpoints =>
             {
