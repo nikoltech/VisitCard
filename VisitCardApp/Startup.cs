@@ -127,15 +127,17 @@ namespace VisitCardApp
                     RequestPath = "/node_modules",
                     EnableDirectoryBrowsing = false
                 });
+            // app.UseCookiePolicy();
 
             app.UseRouting();
-            app.UseSession();
-
+            // app.UseRequestLocalization();
             // app.UseCors();
 
             // Use with default auth and with tokens
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            // app.UseResponseCaching();
 
             // Custom middleware
 
