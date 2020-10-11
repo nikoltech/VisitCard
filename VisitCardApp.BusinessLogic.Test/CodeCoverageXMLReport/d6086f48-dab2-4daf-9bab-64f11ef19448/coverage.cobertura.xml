@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0" branch-rate="0" version="1.9" timestamp="1602249190" lines-covered="0" lines-valid="1285" branches-covered="0" branches-valid="487">
+<coverage line-rate="0.20489999999999997" branch-rate="0.06509999999999999" version="1.9" timestamp="1602445483" lines-covered="267" lines-valid="1303" branches-covered="32" branches-valid="491">
   <sources>
     <source>C:\D\Projects\ASPNET\VisitCardApp\</source>
   </sources>
   <packages>
-    <package name="VisitCardApp.BusinessLogic" line-rate="0" branch-rate="0" complexity="205">
+    <package name="VisitCardApp.BusinessLogic" line-rate="0.40619999999999995" branch-rate="0.2253" complexity="213">
       <classes>
         <class name="VisitCardApp.BusinessLogic.Models.AppRoleModel" filename="VisitCardApp.BusinessLogic\Models\AppRoleModel.cs" line-rate="0" branch-rate="1" complexity="2">
           <methods>
@@ -50,652 +50,708 @@
             <line number="14" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.BusinessLogic.Models.ArticleImageModel" filename="VisitCardApp.BusinessLogic\Models\ArticleImageModel.cs" line-rate="0" branch-rate="0" complexity="11">
+        <class name="VisitCardApp.BusinessLogic.Models.ArticleImageModel" filename="VisitCardApp.BusinessLogic\Models\ArticleImageModel.cs" line-rate="0.8775" branch-rate="0.625" complexity="19">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="27" hits="0" branch="False" />
+                <line number="42" hits="14" branch="False" />
               </lines>
             </method>
-            <method name="get_UrlPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UrlPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="29" hits="0" branch="False" />
+                <line number="44" hits="14" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageMimeType" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageMimeType" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="31" hits="0" branch="False" />
+                <line number="46" hits="14" branch="False" />
               </lines>
             </method>
             <method name="get_FileName" signature="()" line-rate="0" branch-rate="1">
               <lines>
-                <line number="33" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_File" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="35" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="ToEntity" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="38" hits="0" branch="False" />
-                <line number="39" hits="0" branch="False" />
-                <line number="40" hits="0" branch="False" />
-                <line number="41" hits="0" branch="False" />
-                <line number="42" hits="0" branch="False" />
-                <line number="43" hits="0" branch="False" />
-                <line number="44" hits="0" branch="False" />
-                <line number="45" hits="0" branch="False" />
-                <line number="46" hits="0" branch="False" />
-                <line number="47" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.ArticleImage)" line-rate="0" branch-rate="0">
-              <lines>
-                <line number="50" hits="0" branch="False" />
-                <line number="51" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="7" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="52" hits="0" branch="False" />
-                <line number="53" hits="0" branch="False" />
-                <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="False" />
-                <line number="56" hits="0" branch="False" />
-                <line number="57" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="7" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(VisitCardApp.DataAccess.Entities.ArticleImage)" line-rate="0" branch-rate="0">
-              <lines>
-                <line number="9" hits="0" branch="False" />
-                <line number="10" hits="0" branch="False" />
-                <line number="11" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="14" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="12" hits="0" branch="False" />
-                <line number="13" hits="0" branch="False" />
-                <line number="14" hits="0" branch="False" />
-                <line number="15" hits="0" branch="False" />
-                <line number="16" hits="0" branch="False" />
-                <line number="17" hits="0" branch="False" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="27" hits="0" branch="False" />
-            <line number="29" hits="0" branch="False" />
-            <line number="31" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="35" hits="0" branch="False" />
-            <line number="38" hits="0" branch="False" />
-            <line number="39" hits="0" branch="False" />
-            <line number="40" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="42" hits="0" branch="False" />
-            <line number="43" hits="0" branch="False" />
-            <line number="44" hits="0" branch="False" />
-            <line number="45" hits="0" branch="False" />
-            <line number="46" hits="0" branch="False" />
-            <line number="47" hits="0" branch="False" />
-            <line number="50" hits="0" branch="False" />
-            <line number="51" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="7" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="52" hits="0" branch="False" />
-            <line number="53" hits="0" branch="False" />
-            <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="False" />
-            <line number="56" hits="0" branch="False" />
-            <line number="57" hits="0" branch="False" />
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-            <line number="11" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="14" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="12" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-            <line number="14" hits="0" branch="False" />
-            <line number="15" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="17" hits="0" branch="False" />
-          </lines>
-        </class>
-        <class name="VisitCardApp.BusinessLogic.Models.ArticleModel" filename="VisitCardApp.BusinessLogic\Models\ArticleModel.cs" line-rate="0" branch-rate="0" complexity="23">
-          <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="15" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Topic" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="19" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Text" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="21" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_ArticleImages" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="23" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_CategoryId" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="25" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Category" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="27" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Comments" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="29" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_UserId" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="31" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="ToEntity" signature="()" line-rate="0" branch-rate="0">
-              <lines>
-                <line number="34" hits="0" branch="False" />
-                <line number="35" hits="0" branch="False" />
-                <line number="36" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="52" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="37" hits="0" branch="False" />
-                <line number="38" hits="0" branch="False" />
-                <line number="39" hits="0" branch="False" />
-                <line number="41" hits="0" branch="False" />
-                <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="125" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="43" hits="0" branch="False" />
-                <line number="44" hits="0" branch="False" />
-                <line number="45" hits="0" branch="False" />
-                <line number="47" hits="0" branch="False" />
                 <line number="48" hits="0" branch="False" />
-                <line number="49" hits="0" branch="False" />
-                <line number="50" hits="0" branch="False" />
-                <line number="51" hits="0" branch="False" />
-                <line number="52" hits="0" branch="False" />
-                <line number="53" hits="0" branch="False" />
-                <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="False" />
-                <line number="56" hits="0" branch="False" />
-                <line number="57" hits="0" branch="False" />
-                <line number="58" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Article)" line-rate="0" branch-rate="0">
+            <method name="get_File" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="61" hits="0" branch="False" />
-                <line number="62" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="7" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="63" hits="0" branch="False" />
-                <line number="64" hits="0" branch="False" />
-                <line number="65" hits="0" branch="False" />
-                <line number="66" hits="0" branch="False" />
-                <line number="67" hits="0" branch="False" />
-                <line number="68" hits="0" branch="False" />
-                <line number="70" hits="0" branch="False" />
-                <line number="71" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="95" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="72" hits="0" branch="False" />
-                <line number="73" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="146" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="74" hits="0" branch="False" />
-                <line number="75" hits="0" branch="False" />
-                <line number="76" hits="0" branch="False" />
-                <line number="77" hits="0" branch="False" />
-                <line number="79" hits="0" branch="False" />
-                <line number="81" hits="0" branch="False" />
-                <line number="82" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="193" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="83" hits="0" branch="False" />
-                <line number="84" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="264" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="85" hits="0" branch="False" />
-                <line number="86" hits="0" branch="False" />
-                <line number="87" hits="0" branch="False" />
-                <line number="88" hits="0" branch="False" />
-                <line number="89" hits="0" branch="False" />
-                <line number="90" hits="0" branch="False" />
-                <line number="92" hits="0" branch="False" />
-                <line number="93" hits="0" branch="False" />
-                <line number="94" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="9" hits="0" branch="False" />
-                <line number="10" hits="0" branch="False" />
-                <line number="11" hits="0" branch="False" />
-                <line number="12" hits="0" branch="False" />
-                <line number="13" hits="0" branch="False" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="15" hits="0" branch="False" />
-            <line number="19" hits="0" branch="False" />
-            <line number="21" hits="0" branch="False" />
-            <line number="23" hits="0" branch="False" />
-            <line number="25" hits="0" branch="False" />
-            <line number="27" hits="0" branch="False" />
-            <line number="29" hits="0" branch="False" />
-            <line number="31" hits="0" branch="False" />
-            <line number="34" hits="0" branch="False" />
-            <line number="35" hits="0" branch="False" />
-            <line number="36" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="52" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="37" hits="0" branch="False" />
-            <line number="38" hits="0" branch="False" />
-            <line number="39" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="125" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="43" hits="0" branch="False" />
-            <line number="44" hits="0" branch="False" />
-            <line number="45" hits="0" branch="False" />
-            <line number="47" hits="0" branch="False" />
-            <line number="48" hits="0" branch="False" />
-            <line number="49" hits="0" branch="False" />
-            <line number="50" hits="0" branch="False" />
-            <line number="51" hits="0" branch="False" />
-            <line number="52" hits="0" branch="False" />
-            <line number="53" hits="0" branch="False" />
-            <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="False" />
-            <line number="56" hits="0" branch="False" />
-            <line number="57" hits="0" branch="False" />
-            <line number="58" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="62" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="7" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="63" hits="0" branch="False" />
-            <line number="64" hits="0" branch="False" />
-            <line number="65" hits="0" branch="False" />
-            <line number="66" hits="0" branch="False" />
-            <line number="67" hits="0" branch="False" />
-            <line number="68" hits="0" branch="False" />
-            <line number="70" hits="0" branch="False" />
-            <line number="71" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="95" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="72" hits="0" branch="False" />
-            <line number="73" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="146" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="74" hits="0" branch="False" />
-            <line number="75" hits="0" branch="False" />
-            <line number="76" hits="0" branch="False" />
-            <line number="77" hits="0" branch="False" />
-            <line number="79" hits="0" branch="False" />
-            <line number="81" hits="0" branch="False" />
-            <line number="82" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="193" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="83" hits="0" branch="False" />
-            <line number="84" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="264" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="85" hits="0" branch="False" />
-            <line number="86" hits="0" branch="False" />
-            <line number="87" hits="0" branch="False" />
-            <line number="88" hits="0" branch="False" />
-            <line number="89" hits="0" branch="False" />
-            <line number="90" hits="0" branch="False" />
-            <line number="92" hits="0" branch="False" />
-            <line number="93" hits="0" branch="False" />
-            <line number="94" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-            <line number="11" hits="0" branch="False" />
-            <line number="12" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-          </lines>
-        </class>
-        <class name="VisitCardApp.BusinessLogic.Models.CartLineModel" filename="VisitCardApp.BusinessLogic\Models\CartLineModel.cs" line-rate="0" branch-rate="1" complexity="2">
-          <methods>
-            <method name="get_ProjectCase" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="7" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Quantity" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="9" hits="0" branch="False" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-          </lines>
-        </class>
-        <class name="VisitCardApp.BusinessLogic.Models.CartModel" filename="VisitCardApp.BusinessLogic\Models\CartModel.cs" line-rate="0" branch-rate="1" complexity="2">
-          <methods>
-            <method name="get_Items" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="12" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="7" hits="0" branch="False" />
-                <line number="8" hits="0" branch="False" />
-                <line number="9" hits="0" branch="False" />
-                <line number="10" hits="0" branch="False" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="12" hits="0" branch="False" />
-            <line number="7" hits="0" branch="False" />
-            <line number="8" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-          </lines>
-        </class>
-        <class name="VisitCardApp.BusinessLogic.Models.CategoryModel" filename="VisitCardApp.BusinessLogic\Models\CategoryModel.cs" line-rate="0" branch-rate="0" complexity="6">
-          <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="8" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Name" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="10" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Type" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="12" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="ToEntity" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="15" hits="0" branch="False" />
-                <line number="16" hits="0" branch="False" />
-                <line number="17" hits="0" branch="False" />
-                <line number="18" hits="0" branch="False" />
-                <line number="19" hits="0" branch="False" />
-                <line number="20" hits="0" branch="False" />
-                <line number="21" hits="0" branch="False" />
-                <line number="22" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Category)" line-rate="0" branch-rate="0">
-              <lines>
-                <line number="25" hits="0" branch="False" />
-                <line number="26" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="7" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="27" hits="0" branch="False" />
-                <line number="28" hits="0" branch="False" />
-                <line number="29" hits="0" branch="False" />
-                <line number="30" hits="0" branch="False" />
-                <line number="31" hits="0" branch="False" />
-                <line number="32" hits="0" branch="False" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="8" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-            <line number="12" hits="0" branch="False" />
-            <line number="15" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="17" hits="0" branch="False" />
-            <line number="18" hits="0" branch="False" />
-            <line number="19" hits="0" branch="False" />
-            <line number="20" hits="0" branch="False" />
-            <line number="21" hits="0" branch="False" />
-            <line number="22" hits="0" branch="False" />
-            <line number="25" hits="0" branch="False" />
-            <line number="26" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="7" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="27" hits="0" branch="False" />
-            <line number="28" hits="0" branch="False" />
-            <line number="29" hits="0" branch="False" />
-            <line number="30" hits="0" branch="False" />
-            <line number="31" hits="0" branch="False" />
-            <line number="32" hits="0" branch="False" />
-          </lines>
-        </class>
-        <class name="VisitCardApp.BusinessLogic.Models.CommentModel" filename="VisitCardApp.BusinessLogic\Models\CommentModel.cs" line-rate="0" branch-rate="0" complexity="15">
-          <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="25" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_Text" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="28" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="get_UserName" signature="()" line-rate="0" branch-rate="1">
-              <lines>
-                <line number="30" hits="0" branch="False" />
+                <line number="50" hits="6" branch="False" />
               </lines>
             </method>
             <method name="get_ArticleId" signature="()" line-rate="0" branch-rate="1">
               <lines>
-                <line number="33" hits="0" branch="False" />
+                <line number="52" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_Article" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Article" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="35" hits="0" branch="False" />
+                <line number="54" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="get_UserId" signature="()" line-rate="0" branch-rate="1">
+            <method name="ToEntity" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="37" hits="0" branch="False" />
+                <line number="57" hits="4" branch="False" />
+                <line number="58" hits="4" branch="False" />
+                <line number="59" hits="4" branch="False" />
+                <line number="60" hits="4" branch="False" />
+                <line number="61" hits="4" branch="False" />
+                <line number="62" hits="4" branch="False" />
+                <line number="63" hits="4" branch="False" />
+                <line number="64" hits="4" branch="False" />
+                <line number="65" hits="4" branch="False" />
+                <line number="66" hits="4" branch="False" />
               </lines>
             </method>
-            <method name="ToEntity" signature="()" line-rate="0" branch-rate="0">
+            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.ArticleImage)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="41" hits="0" branch="False" />
-                <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="69" hits="1" branch="False" />
+                <line number="70" hits="1" branch="False" />
+                <line number="71" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="SetFieldsFromEntity" signature="(VisitCardApp.DataAccess.Entities.ArticleImage)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="74" hits="6" branch="False" />
+                <line number="75" hits="6" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="79" type="jump" coverage="0%" />
+                    <condition number="7" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="43" hits="0" branch="False" />
-                <line number="44" hits="0" branch="False" />
-                <line number="45" hits="0" branch="False" />
-                <line number="46" hits="0" branch="False" />
-                <line number="47" hits="0" branch="False" />
-                <line number="48" hits="0" branch="False" />
-                <line number="49" hits="0" branch="False" />
-                <line number="50" hits="0" branch="False" />
-                <line number="51" hits="0" branch="False" />
+                <line number="76" hits="6" branch="False" />
+                <line number="77" hits="6" branch="False" />
+                <line number="78" hits="6" branch="False" />
+                <line number="79" hits="6" branch="False" />
+                <line number="81" hits="6" branch="False" />
+                <line number="82" hits="6" branch="False" />
               </lines>
             </method>
-            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Comment)" line-rate="0" branch-rate="0">
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="7" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="56" hits="0" branch="False" />
-                <line number="57" hits="0" branch="False" />
-                <line number="58" hits="0" branch="False" />
-                <line number="59" hits="0" branch="False" />
-                <line number="60" hits="0" branch="False" />
-                <line number="61" hits="0" branch="False" />
-                <line number="63" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="86" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="64" hits="0" branch="False" />
-                <line number="65" hits="0" branch="False" />
-                <line number="66" hits="0" branch="False" />
-                <line number="67" hits="0" branch="False" />
-                <line number="68" hits="0" branch="False" />
-                <line number="69" hits="0" branch="False" />
-                <line number="70" hits="0" branch="False" />
+                <line number="7" hits="15" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
+            <method name=".ctor" signature="(VisitCardApp.DataAccess.Entities.ArticleImage)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="8" hits="0" branch="False" />
+                <line number="9" hits="1" branch="False" />
+                <line number="10" hits="1" branch="False" />
+                <line number="11" hits="1" branch="False" />
+                <line number="13" hits="1" branch="False" />
+                <line number="14" hits="1" branch="False" />
+                <line number="15" hits="1" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(VisitCardApp.DataAccess.Entities.Comment)" line-rate="0" branch-rate="0">
+            <method name=".ctor" signature="(VisitCardApp.DataAccess.Entities.ArticleImage,VisitCardApp.BusinessLogic.Models.ArticleModel)" line-rate="0.7142000000000001" branch-rate="0.5">
               <lines>
-                <line number="10" hits="0" branch="False" />
-                <line number="11" hits="0" branch="False" />
-                <line number="12" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="17" hits="4" branch="False" />
+                <line number="18" hits="4" branch="False" />
+                <line number="19" hits="4" branch="False" />
+                <line number="21" hits="4" branch="True" condition-coverage="50% (3/6)">
                   <conditions>
-                    <condition number="14" type="jump" coverage="0%" />
+                    <condition number="17" type="jump" coverage="50%" />
+                    <condition number="32" type="jump" coverage="50%" />
+                    <condition number="79" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="13" hits="0" branch="False" />
-                <line number="14" hits="0" branch="False" />
-                <line number="15" hits="0" branch="False" />
-                <line number="16" hits="0" branch="False" />
-                <line number="17" hits="0" branch="False" />
-                <line number="19" hits="0" branch="False" />
-                <line number="20" hits="0" branch="False" />
-                <line number="21" hits="0" branch="False" />
                 <line number="22" hits="0" branch="False" />
                 <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="False" />
+                <line number="25" hits="0" branch="False" />
+                <line number="27" hits="4" branch="False" />
+                <line number="28" hits="4" branch="False" />
+                <line number="29" hits="4" branch="False" />
+                <line number="30" hits="4" branch="False" />
+                <line number="31" hits="4" branch="False" />
+                <line number="32" hits="4" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="25" hits="0" branch="False" />
-            <line number="28" hits="0" branch="False" />
-            <line number="30" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="35" hits="0" branch="False" />
-            <line number="37" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="79" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="43" hits="0" branch="False" />
-            <line number="44" hits="0" branch="False" />
-            <line number="45" hits="0" branch="False" />
-            <line number="46" hits="0" branch="False" />
-            <line number="47" hits="0" branch="False" />
+            <line number="42" hits="14" branch="False" />
+            <line number="44" hits="14" branch="False" />
+            <line number="46" hits="14" branch="False" />
             <line number="48" hits="0" branch="False" />
-            <line number="49" hits="0" branch="False" />
-            <line number="50" hits="0" branch="False" />
-            <line number="51" hits="0" branch="False" />
-            <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="50" hits="6" branch="False" />
+            <line number="52" hits="0" branch="False" />
+            <line number="54" hits="2" branch="False" />
+            <line number="57" hits="4" branch="False" />
+            <line number="58" hits="4" branch="False" />
+            <line number="59" hits="4" branch="False" />
+            <line number="60" hits="4" branch="False" />
+            <line number="61" hits="4" branch="False" />
+            <line number="62" hits="4" branch="False" />
+            <line number="63" hits="4" branch="False" />
+            <line number="64" hits="4" branch="False" />
+            <line number="65" hits="4" branch="False" />
+            <line number="66" hits="4" branch="False" />
+            <line number="69" hits="1" branch="False" />
+            <line number="70" hits="1" branch="False" />
+            <line number="71" hits="1" branch="False" />
+            <line number="74" hits="6" branch="False" />
+            <line number="75" hits="6" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="7" type="jump" coverage="0%" />
+                <condition number="7" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="56" hits="0" branch="False" />
-            <line number="57" hits="0" branch="False" />
-            <line number="58" hits="0" branch="False" />
-            <line number="59" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="63" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="76" hits="6" branch="False" />
+            <line number="77" hits="6" branch="False" />
+            <line number="78" hits="6" branch="False" />
+            <line number="79" hits="6" branch="False" />
+            <line number="81" hits="6" branch="False" />
+            <line number="82" hits="6" branch="False" />
+            <line number="7" hits="15" branch="False" />
+            <line number="9" hits="1" branch="False" />
+            <line number="10" hits="1" branch="False" />
+            <line number="11" hits="1" branch="False" />
+            <line number="13" hits="1" branch="False" />
+            <line number="14" hits="1" branch="False" />
+            <line number="15" hits="1" branch="False" />
+            <line number="17" hits="4" branch="False" />
+            <line number="18" hits="4" branch="False" />
+            <line number="19" hits="4" branch="False" />
+            <line number="21" hits="4" branch="True" condition-coverage="50% (3/6)">
               <conditions>
-                <condition number="86" type="jump" coverage="0%" />
+                <condition number="17" type="jump" coverage="50%" />
+                <condition number="32" type="jump" coverage="50%" />
+                <condition number="79" type="jump" coverage="50%" />
               </conditions>
             </line>
-            <line number="64" hits="0" branch="False" />
-            <line number="65" hits="0" branch="False" />
-            <line number="66" hits="0" branch="False" />
-            <line number="67" hits="0" branch="False" />
-            <line number="68" hits="0" branch="False" />
-            <line number="69" hits="0" branch="False" />
-            <line number="70" hits="0" branch="False" />
-            <line number="8" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-            <line number="11" hits="0" branch="False" />
-            <line number="12" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="14" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="13" hits="0" branch="False" />
-            <line number="14" hits="0" branch="False" />
-            <line number="15" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="17" hits="0" branch="False" />
-            <line number="19" hits="0" branch="False" />
-            <line number="20" hits="0" branch="False" />
-            <line number="21" hits="0" branch="False" />
             <line number="22" hits="0" branch="False" />
             <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+            <line number="27" hits="4" branch="False" />
+            <line number="28" hits="4" branch="False" />
+            <line number="29" hits="4" branch="False" />
+            <line number="30" hits="4" branch="False" />
+            <line number="31" hits="4" branch="False" />
+            <line number="32" hits="4" branch="False" />
+          </lines>
+        </class>
+        <class name="VisitCardApp.BusinessLogic.Models.ArticleModel" filename="VisitCardApp.BusinessLogic\Models\ArticleModel.cs" line-rate="1" branch-rate="1" complexity="23">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="15" hits="24" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Topic" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="19" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Text" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="21" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ArticleImages" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="23" hits="21" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CategoryId" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="25" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="27" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Comments" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="29" hits="21" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UserId" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="31" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="ToEntity" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="34" hits="3" branch="False" />
+                <line number="35" hits="3" branch="False" />
+                <line number="36" hits="15" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="52" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="3" branch="False" />
+                <line number="38" hits="3" branch="False" />
+                <line number="39" hits="3" branch="False" />
+                <line number="41" hits="3" branch="False" />
+                <line number="42" hits="17" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="125" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="43" hits="4" branch="False" />
+                <line number="44" hits="4" branch="False" />
+                <line number="45" hits="4" branch="False" />
+                <line number="47" hits="3" branch="False" />
+                <line number="48" hits="3" branch="False" />
+                <line number="49" hits="3" branch="False" />
+                <line number="50" hits="3" branch="False" />
+                <line number="51" hits="3" branch="False" />
+                <line number="52" hits="3" branch="False" />
+                <line number="53" hits="3" branch="False" />
+                <line number="54" hits="3" branch="False" />
+                <line number="55" hits="3" branch="False" />
+                <line number="56" hits="3" branch="False" />
+                <line number="57" hits="3" branch="False" />
+                <line number="58" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Article)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="61" hits="9" branch="False" />
+                <line number="62" hits="9" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="63" hits="2" branch="False" />
+                <line number="64" hits="2" branch="False" />
+                <line number="65" hits="2" branch="False" />
+                <line number="66" hits="2" branch="False" />
+                <line number="67" hits="2" branch="False" />
+                <line number="68" hits="2" branch="False" />
+                <line number="69" hits="2" branch="False" />
+                <line number="71" hits="2" branch="False" />
+                <line number="72" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="108" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="73" hits="1" branch="False" />
+                <line number="74" hits="11" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="160" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="75" hits="4" branch="False" />
+                <line number="76" hits="4" branch="False" />
+                <line number="77" hits="4" branch="False" />
+                <line number="78" hits="1" branch="False" />
+                <line number="80" hits="2" branch="False" />
+                <line number="82" hits="2" branch="False" />
+                <line number="83" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="207" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="84" hits="1" branch="False" />
+                <line number="85" hits="9" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="278" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="86" hits="3" branch="False" />
+                <line number="87" hits="3" branch="False" />
+                <line number="88" hits="3" branch="False" />
+                <line number="89" hits="3" branch="False" />
+                <line number="90" hits="3" branch="False" />
+                <line number="91" hits="1" branch="False" />
+                <line number="93" hits="2" branch="False" />
+                <line number="94" hits="2" branch="False" />
+                <line number="95" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="9" hits="13" branch="False" />
+                <line number="10" hits="13" branch="False" />
+                <line number="11" hits="13" branch="False" />
+                <line number="12" hits="13" branch="False" />
+                <line number="13" hits="13" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="24" branch="False" />
+            <line number="19" hits="13" branch="False" />
+            <line number="21" hits="13" branch="False" />
+            <line number="23" hits="21" branch="False" />
+            <line number="25" hits="13" branch="False" />
+            <line number="27" hits="5" branch="False" />
+            <line number="29" hits="21" branch="False" />
+            <line number="31" hits="13" branch="False" />
+            <line number="34" hits="3" branch="False" />
+            <line number="35" hits="3" branch="False" />
+            <line number="36" hits="15" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="52" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="37" hits="3" branch="False" />
+            <line number="38" hits="3" branch="False" />
+            <line number="39" hits="3" branch="False" />
+            <line number="41" hits="3" branch="False" />
+            <line number="42" hits="17" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="125" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="43" hits="4" branch="False" />
+            <line number="44" hits="4" branch="False" />
+            <line number="45" hits="4" branch="False" />
+            <line number="47" hits="3" branch="False" />
+            <line number="48" hits="3" branch="False" />
+            <line number="49" hits="3" branch="False" />
+            <line number="50" hits="3" branch="False" />
+            <line number="51" hits="3" branch="False" />
+            <line number="52" hits="3" branch="False" />
+            <line number="53" hits="3" branch="False" />
+            <line number="54" hits="3" branch="False" />
+            <line number="55" hits="3" branch="False" />
+            <line number="56" hits="3" branch="False" />
+            <line number="57" hits="3" branch="False" />
+            <line number="58" hits="3" branch="False" />
+            <line number="61" hits="9" branch="False" />
+            <line number="62" hits="9" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="63" hits="2" branch="False" />
+            <line number="64" hits="2" branch="False" />
+            <line number="65" hits="2" branch="False" />
+            <line number="66" hits="2" branch="False" />
+            <line number="67" hits="2" branch="False" />
+            <line number="68" hits="2" branch="False" />
+            <line number="69" hits="2" branch="False" />
+            <line number="71" hits="2" branch="False" />
+            <line number="72" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="108" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="73" hits="1" branch="False" />
+            <line number="74" hits="11" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="160" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="75" hits="4" branch="False" />
+            <line number="76" hits="4" branch="False" />
+            <line number="77" hits="4" branch="False" />
+            <line number="78" hits="1" branch="False" />
+            <line number="80" hits="2" branch="False" />
+            <line number="82" hits="2" branch="False" />
+            <line number="83" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="207" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="84" hits="1" branch="False" />
+            <line number="85" hits="9" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="278" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="86" hits="3" branch="False" />
+            <line number="87" hits="3" branch="False" />
+            <line number="88" hits="3" branch="False" />
+            <line number="89" hits="3" branch="False" />
+            <line number="90" hits="3" branch="False" />
+            <line number="91" hits="1" branch="False" />
+            <line number="93" hits="2" branch="False" />
+            <line number="94" hits="2" branch="False" />
+            <line number="95" hits="9" branch="False" />
+            <line number="9" hits="13" branch="False" />
+            <line number="10" hits="13" branch="False" />
+            <line number="11" hits="13" branch="False" />
+            <line number="12" hits="13" branch="False" />
+            <line number="13" hits="13" branch="False" />
+          </lines>
+        </class>
+        <class name="VisitCardApp.BusinessLogic.Models.CartLineModel" filename="VisitCardApp.BusinessLogic\Models\CartLineModel.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_ProjectCase" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Quantity" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="9" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="2" branch="False" />
+            <line number="9" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="VisitCardApp.BusinessLogic.Models.CartModel" filename="VisitCardApp.BusinessLogic\Models\CartModel.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_Items" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="12" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="1" branch="False" />
+                <line number="8" hits="1" branch="False" />
+                <line number="9" hits="1" branch="False" />
+                <line number="10" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="2" branch="False" />
+            <line number="7" hits="1" branch="False" />
+            <line number="8" hits="1" branch="False" />
+            <line number="9" hits="1" branch="False" />
+            <line number="10" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="VisitCardApp.BusinessLogic.Models.CategoryModel" filename="VisitCardApp.BusinessLogic\Models\CategoryModel.cs" line-rate="1" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Name" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="10" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Type" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="12" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ToEntity" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="15" hits="1" branch="False" />
+                <line number="16" hits="1" branch="False" />
+                <line number="17" hits="1" branch="False" />
+                <line number="18" hits="1" branch="False" />
+                <line number="19" hits="1" branch="False" />
+                <line number="20" hits="1" branch="False" />
+                <line number="21" hits="1" branch="False" />
+                <line number="22" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Category)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="25" hits="1" branch="False" />
+                <line number="26" hits="1" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="27" hits="1" branch="False" />
+                <line number="28" hits="1" branch="False" />
+                <line number="29" hits="1" branch="False" />
+                <line number="30" hits="1" branch="False" />
+                <line number="31" hits="1" branch="False" />
+                <line number="32" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="5" branch="False" />
+            <line number="10" hits="5" branch="False" />
+            <line number="12" hits="5" branch="False" />
+            <line number="15" hits="1" branch="False" />
+            <line number="16" hits="1" branch="False" />
+            <line number="17" hits="1" branch="False" />
+            <line number="18" hits="1" branch="False" />
+            <line number="19" hits="1" branch="False" />
+            <line number="20" hits="1" branch="False" />
+            <line number="21" hits="1" branch="False" />
+            <line number="22" hits="1" branch="False" />
+            <line number="25" hits="1" branch="False" />
+            <line number="26" hits="1" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="27" hits="1" branch="False" />
+            <line number="28" hits="1" branch="False" />
+            <line number="29" hits="1" branch="False" />
+            <line number="30" hits="1" branch="False" />
+            <line number="31" hits="1" branch="False" />
+            <line number="32" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="VisitCardApp.BusinessLogic.Models.CommentModel" filename="VisitCardApp.BusinessLogic\Models\CommentModel.cs" line-rate="1" branch-rate="0.875" complexity="15">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="26" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Text" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="29" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UserName" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="31" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ArticleId" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="34" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Article" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="36" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UserId" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="38" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="ToEntity" signature="()" line-rate="1" branch-rate="0.5">
+              <lines>
+                <line number="42" hits="5" branch="False" />
+                <line number="43" hits="5" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="79" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="44" hits="5" branch="False" />
+                <line number="45" hits="5" branch="False" />
+                <line number="46" hits="5" branch="False" />
+                <line number="47" hits="5" branch="False" />
+                <line number="48" hits="5" branch="False" />
+                <line number="49" hits="5" branch="False" />
+                <line number="50" hits="5" branch="False" />
+                <line number="51" hits="5" branch="False" />
+                <line number="52" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.Comment)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="55" hits="4" branch="False" />
+                <line number="56" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="57" hits="4" branch="False" />
+                <line number="58" hits="4" branch="False" />
+                <line number="59" hits="4" branch="False" />
+                <line number="60" hits="4" branch="False" />
+                <line number="61" hits="4" branch="False" />
+                <line number="62" hits="4" branch="False" />
+                <line number="64" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="86" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="65" hits="1" branch="False" />
+                <line number="66" hits="1" branch="False" />
+                <line number="67" hits="1" branch="False" />
+                <line number="68" hits="1" branch="False" />
+                <line number="69" hits="1" branch="False" />
+                <line number="70" hits="4" branch="False" />
+                <line number="71" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(VisitCardApp.DataAccess.Entities.Comment)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="10" hits="1" branch="False" />
+                <line number="11" hits="1" branch="False" />
+                <line number="12" hits="1" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="14" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="13" hits="1" branch="False" />
+                <line number="14" hits="1" branch="False" />
+                <line number="15" hits="1" branch="False" />
+                <line number="16" hits="1" branch="False" />
+                <line number="17" hits="1" branch="False" />
+                <line number="18" hits="1" branch="False" />
+                <line number="20" hits="1" branch="False" />
+                <line number="21" hits="1" branch="False" />
+                <line number="22" hits="1" branch="False" />
+                <line number="23" hits="1" branch="False" />
+                <line number="24" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="14" branch="False" />
+            <line number="29" hits="14" branch="False" />
+            <line number="31" hits="14" branch="False" />
+            <line number="34" hits="14" branch="False" />
+            <line number="36" hits="14" branch="False" />
+            <line number="38" hits="14" branch="False" />
+            <line number="42" hits="5" branch="False" />
+            <line number="43" hits="5" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="79" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="44" hits="5" branch="False" />
+            <line number="45" hits="5" branch="False" />
+            <line number="46" hits="5" branch="False" />
+            <line number="47" hits="5" branch="False" />
+            <line number="48" hits="5" branch="False" />
+            <line number="49" hits="5" branch="False" />
+            <line number="50" hits="5" branch="False" />
+            <line number="51" hits="5" branch="False" />
+            <line number="52" hits="5" branch="False" />
+            <line number="55" hits="4" branch="False" />
+            <line number="56" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="57" hits="4" branch="False" />
+            <line number="58" hits="4" branch="False" />
+            <line number="59" hits="4" branch="False" />
+            <line number="60" hits="4" branch="False" />
+            <line number="61" hits="4" branch="False" />
+            <line number="62" hits="4" branch="False" />
+            <line number="64" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="86" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="65" hits="1" branch="False" />
+            <line number="66" hits="1" branch="False" />
+            <line number="67" hits="1" branch="False" />
+            <line number="68" hits="1" branch="False" />
+            <line number="69" hits="1" branch="False" />
+            <line number="70" hits="4" branch="False" />
+            <line number="71" hits="4" branch="False" />
+            <line number="8" hits="27" branch="False" />
+            <line number="10" hits="1" branch="False" />
+            <line number="11" hits="1" branch="False" />
+            <line number="12" hits="1" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="14" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="13" hits="1" branch="False" />
+            <line number="14" hits="1" branch="False" />
+            <line number="15" hits="1" branch="False" />
+            <line number="16" hits="1" branch="False" />
+            <line number="17" hits="1" branch="False" />
+            <line number="18" hits="1" branch="False" />
+            <line number="20" hits="1" branch="False" />
+            <line number="21" hits="1" branch="False" />
+            <line number="22" hits="1" branch="False" />
+            <line number="23" hits="1" branch="False" />
+            <line number="24" hits="1" branch="False" />
           </lines>
         </class>
         <class name="VisitCardApp.BusinessLogic.Models.OrderModel" filename="VisitCardApp.BusinessLogic\Models\OrderModel.cs" line-rate="0" branch-rate="1" complexity="2">
@@ -720,186 +776,186 @@
             <line number="15" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.BusinessLogic.Models.ProjectCaseModel" filename="VisitCardApp.BusinessLogic\Models\ProjectCaseModel.cs" line-rate="0" branch-rate="0" complexity="17">
+        <class name="VisitCardApp.BusinessLogic.Models.ProjectCaseModel" filename="VisitCardApp.BusinessLogic\Models\ProjectCaseModel.cs" line-rate="1" branch-rate="1" complexity="17">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="7" branch="False" />
               </lines>
             </method>
-            <method name="get_ProjectName" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ProjectName" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="13" hits="0" branch="False" />
+                <line number="13" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Description" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Description" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="16" hits="0" branch="False" />
+                <line number="16" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_DescriptionPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_DescriptionPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="18" hits="0" branch="False" />
+                <line number="18" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_UrlPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UrlPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="20" hits="0" branch="False" />
+                <line number="20" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImagePath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImagePath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="22" hits="0" branch="False" />
+                <line number="22" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Image" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Image" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="24" hits="0" branch="False" />
+                <line number="24" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageFileName" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageFileName" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="26" hits="0" branch="False" />
+                <line number="26" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageMimeType" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageMimeType" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="28" hits="0" branch="False" />
+                <line number="28" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Cost" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Cost" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="33" hits="0" branch="False" />
+                <line number="33" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="set_Cost" signature="(System.Decimal)" line-rate="0" branch-rate="0">
+            <method name="set_Cost" signature="(System.Decimal)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="35" hits="0" branch="False" />
-                <line number="36" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="35" hits="4" branch="False" />
+                <line number="36" hits="7" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="14" type="jump" coverage="0%" />
+                    <condition number="14" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="37" hits="0" branch="False" />
-                <line number="38" hits="0" branch="False" />
+                <line number="37" hits="9" branch="False" />
+                <line number="38" hits="4" branch="False" />
               </lines>
             </method>
-            <method name="get_CategoryId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_CategoryId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="41" hits="0" branch="False" />
+                <line number="41" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Category" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="43" hits="0" branch="False" />
+                <line number="43" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="ToEntity" signature="()" line-rate="0" branch-rate="1">
+            <method name="ToEntity" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="46" hits="0" branch="False" />
-                <line number="47" hits="0" branch="False" />
-                <line number="48" hits="0" branch="False" />
-                <line number="49" hits="0" branch="False" />
-                <line number="50" hits="0" branch="False" />
-                <line number="51" hits="0" branch="False" />
-                <line number="52" hits="0" branch="False" />
-                <line number="53" hits="0" branch="False" />
-                <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="False" />
-                <line number="56" hits="0" branch="False" />
-                <line number="57" hits="0" branch="False" />
-                <line number="58" hits="0" branch="False" />
-                <line number="59" hits="0" branch="False" />
-                <line number="60" hits="0" branch="False" />
-                <line number="61" hits="0" branch="False" />
-                <line number="62" hits="0" branch="False" />
+                <line number="46" hits="1" branch="False" />
+                <line number="47" hits="1" branch="False" />
+                <line number="48" hits="1" branch="False" />
+                <line number="49" hits="1" branch="False" />
+                <line number="50" hits="1" branch="False" />
+                <line number="51" hits="1" branch="False" />
+                <line number="52" hits="1" branch="False" />
+                <line number="53" hits="1" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="55" hits="1" branch="False" />
+                <line number="56" hits="1" branch="False" />
+                <line number="57" hits="1" branch="False" />
+                <line number="58" hits="1" branch="False" />
+                <line number="59" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+                <line number="61" hits="1" branch="False" />
+                <line number="62" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.ProjectCase)" line-rate="0" branch-rate="0">
+            <method name="ToModel" signature="(VisitCardApp.DataAccess.Entities.ProjectCase)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="65" hits="0" branch="False" />
-                <line number="66" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="65" hits="1" branch="False" />
+                <line number="66" hits="1" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="7" type="jump" coverage="0%" />
+                    <condition number="7" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="67" hits="0" branch="False" />
-                <line number="68" hits="0" branch="False" />
-                <line number="69" hits="0" branch="False" />
-                <line number="70" hits="0" branch="False" />
-                <line number="71" hits="0" branch="False" />
-                <line number="72" hits="0" branch="False" />
-                <line number="73" hits="0" branch="False" />
-                <line number="74" hits="0" branch="False" />
-                <line number="75" hits="0" branch="False" />
-                <line number="76" hits="0" branch="False" />
-                <line number="77" hits="0" branch="False" />
-                <line number="78" hits="0" branch="False" />
-                <line number="79" hits="0" branch="False" />
-                <line number="80" hits="0" branch="False" />
-                <line number="81" hits="0" branch="False" />
+                <line number="67" hits="1" branch="False" />
+                <line number="68" hits="1" branch="False" />
+                <line number="69" hits="1" branch="False" />
+                <line number="70" hits="1" branch="False" />
+                <line number="71" hits="1" branch="False" />
+                <line number="72" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
+                <line number="74" hits="1" branch="False" />
+                <line number="75" hits="1" branch="False" />
+                <line number="76" hits="1" branch="False" />
+                <line number="77" hits="1" branch="False" />
+                <line number="78" hits="1" branch="False" />
+                <line number="79" hits="1" branch="False" />
+                <line number="80" hits="1" branch="False" />
+                <line number="81" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="9" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="18" hits="0" branch="False" />
-            <line number="20" hits="0" branch="False" />
-            <line number="22" hits="0" branch="False" />
-            <line number="24" hits="0" branch="False" />
-            <line number="26" hits="0" branch="False" />
-            <line number="28" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="35" hits="0" branch="False" />
-            <line number="36" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="9" hits="7" branch="False" />
+            <line number="13" hits="5" branch="False" />
+            <line number="16" hits="5" branch="False" />
+            <line number="18" hits="5" branch="False" />
+            <line number="20" hits="5" branch="False" />
+            <line number="22" hits="5" branch="False" />
+            <line number="24" hits="5" branch="False" />
+            <line number="26" hits="5" branch="False" />
+            <line number="28" hits="5" branch="False" />
+            <line number="33" hits="15" branch="False" />
+            <line number="35" hits="4" branch="False" />
+            <line number="36" hits="7" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="14" type="jump" coverage="0%" />
+                <condition number="14" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="37" hits="0" branch="False" />
-            <line number="38" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="43" hits="0" branch="False" />
-            <line number="46" hits="0" branch="False" />
-            <line number="47" hits="0" branch="False" />
-            <line number="48" hits="0" branch="False" />
-            <line number="49" hits="0" branch="False" />
-            <line number="50" hits="0" branch="False" />
-            <line number="51" hits="0" branch="False" />
-            <line number="52" hits="0" branch="False" />
-            <line number="53" hits="0" branch="False" />
-            <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="False" />
-            <line number="56" hits="0" branch="False" />
-            <line number="57" hits="0" branch="False" />
-            <line number="58" hits="0" branch="False" />
-            <line number="59" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="62" hits="0" branch="False" />
-            <line number="65" hits="0" branch="False" />
-            <line number="66" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="37" hits="9" branch="False" />
+            <line number="38" hits="4" branch="False" />
+            <line number="41" hits="5" branch="False" />
+            <line number="43" hits="2" branch="False" />
+            <line number="46" hits="1" branch="False" />
+            <line number="47" hits="1" branch="False" />
+            <line number="48" hits="1" branch="False" />
+            <line number="49" hits="1" branch="False" />
+            <line number="50" hits="1" branch="False" />
+            <line number="51" hits="1" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="53" hits="1" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="55" hits="1" branch="False" />
+            <line number="56" hits="1" branch="False" />
+            <line number="57" hits="1" branch="False" />
+            <line number="58" hits="1" branch="False" />
+            <line number="59" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="61" hits="1" branch="False" />
+            <line number="62" hits="1" branch="False" />
+            <line number="65" hits="1" branch="False" />
+            <line number="66" hits="1" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="7" type="jump" coverage="0%" />
+                <condition number="7" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="67" hits="0" branch="False" />
-            <line number="68" hits="0" branch="False" />
-            <line number="69" hits="0" branch="False" />
-            <line number="70" hits="0" branch="False" />
-            <line number="71" hits="0" branch="False" />
-            <line number="72" hits="0" branch="False" />
-            <line number="73" hits="0" branch="False" />
-            <line number="74" hits="0" branch="False" />
-            <line number="75" hits="0" branch="False" />
-            <line number="76" hits="0" branch="False" />
-            <line number="77" hits="0" branch="False" />
-            <line number="78" hits="0" branch="False" />
-            <line number="79" hits="0" branch="False" />
-            <line number="80" hits="0" branch="False" />
-            <line number="81" hits="0" branch="False" />
+            <line number="67" hits="1" branch="False" />
+            <line number="68" hits="1" branch="False" />
+            <line number="69" hits="1" branch="False" />
+            <line number="70" hits="1" branch="False" />
+            <line number="71" hits="1" branch="False" />
+            <line number="72" hits="1" branch="False" />
+            <line number="73" hits="1" branch="False" />
+            <line number="74" hits="1" branch="False" />
+            <line number="75" hits="1" branch="False" />
+            <line number="76" hits="1" branch="False" />
+            <line number="77" hits="1" branch="False" />
+            <line number="78" hits="1" branch="False" />
+            <line number="79" hits="1" branch="False" />
+            <line number="80" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
           </lines>
         </class>
         <class name="VisitCardApp.BusinessLogic.Managements.ArticleManagement" filename="VisitCardApp.BusinessLogic\Managements\ArticleManagement.cs" line-rate="0" branch-rate="0" complexity="3">
@@ -2272,7 +2328,7 @@
         </class>
       </classes>
     </package>
-    <package name="VisitCardApp.DataAccess" line-rate="0" branch-rate="0" complexity="430">
+    <package name="VisitCardApp.DataAccess" line-rate="0.0453" branch-rate="0" complexity="430">
       <classes>
         <class name="VisitCardApp.DataAccess.DataContext" filename="VisitCardApp.DataAccess\DataContext.cs" line-rate="0" branch-rate="1" complexity="11">
           <methods>
@@ -5246,16 +5302,16 @@
             <line number="11" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.DataAccess.Entities.Article" filename="VisitCardApp.DataAccess\Entities\Article.cs" line-rate="0" branch-rate="1" complexity="10">
+        <class name="VisitCardApp.DataAccess.Entities.Article" filename="VisitCardApp.DataAccess\Entities\Article.cs" line-rate="0.8" branch-rate="1" complexity="10">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="8" hits="0" branch="False" />
+                <line number="8" hits="14" branch="False" />
               </lines>
             </method>
-            <method name="get_Topic" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Topic" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="10" hits="0" branch="False" />
+                <line number="10" hits="14" branch="False" />
               </lines>
             </method>
             <method name="get_TextPath" signature="()" line-rate="0" branch-rate="1">
@@ -5263,29 +5319,29 @@
                 <line number="12" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_ArticleImages" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ArticleImages" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="14" hits="0" branch="False" />
+                <line number="14" hits="9" branch="False" />
               </lines>
             </method>
-            <method name="get_CategoryId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_CategoryId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="16" hits="0" branch="False" />
+                <line number="16" hits="14" branch="False" />
               </lines>
             </method>
-            <method name="get_Category" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="18" hits="0" branch="False" />
+                <line number="18" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Comments" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Comments" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="20" hits="0" branch="False" />
+                <line number="20" hits="9" branch="False" />
               </lines>
             </method>
-            <method name="get_UserId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UserId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="22" hits="0" branch="False" />
+                <line number="22" hits="14" branch="False" />
               </lines>
             </method>
             <method name="get_User" signature="()" line-rate="0" branch-rate="1">
@@ -5293,35 +5349,35 @@
                 <line number="24" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_Text" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Text" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="27" hits="0" branch="False" />
+                <line number="27" hits="14" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="8" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
+            <line number="8" hits="14" branch="False" />
+            <line number="10" hits="14" branch="False" />
             <line number="12" hits="0" branch="False" />
-            <line number="14" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="18" hits="0" branch="False" />
-            <line number="20" hits="0" branch="False" />
-            <line number="22" hits="0" branch="False" />
+            <line number="14" hits="9" branch="False" />
+            <line number="16" hits="14" branch="False" />
+            <line number="18" hits="5" branch="False" />
+            <line number="20" hits="9" branch="False" />
+            <line number="22" hits="14" branch="False" />
             <line number="24" hits="0" branch="False" />
-            <line number="27" hits="0" branch="False" />
+            <line number="27" hits="14" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.DataAccess.Entities.ArticleImage" filename="VisitCardApp.DataAccess\Entities\ArticleImage.cs" line-rate="0" branch-rate="1" complexity="7">
+        <class name="VisitCardApp.DataAccess.Entities.ArticleImage" filename="VisitCardApp.DataAccess\Entities\ArticleImage.cs" line-rate="0.5714" branch-rate="1" complexity="7">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="7" hits="0" branch="False" />
+                <line number="7" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="get_UrlPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UrlPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="15" branch="False" />
               </lines>
             </method>
             <method name="get_FilePath" signature="()" line-rate="0" branch-rate="1">
@@ -5329,9 +5385,9 @@
                 <line number="11" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageMimeType" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageMimeType" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="13" hits="0" branch="False" />
+                <line number="13" hits="15" branch="False" />
               </lines>
             </method>
             <method name="get_Article" signature="()" line-rate="0" branch-rate="1">
@@ -5339,9 +5395,9 @@
                 <line number="15" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_File" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_File" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="18" hits="0" branch="False" />
+                <line number="18" hits="7" branch="False" />
               </lines>
             </method>
             <method name="get_FileName" signature="()" line-rate="0" branch-rate="1">
@@ -5351,12 +5407,12 @@
             </method>
           </methods>
           <lines>
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
+            <line number="7" hits="15" branch="False" />
+            <line number="9" hits="15" branch="False" />
             <line number="11" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
+            <line number="13" hits="15" branch="False" />
             <line number="15" hits="0" branch="False" />
-            <line number="18" hits="0" branch="False" />
+            <line number="18" hits="7" branch="False" />
             <line number="21" hits="0" branch="False" />
           </lines>
         </class>
@@ -5426,60 +5482,60 @@
             <line number="11" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.DataAccess.Entities.Category" filename="VisitCardApp.DataAccess\Entities\Category.cs" line-rate="0" branch-rate="1" complexity="3">
+        <class name="VisitCardApp.DataAccess.Entities.Category" filename="VisitCardApp.DataAccess\Entities\Category.cs" line-rate="1" branch-rate="1" complexity="3">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="7" hits="0" branch="False" />
+                <line number="7" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Name" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Name" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Type" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Type" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="11" hits="0" branch="False" />
+                <line number="11" hits="5" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="11" hits="0" branch="False" />
+            <line number="7" hits="5" branch="False" />
+            <line number="9" hits="5" branch="False" />
+            <line number="11" hits="5" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.DataAccess.Entities.Comment" filename="VisitCardApp.DataAccess\Entities\Comment.cs" line-rate="0" branch-rate="1" complexity="7">
+        <class name="VisitCardApp.DataAccess.Entities.Comment" filename="VisitCardApp.DataAccess\Entities\Comment.cs" line-rate="0.8571" branch-rate="1" complexity="7">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="5" hits="0" branch="False" />
+                <line number="5" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="get_Text" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Text" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="7" hits="0" branch="False" />
+                <line number="7" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="get_UserName" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UserName" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="get_ArticleId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ArticleId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="11" hits="0" branch="False" />
+                <line number="11" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="get_Article" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Article" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="13" hits="0" branch="False" />
+                <line number="13" hits="7" branch="False" />
               </lines>
             </method>
-            <method name="get_UserId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UserId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="15" hits="0" branch="False" />
+                <line number="15" hits="15" branch="False" />
               </lines>
             </method>
             <method name="get_User" signature="()" line-rate="0" branch-rate="1">
@@ -5489,12 +5545,12 @@
             </method>
           </methods>
           <lines>
-            <line number="5" hits="0" branch="False" />
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="11" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-            <line number="15" hits="0" branch="False" />
+            <line number="5" hits="15" branch="False" />
+            <line number="7" hits="15" branch="False" />
+            <line number="9" hits="15" branch="False" />
+            <line number="11" hits="15" branch="False" />
+            <line number="13" hits="7" branch="False" />
+            <line number="15" hits="15" branch="False" />
             <line number="17" hits="0" branch="False" />
           </lines>
         </class>
@@ -5522,82 +5578,82 @@
             <line number="9" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="VisitCardApp.DataAccess.Entities.ProjectCase" filename="VisitCardApp.DataAccess\Entities\ProjectCase.cs" line-rate="0" branch-rate="1" complexity="12">
+        <class name="VisitCardApp.DataAccess.Entities.ProjectCase" filename="VisitCardApp.DataAccess\Entities\ProjectCase.cs" line-rate="1" branch-rate="1" complexity="12">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="7" hits="0" branch="False" />
+                <line number="7" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ProjectName" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ProjectName" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_DescriptionPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_DescriptionPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="11" hits="0" branch="False" />
+                <line number="11" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_UrlPath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_UrlPath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="13" hits="0" branch="False" />
+                <line number="13" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImagePath" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImagePath" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="15" hits="0" branch="False" />
+                <line number="15" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageMimeType" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageMimeType" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="17" hits="0" branch="False" />
+                <line number="17" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_ImageFileName" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_ImageFileName" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="19" hits="0" branch="False" />
+                <line number="19" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Cost" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Cost" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="21" hits="0" branch="False" />
+                <line number="21" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_CategoryId" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_CategoryId" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="23" hits="0" branch="False" />
+                <line number="23" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Category" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="25" hits="0" branch="False" />
+                <line number="25" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="get_Description" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Description" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="28" hits="0" branch="False" />
+                <line number="28" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_Image" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_Image" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="31" hits="0" branch="False" />
+                <line number="31" hits="5" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="7" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="11" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-            <line number="15" hits="0" branch="False" />
-            <line number="17" hits="0" branch="False" />
-            <line number="19" hits="0" branch="False" />
-            <line number="21" hits="0" branch="False" />
-            <line number="23" hits="0" branch="False" />
-            <line number="25" hits="0" branch="False" />
-            <line number="28" hits="0" branch="False" />
-            <line number="31" hits="0" branch="False" />
+            <line number="7" hits="5" branch="False" />
+            <line number="9" hits="5" branch="False" />
+            <line number="11" hits="5" branch="False" />
+            <line number="13" hits="5" branch="False" />
+            <line number="15" hits="5" branch="False" />
+            <line number="17" hits="5" branch="False" />
+            <line number="19" hits="5" branch="False" />
+            <line number="21" hits="5" branch="False" />
+            <line number="23" hits="5" branch="False" />
+            <line number="25" hits="2" branch="False" />
+            <line number="28" hits="5" branch="False" />
+            <line number="31" hits="5" branch="False" />
           </lines>
         </class>
       </classes>

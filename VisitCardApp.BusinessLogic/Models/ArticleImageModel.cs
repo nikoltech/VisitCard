@@ -8,11 +8,26 @@
 
         public ArticleImageModel(ArticleImage entity) 
         {
-            if (entity != null)
+            this.SetFieldsFromEntity(entity);
+
+            ArticleModel articleModel = new ArticleModel();
+            articleModel.ToModel(entity.Article);
+        }
+
+        public ArticleImageModel(ArticleImage entity, ArticleModel articleModel)
+        {
+            this.SetFieldsFromEntity(entity);
+
+            if (articleModel != null && articleModel.Id == entity.Article?.Id)
             {
-                this.Id = entity.Id;
-                this.UrlPath = entity.UrlPath;
-                this.ImageMimeType = entity.ImageMimeType;
+                this.Article = articleModel;
+                this.ArticleId = articleModel.Id;
+            }
+            else
+            {
+                ArticleModel articleModelFromEntity = new ArticleModel();
+                articleModelFromEntity.ToModel(entity.Article);
+                this.ArticleId = articleModelFromEntity.Id;
             }
         }
 
@@ -34,6 +49,10 @@
 
         public byte[] File { get; set; }
 
+        public int ArticleId { get; set; }
+
+        public ArticleModel Article { get; set; }
+
         public ArticleImage ToEntity()
         {
             return new ArticleImage
@@ -42,17 +61,24 @@
                 UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
                 File = this.File,
-                FileName = this.FileName
+                Article = this.Article?.ToEntity()
+                // FileName = this.FileName // Security NOTE: Do not get from user
             };
         }
 
         public void ToModel(ArticleImage entity)
+        {
+            this.SetFieldsFromEntity(entity);
+        }
+
+        private void SetFieldsFromEntity(ArticleImage entity)
         {
             if (entity != null)
             {
                 this.Id = entity.Id;
                 this.UrlPath = entity.UrlPath;
                 this.ImageMimeType = entity.ImageMimeType;
+                // this.FileName = entity.FileName; // Security NOTE: Do not give to user
             }
         }
     }

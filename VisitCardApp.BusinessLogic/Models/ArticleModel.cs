@@ -66,13 +66,14 @@
                 this.Text = entity.Text;
                 this.CategoryId = entity.CategoryId;
                 this.Category = entity.Category;
+                this.UserId = entity.UserId;
 
                 List<ArticleImageModel> articleImages = new List<ArticleImageModel>();
                 if (entity.ArticleImages != null)
                 {
                     foreach (ArticleImage im in entity.ArticleImages)
                     {
-                        articleImages.Add(new ArticleImageModel(im));
+                        articleImages.Add(new ArticleImageModel(im, this));
                     }
                 }
 

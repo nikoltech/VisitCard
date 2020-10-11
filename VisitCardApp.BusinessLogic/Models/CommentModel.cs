@@ -15,6 +15,7 @@
                 this.Text = entity.Text;
                 this.UserId = entity.UserId;
                 this.ArticleId = entity.ArticleId;
+                this.UserName = entity.UserName;
 
                 ArticleModel article = new ArticleModel();
                 article.ToModel(entity.Article);

@@ -30,7 +30,7 @@
         private decimal cost;
         public decimal Cost
         {
-            get { return Math.Round(this.cost, 2); }
+            get { return Math.Round(this.cost, 2, MidpointRounding.ToEven); }
             set 
             {
                 if (value < 0) { this.cost = 0; }
