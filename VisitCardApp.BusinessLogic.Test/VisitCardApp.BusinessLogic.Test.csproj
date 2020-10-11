@@ -1,10 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CodeCoverageHTMLReport\**" />
+    <Compile Remove="CodeCoverageXMLReport\**" />
+    <EmbeddedResource Remove="CodeCoverageHTMLReport\**" />
+    <EmbeddedResource Remove="CodeCoverageXMLReport\**" />
+    <None Remove="CodeCoverageHTMLReport\**" />
+    <None Remove="CodeCoverageXMLReport\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Launch file for web review not found! " />
+    <None Remove="Launch file for_web review not_found! " />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
