@@ -123,7 +123,7 @@
                 ArticleModel model = reqModel.ToAppModel();
                 if (reqModel.Files != null)
                 {
-                    model.ArticleImages = this.ReadFilesBytes(reqModel.Files);
+                    model.ArticleImages = this.ReadFilesAsArticleImageModel(reqModel.Files);
                 }
                 model.UserId = this.UserManager.GetUserId(this.User);
 
@@ -257,7 +257,7 @@
         }
 
         #region private methods
-        private List<ArticleImageModel> ReadFilesBytes(FormFileCollection files)
+        private List<ArticleImageModel> ReadFilesAsArticleImageModel(FormFileCollection files)
         {
             List<ArticleImageModel> images = new List<ArticleImageModel>();
             foreach (IFormFile file in files)
