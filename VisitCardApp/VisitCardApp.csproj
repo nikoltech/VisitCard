@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20200529174123_RemoveInitializeCode.Designer.cs" />
     <Compile Remove="Migrations\20200529174245_AddInitializeCode.cs" />
     <Compile Remove="Migrations\20200529174245_AddInitializeCode.Designer.cs" />
+    <Compile Remove="Migrations\20201012110333_ArticleArticleId.cs" />
+    <Compile Remove="Migrations\20201012110333_ArticleArticleId.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

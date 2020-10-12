@@ -61,7 +61,7 @@
                 UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
                 File = this.File,
-                Article = this.Article?.ToEntity()
+                ArticleId = this.ArticleId
                 // FileName = this.FileName // Security NOTE: Do not get from user
             };
         }
