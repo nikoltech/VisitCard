@@ -9,26 +9,6 @@
         public ArticleImageModel(ArticleImage entity) 
         {
             this.SetFieldsFromEntity(entity);
-
-            ArticleModel articleModel = new ArticleModel();
-            articleModel.ToModel(entity.Article);
-        }
-
-        public ArticleImageModel(ArticleImage entity, ArticleModel articleModel)
-        {
-            this.SetFieldsFromEntity(entity);
-
-            if (articleModel != null && articleModel.Id == entity.Article?.Id)
-            {
-                this.Article = articleModel;
-                this.ArticleId = articleModel.Id;
-            }
-            else
-            {
-                ArticleModel articleModelFromEntity = new ArticleModel();
-                articleModelFromEntity.ToModel(entity.Article);
-                this.ArticleId = articleModelFromEntity.Id;
-            }
         }
 
         //public ArticleImageModel(string filename, byte[] file, string imageMimeType, string urlPath)
@@ -61,8 +41,8 @@
                 UrlPath = this.UrlPath,
                 ImageMimeType = this.ImageMimeType,
                 File = this.File,
-                ArticleId = this.ArticleId
-                // FileName = this.FileName // Security NOTE: Do not get from user
+                ArticleId = this.ArticleId,
+                FileName = this.FileName
             };
         }
 
@@ -78,7 +58,8 @@
                 this.Id = entity.Id;
                 this.UrlPath = entity.UrlPath;
                 this.ImageMimeType = entity.ImageMimeType;
-                // this.FileName = entity.FileName; // Security NOTE: Do not give to user
+                this.ArticleId = entity.ArticleId;
+                this.FileName = entity.FileName;
             }
         }
     }

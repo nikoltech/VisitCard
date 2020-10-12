@@ -73,7 +73,8 @@
                 {
                     foreach (ArticleImage im in entity.ArticleImages)
                     {
-                        articleImages.Add(new ArticleImageModel(im, this));
+                        articleImages.Add(new ArticleImageModel(im));
+                        // articleImages.Add(new ArticleImageModel(im) { Article = this }); // Check JSON work if this is
                     }
                 }
 

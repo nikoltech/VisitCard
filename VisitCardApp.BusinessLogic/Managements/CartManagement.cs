@@ -16,6 +16,7 @@
             this.repo = repo;
         }
 
+        // REASON: Moved to cache. Next task to save order`s hystory.
         public async Task<CartModel> AddToCart(CartLineModel model, string userId)
         {
             model = model ?? throw new ArgumentNullException(nameof(model));

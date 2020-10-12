@@ -34,7 +34,7 @@
             Assert.Equal(entity.Id, model.Id);
             Assert.Equal(entity.ImageMimeType, model.ImageMimeType);
             Assert.Equal(entity.UrlPath, model.UrlPath);
-            Assert.Equal(entity.Article?.Id, model.Article?.Id);
+            Assert.Equal(entity.ArticleId, model.ArticleId);
         }
 
         [Fact]
