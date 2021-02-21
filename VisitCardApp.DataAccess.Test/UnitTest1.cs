@@ -10,5 +10,11 @@ namespace VisitCardApp.DataAccess.Test
         {
 
         }
+
+        [Fact]
+        public void Test2()
+        {
+
+        }
     }
 }
